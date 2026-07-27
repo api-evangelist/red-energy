@@ -1,0 +1,27 @@
+{
+  "captured": "2026-07-27",
+  "method": "searched",
+  "source": "Live capture from the production endpoint on 2026-07-27. Verbatim response body; no values invented.",
+  "operationId": "listEnergyPlans",
+  "note": "The x-v request header is mandatory on every Consumer Data Standards endpoint. Omitting it is a 400 with the CDS errors[] envelope.",
+  "request": {
+    "method": "GET",
+    "url": "https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans",
+    "headers": {}
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "errors": [
+        {
+          "code": "urn:au-cds:error:cds-all:Header/Missing",
+          "title": "Missing Required Header",
+          "detail": "Header x-v must be provided"
+        }
+      ]
+    }
+  }
+}

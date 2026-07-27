@@ -1,0 +1,158 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  DERIVED by binding every candidate MCP tool in mcp/red-energy-mcp.yml to the
+  OpenAPI operationId that backs it. Every operationId below was verified
+  verbatim in openapi/red-energy-cds-energy-openapi.yml or
+  openapi/red-energy-cds-common-openapi.yml. Because the tool list is itself
+  derived from those same operations, every binding is exact — there is no
+  published MCP server whose naming could diverge.
+provider: Red Energy
+providerId: red-energy
+
+surfaces:
+  openapi:
+    - file: openapi/red-energy-cds-energy-openapi.yml
+      title: CDR Energy API 1.36.0 (DSB standard)
+      operations: 23
+    - file: openapi/red-energy-cds-common-openapi.yml
+      title: CDR Common API 1.36.0 (DSB standard)
+      operations: 4
+  graphql:
+    endpoint: null
+    note: No GraphQL surface exists anywhere in the CDR ecosystem.
+  mcp:
+    url: null
+    status: candidate
+    note: >-
+      No hosted MCP server is published by Red Energy, the AER or the DSB.
+      tools/list was not probed because no endpoint is advertised.
+
+crosswalk:
+  - tool: get_cdr_status
+    category: operations
+    rest: [getStatus]
+    binding: rest
+    confidence: high
+    gated: false
+  - tool: get_cdr_outages
+    category: operations
+    rest: [getOutages]
+    binding: rest
+    confidence: high
+    gated: false
+  - tool: list_energy_plans
+    category: product-reference-data
+    rest: [listEnergyPlans]
+    binding: rest
+    confidence: high
+    gated: false
+  - tool: get_energy_plan_detail
+    category: product-reference-data
+    rest: [getEnergyPlanDetail]
+    binding: rest
+    confidence: high
+    gated: false
+    note: Requires x-v 3 or higher; x-v 1 returns 406 Header/UnsupportedVersion.
+  - tool: get_customer
+    category: customer
+    rest: [getCustomer]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_customer_detail
+    category: customer
+    rest: [getCustomerDetail]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: list_energy_accounts
+    category: accounts
+    rest: [listEnergyAccounts]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_energy_account_detail
+    category: accounts
+    rest: [getEnergyAccountDetail]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_energy_account_balance
+    category: billing
+    rest: [getEnergyAccountBalance]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: list_energy_account_balances
+    category: billing
+    rest: [listEnergyAccountBalancesBulk, listEnergyAccountBalancesSpecificAccounts]
+    binding: rest
+    confidence: medium
+    gated: true
+    note: Fans out to the bulk GET and the POST-as-query variant for a specific account set.
+  - tool: get_energy_account_billing
+    category: billing
+    rest: [getBillingForEnergyAccount, listEnergyAccountBillingBulk, listEnergyAccountBillingForSpecificAccounts]
+    binding: rest
+    confidence: medium
+    gated: true
+  - tool: get_energy_account_invoices
+    category: billing
+    rest: [getEnergyAccountInvoices, listEnergyAccountInvoicesBulk, listEnergyInvoicesForSpecificAccounts]
+    binding: rest
+    confidence: medium
+    gated: true
+  - tool: get_energy_account_concessions
+    category: accounts
+    rest: [getEnergyAccountConcessions]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_energy_account_payment_schedule
+    category: accounts
+    rest: [getEnergyAccountPaymentSchedule]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: list_electricity_service_points
+    category: service-points
+    rest: [listElectricityServicePoints]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_electricity_service_point_detail
+    category: service-points
+    rest: [getElectricityServicePointDetail]
+    binding: rest
+    confidence: high
+    gated: true
+  - tool: get_electricity_usage
+    category: usage
+    rest: [getElectricityServicePointUsage, listElectricityUsageBulk, listElectricityUsageForServicePoints]
+    binding: rest
+    confidence: medium
+    gated: true
+  - tool: get_electricity_der
+    category: der
+    rest: [getElectricityDERForServicePoint, listElectricityDERBulk, listElectricityDERForSpecificServicePoints]
+    binding: rest
+    confidence: medium
+    gated: true
+
+mcp_only: []
+mcp_only_note: No MCP-only capability exists — the candidate tool list is derived from REST, so nothing is unbacked.
+
+rest_only: []
+rest_only_note: >-
+  Every one of the 27 operations across the two specs is represented by a
+  candidate tool, either directly or folded into a fan-out tool.
+
+coverage:
+  tools_named: 18
+  tools_bound: 18
+  tools_unauthenticated: 4
+  tools_gated: 14
+  mcp_only: 0
+  rest_operations_total: 27
+  rest_operations_with_tool: 27

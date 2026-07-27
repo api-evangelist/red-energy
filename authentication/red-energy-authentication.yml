@@ -1,0 +1,181 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://consumerdatastandardsaustralia.github.io/standards/#security-profile —
+  the Consumer Data Standards (CDS) Security Profile, v1.36.0. Red Energy
+  publishes no authentication documentation of its own; as a designated CDR
+  energy data holder its authentication contract IS the CDS Security Profile.
+  The mechanical derivation from the harvested OpenAPI produced nothing: the DSB
+  cds_energy and cds_common documents declare no components.securitySchemes at
+  all, expressing per-operation authorisation only through the x-scopes vendor
+  extension. This profile therefore comes from the standard's prose, plus what
+  was observed live on 2026-07-27.
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+provider: Red Energy
+providerId: red-energy
+
+summary:
+  types: [none, oauth2, openIdConnect, mutualTLS]
+  api_key_in: []
+  oauth2_flows: [authorizationCode]
+  note: >-
+    Two distinct authentication postures on one provider. The anonymous half
+    (Product Reference Data + Data Holder Operations discovery) takes no
+    credential at all. The consumer-authorised half takes the full FAPI 1.0
+    Advanced stack and is reachable only by an ACCC-accredited data recipient.
+
+surfaces:
+  - name: CDR Energy Product Reference Data (anonymous)
+    base_url: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+    operations: [listEnergyPlans, getEnergyPlanDetail]
+    auth: none
+    verified: >-
+      HTTP 200 with no credential on 2026-07-27. No API key, no signup, no
+      terms click-through, no registration.
+    required_headers:
+      - name: x-v
+        required: true
+        description: >-
+          Endpoint payload version. Mandatory on every CDS endpoint. Omitting it
+          returns 400 urn:au-cds:error:cds-all:Header/Missing.
+      - name: x-min-v
+        required: false
+        description: Minimum acceptable endpoint version for negotiation.
+  - name: CDR Common Data Holder Operations (anonymous)
+    base_url: https://public.cdr.redenergy.com.au/cds-au/v1
+    operations: [getStatus, getOutages]
+    auth: none
+    verified: HTTP 200 with no credential on 2026-07-27.
+  - name: CDR Energy + Common consumer data (accredited only)
+    base_url: null
+    base_url_note: >-
+      The data holder's infosec and mTLS base URIs are published only through
+      the AUTHENTICATED portion of the CDR Register. GET
+      https://public.cdr.redenergy.com.au/.well-known/openid-configuration
+      returned HTTP 404 (nginx) on 2026-07-27 — no anonymous OIDC discovery
+      document exists on the public base URI.
+    operations:
+      - getCustomer
+      - getCustomerDetail
+      - listEnergyAccounts
+      - getEnergyAccountDetail
+      - getEnergyAccountBalance
+      - listEnergyAccountBalancesBulk
+      - listEnergyAccountBalancesSpecificAccounts
+      - getBillingForEnergyAccount
+      - listEnergyAccountBillingBulk
+      - listEnergyAccountBillingForSpecificAccounts
+      - getEnergyAccountInvoices
+      - listEnergyAccountInvoicesBulk
+      - listEnergyInvoicesForSpecificAccounts
+      - getEnergyAccountConcessions
+      - getEnergyAccountPaymentSchedule
+      - listElectricityServicePoints
+      - getElectricityServicePointDetail
+      - listElectricityUsageBulk
+      - getElectricityServicePointUsage
+      - listElectricityUsageForServicePoints
+      - listElectricityDERBulk
+      - getElectricityDERForServicePoint
+      - listElectricityDERForSpecificServicePoints
+    auth: oauth2 + openIdConnect over mutualTLS
+    verified: false
+    verified_note: >-
+      Not called. Accreditation, CDR Register-issued certificates and a consented
+      authorisation are required; the surface is unreachable from outside the
+      regime by design. The obligation is confirmed by the CDR Register listing.
+
+schemes:
+  - name: none
+    type: none
+    applies_to: [listEnergyPlans, getEnergyPlanDetail, getStatus, getOutages]
+    sources: [openapi/red-energy-cds-energy-openapi.yml, openapi/red-energy-cds-common-openapi.yml]
+    description: >-
+      Unauthenticated public endpoints. Under the CDS these MUST NOT use mutual
+      TLS; they are served over ordinary one-way TLS.
+  - name: CDR OAuth2 / OpenID Connect (FAPI 1.0 Advanced)
+    type: oauth2
+    profile: FAPI 1.0 Advanced (OpenID Foundation Financial-grade API)
+    flows:
+      - flow: authorizationCode
+        description: >-
+          Authorization Code flow with PKCE (S256). The CDS also documents the
+          OIDC Hybrid flow; Authorization Code flow is the current profile for
+          FAPI 1.0 Final Phase 3 obligations.
+        authorizationUrl: null
+        tokenUrl: null
+        url_note: >-
+          Per-data-holder endpoints are advertised in the data holder's OpenID
+          Provider Configuration document, which is published only to accredited
+          participants. Red Energy's is not anonymously discoverable.
+    requires:
+      pushed_authorisation_requests: true
+      request_object: signed JWT (ES256 or PS256)
+      pkce: S256
+      client_authentication: private_key_jwt
+      client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      sender_constrained_tokens: >-
+        mutual-TLS holder-of-key — tls_client_certificate_bound_access_tokens
+        true. Resource requests MUST be validated so the client certificate and
+        the access token match. OAUTB is not supported.
+      subject_identifier: pairwise (PPID), RECOMMENDED as a UUID v4
+      id_token_signing_alg: [ES256, PS256]
+      consent: >-
+        Explicit, scoped, time-limited consumer authorisation. A CDR-mandated
+        consumer dashboard lets the customer review, amend and withdraw sharing
+        at any time.
+    scopes_artifact: scopes/red-energy-scopes.yml
+  - name: CDR mutual TLS
+    type: mutualTLS
+    description: >-
+      All back-channel traffic between an accredited data recipient and a data
+      holder uses mTLS. Both client and server transport certificates MUST be
+      issued by the CDR Certificate Authority; certificates from any other
+      authority MUST NOT be trusted.
+    certificate_profile:
+      signature_algorithm: SHA256
+      key_algorithm: RSA
+      key_size: 2048
+      organizational_unit: Consumer Data Right
+      common_name: primary DNS name (server) / software product name (client)
+    ciphers: >-
+      From 17 March 2025 the FAPI 1.0 Advanced TLS considerations apply. Prior to
+      that only TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 and
+      TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 were permitted.
+  - name: CDR OpenID Provider Configuration
+    type: openIdConnect
+    openIdConnectUrl: null
+    description: >-
+      Each data holder publishes /.well-known/openid-configuration on its TLS
+      base URI with acr_values_supported urn:cds.au:cdr:2 and urn:cds.au:cdr:3,
+      require_pushed_authorization_requests true, a cdr_arrangement_revocation_endpoint,
+      and token_endpoint_auth_methods_supported private_key_jwt.
+    probe:
+      url: https://public.cdr.redenergy.com.au/.well-known/openid-configuration
+      status: 404
+      date: '2026-07-27'
+
+tokens:
+  access_token: >-
+    Lifetime MUST be deterministic and returned in expires_in on the token
+    response. Sender-constrained to the client's mTLS certificate.
+  refresh_token: >-
+    Issued for ongoing (unattended) sharing; bounded by the consent duration and
+    revocable through the consumer dashboard or the CDR arrangement revocation
+    endpoint.
+
+accreditation:
+  regulator: Australian Competition and Consumer Commission (ACCC)
+  register: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  data_holder_brand_id: 39230258-a56c-ee11-a81c-002248e31327
+  public_base_uri: https://public.cdr.redenergy.com.au
+  pathways:
+    - unrestricted accreditation
+    - sponsored accreditation
+    - CDR representative
+    - trusted adviser
+  steps: >-
+    Apply to the ACCC, obtain CDR Register client credentials and transport and
+    signing certificates from the CDR Certificate Authority, pass Conformance
+    Test Suite testing, then initiate a consent flow the individual Red Energy
+    customer approves. There is no self-serve path and no commercial API deal.

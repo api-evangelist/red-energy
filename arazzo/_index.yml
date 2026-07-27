@@ -1,0 +1,22 @@
+generated: '2026-07-27'
+method: derived
+source: Derived from the Arazzo 1.0.1 workflow files in this directory.
+provider: Red Energy
+providerId: red-energy
+workflows:
+  - file: red-energy-compare-plans-workflow.yml
+    workflowId: compareRedEnergyPlans
+    title: Compare Red Energy tariff plans
+    summary: >-
+      Check CDR availability on Red Energy's own registered public base URI, then
+      list and inspect its published electricity tariffs on the Australian Energy
+      Regulator's CDR host. Fully unauthenticated; every step executed live on
+      2026-07-27.
+    operations: [getStatus, getOutages, listEnergyPlans, getEnergyPlanDetail]
+    access: anonymous
+note: >-
+  Only the anonymous half of Red Energy's surface can be modelled as a runnable
+  workflow. The 23 consumer-authorised operations need ACCC accreditation, CDR
+  CA certificates, mutual TLS and a consented FAPI authorisation, so no forkable
+  workflow can be authored for them. See
+  skills/red-energy-share-consumer-energy-data.md for the shape of that flow.

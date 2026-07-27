@@ -1,0 +1,97 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://consumerdatastandardsaustralia.github.io/standards/#changelog-and-archives
+  — the Consumer Data Standards changelog, harvested 2026-07-27. Red Energy
+  publishes no changelog of its own; the contract it implements is versioned and
+  changed by the Data Standards Body, so this is the changelog that governs its
+  API surface.
+provider: Red Energy
+providerId: red-energy
+docs: https://consumerdatastandardsaustralia.github.io/standards/#changelog-and-archives
+releases: https://github.com/ConsumerDataStandardsAustralia/standards/releases
+release_notes_example: https://consumerdatastandardsaustralia.github.io/standards/includes/releasenotes/releasenotes.1.36.0.html
+
+scheme: semver-like MAJOR.MINOR.PATCH on the whole standard, with independent per-endpoint integer versions negotiated via the x-v header
+current_version: 1.36.0
+current_version_date: '2025-12-04'
+governance: >-
+  Changes arrive through numbered Decision Proposals and periodic Maintenance
+  Iterations run by the Data Standards Body, with a Chair's decision published
+  per change. Obligation dates for data holders are tracked separately in the
+  Future Dated Obligations section.
+
+entries:
+  - version: 1.36.0
+    date: '2025-12-04'
+    summary: Changes from Decision 376 (White label brand arrangements).
+    breaking: false
+    references: [Decision 376]
+  - version: 1.35.1
+    date: '2025-10-08'
+    summary: Changes from Decision 377 (Amendments to the certificate management section).
+    breaking: false
+    references: [Decision 377]
+    relevance: >-
+      Touches the CDR certificate management rules that govern the mTLS channel
+      Red Energy's consumer-data surface runs on.
+  - version: 1.35.0
+    date: '2025-07-29'
+    summary: >-
+      Maintenance Iteration 22 (Decision 364), plus Decision 367 incorporating
+      the March 2025 Rules amendment, and Decisions 369 and 370.
+    breaking: false
+    references: [Decision 364, Decision 367, Decision 369, Decision 370]
+  - version: 1.34.1
+    date: '2025-04-11'
+    summary: Update to the Candidate Standards for the Banking and Non-Bank Lending sector.
+    breaking: false
+    relevance: Banking/NBL only — no energy impact.
+  - version: 1.34.0
+    date: '2025-03-13'
+    summary: >-
+      Decision 338 (Updates to Banking Products and Accounts) and Decision 361
+      (Energy Last Consumer Change Date).
+    breaking: false
+    references: [Decision 338, Decision 361]
+    relevance: Decision 361 is an energy-sector change and applies to Red Energy.
+  - version: 1.33.1
+    date: '2025-03-06'
+    summary: Changes from OpenAPI specification refactoring.
+    breaking: false
+    relevance: >-
+      Restructured the published OpenAPI documents themselves — the cds_energy
+      and cds_common artefacts harvested into ../openapi/ are post-refactor.
+  - version: 1.33.0
+    date: '2024-12-18'
+    summary: Maintenance Iteration 21 (Decision 356) and Decision 350 (August 2024 Rules standards impacts).
+    breaking: false
+    references: [Decision 356, Decision 350]
+  - version: 1.32.0
+    date: '2024-10-21'
+    summary: Maintenance Iteration 20 (Decision 353).
+    breaking: false
+    references: [Decision 353]
+  - version: 1.31.0
+    date: '2024-07-03'
+    summary: Maintenance Iteration 19 (Decision 347).
+    breaking: false
+    references: [Decision 347]
+  - version: 1.30.0
+    date: '2024-04-24'
+    summary: Maintenance Iteration 18 (Decision 340).
+    breaking: false
+    references: [Decision 340]
+
+window_note: >-
+  Recent window only — the DSB changelog runs back to 0.1.0 in December 2018 and
+  the live page is the source of truth. Earlier energy-relevant milestones
+  include 1.19.0 (Decision 260, Energy Closed Accounts, 13 September 2022).
+
+provider_changelog:
+  exists: false
+  note: >-
+    Red Energy publishes no API changelog, release notes or version history. It
+    also publishes no developer portal to host one — developer., api., docs. and
+    data. subdomains do not resolve, and every path on redenergy.com.au returns
+    HTTP 403 to programmatic clients.

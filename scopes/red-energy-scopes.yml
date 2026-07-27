@@ -1,0 +1,173 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  Baseline DERIVED from the x-scopes vendor extension on every operation in
+  openapi/red-energy-cds-energy-openapi.yml and
+  openapi/red-energy-cds-common-openapi.yml (the DSB cds_energy / cds_common
+  v1.36.0 documents declare no components.securitySchemes, so
+  0-working/derive-oauth-scopes.py found nothing to aggregate), then SEARCHED
+  and enriched from the Consumer Data Standards "Authorisation Scopes" and
+  "Data Language Standards" reference.
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+cx_docs: https://consumerdatastandardsaustralia.github.io/standards/#data-language-standards
+provider: Red Energy
+providerId: red-energy
+
+note: >-
+  These are the CDR authorisation scopes Red Energy is bound to honour as a
+  designated energy data holder. They apply ONLY to the consumer-authorised half
+  of the surface, requested by an accredited data recipient in an OIDC
+  authorisation request and granted by the individual customer. The anonymous
+  half — listEnergyPlans, getEnergyPlanDetail, getStatus, getOutages — carries no
+  scope at all. Scope-to-endpoint binding is the standard's, not Red Energy's;
+  Red Energy publishes no scope documentation of its own.
+
+schemes:
+  - name: CDR OAuth2 / OIDC (FAPI 1.0 Advanced)
+    source: openapi/red-energy-cds-energy-openapi.yml
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: null
+        tokenUrl: null
+        note: >-
+          Endpoints are published per-data-holder through the authenticated CDR
+          Register, not anonymously. See authentication/red-energy-authentication.yml.
+
+oidc_scopes:
+  - scope: openid
+    description: Required OIDC scope; requests an ID Token for the authenticated consumer.
+  - scope: profile
+    description: >-
+      Standard OIDC profile scope. Under the CDS, name-related claims may be
+      requested either via the profile scope or as individual OIDC claims
+      (name, given_name, family_name, updated_at).
+
+scopes:
+  - scope: common:customer.basic:read
+    name: Basic Customer Data
+    description: >-
+      Personally identifiable information about the customer. For individuals,
+      name and occupation; for business customers, organisation name, ABN/ACN,
+      charity status, establishment date, industry, organisation type and country
+      of registration, plus the agent's name and role.
+    data_cluster_language: Name and occupation / Organisation profile
+    operations: [getCustomer]
+    sources: [openapi/red-energy-cds-common-openapi.yml]
+  - scope: common:customer.detail:read
+    name: Detailed Customer Data
+    description: >-
+      Everything in Basic Customer Data plus contact details — phone, email
+      address, mail address and residential (or organisation) address.
+    data_cluster_language: Contact details / Organisation contact details
+    operations: [getCustomerDetail]
+    sources: [openapi/red-energy-cds-common-openapi.yml]
+  - scope: energy:accounts.basic:read
+    name: Basic Energy Account Data
+    description: >-
+      Basic information about the customer's energy accounts with the retailer —
+      simple account information, basic plan information and the service points
+      that are part of the account. Excludes tailored plans, electricity contract
+      detail and discounts.
+    data_cluster_language: Accounts and plans
+    operations: [listEnergyAccounts]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:accounts.detail:read
+    name: Detailed Energy Account Data
+    description: >-
+      Additional authorisation on top of Basic Energy Account Data. Account type,
+      fees, features, rates and discounts, and additional account users. Only
+      meaningful when the basic scope is also authorised.
+    data_cluster_language: Account and plan details
+    operations: [getEnergyAccountDetail]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:accounts.concessions:read
+    name: Energy Concession Data
+    description: Details of any concessions applied to a customer's energy account.
+    data_cluster_language: Concessions and assistance
+    operations: [getEnergyAccountConcessions]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:accounts.paymentschedule:read
+    name: Energy Regular Payments Data
+    description: >-
+      Payment schedules for energy accounts, including direct debit or credit
+      based scheduled payments and manual payments.
+    data_cluster_language: Payment preferences
+    operations: [getEnergyAccountPaymentSchedule]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:billing:read
+    name: Energy Billing Data
+    description: >-
+      Billing and invoice data for a customer's energy account — account balance,
+      payment method, payment status, charges, discounts and credits, billing
+      date, usage for the billing period, payment date and invoice number.
+    data_cluster_language: Billing payments and history
+    operations:
+      - getEnergyAccountBalance
+      - listEnergyAccountBalancesBulk
+      - listEnergyAccountBalancesSpecificAccounts
+      - getBillingForEnergyAccount
+      - listEnergyAccountBillingBulk
+      - listEnergyAccountBillingForSpecificAccounts
+      - getEnergyAccountInvoices
+      - listEnergyAccountInvoicesBulk
+      - listEnergyInvoicesForSpecificAccounts
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:electricity.servicepoints.basic:read
+    name: Basic Service Point Data
+    description: >-
+      Basic standing data for the customer's service points, including the
+      National Meter Identifier (NMI), customer type and connection point
+      details. Excludes location and meter attributes.
+    data_cluster_language: Electricity connection
+    operations: [listElectricityServicePoints]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:electricity.servicepoints.detail:read
+    name: Detailed Service Point Data
+    description: >-
+      Additional authorisation on top of Basic Service Point Data — supply
+      address, meter details and associated service providers. Only meaningful
+      when the basic scope is also authorised.
+    data_cluster_language: Electricity meter
+    operations: [getElectricityServicePointDetail]
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:electricity.usage:read
+    name: Electricity Usage Data
+    description: >-
+      Electricity usage data for service points, including basic and interval
+      meter reads. Additional authorisation on top of Basic Service Point Data.
+    data_cluster_language: Electricity usage
+    operations:
+      - listElectricityUsageBulk
+      - getElectricityServicePointUsage
+      - listElectricityUsageForServicePoints
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+  - scope: energy:electricity.der:read
+    name: Distributed Energy Resource Data
+    description: >-
+      Data about distributed energy resources at the customer's service points —
+      generation information, generation or storage device type, device
+      characteristics, islandable devices and energy conversion information.
+      Additional authorisation on top of Basic Service Point Data.
+    data_cluster_language: Energy generation and storage
+    operations:
+      - listElectricityDERBulk
+      - getElectricityDERForServicePoint
+      - listElectricityDERForSpecificServicePoints
+    sources: [openapi/red-energy-cds-energy-openapi.yml]
+
+unscoped_operations:
+  - operationId: listEnergyPlans
+    reason: Unauthenticated CDR Product Reference Data. No scope, no token, no accreditation.
+  - operationId: getEnergyPlanDetail
+    reason: Unauthenticated CDR Product Reference Data.
+  - operationId: getStatus
+    reason: Unauthenticated CDR Common Data Holder Operations endpoint.
+  - operationId: getOutages
+    reason: Unauthenticated CDR Common Data Holder Operations endpoint.
+
+secondary_data_holder_note: >-
+  Interval metering data behind energy:electricity.usage:read and the NMI
+  standing data behind the service point scopes ultimately originate with AEMO
+  as the CDR secondary data holder. Red Energy is the primary data holder for
+  the account, billing and tariff side and makes a Shared Responsibility Data
+  Request for the rest.

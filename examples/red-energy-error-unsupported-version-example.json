@@ -1,0 +1,29 @@
+{
+  "captured": "2026-07-27",
+  "method": "searched",
+  "source": "Live capture from the production endpoint on 2026-07-27. Verbatim response body; no values invented.",
+  "operationId": "listEnergyPlans",
+  "note": "Requesting a version above the maximum supported version returns 406 Not Acceptable and reports the maximum in detail.",
+  "request": {
+    "method": "GET",
+    "url": "https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans",
+    "headers": {
+      "x-v": "9"
+    }
+  },
+  "response": {
+    "status": 406,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "errors": [
+        {
+          "code": "urn:au-cds:error:cds-all:Header/UnsupportedVersion",
+          "title": "Unsupported Version",
+          "detail": "Header x-v greater than maximum supported [x-v=9, max=1]"
+        }
+      ]
+    }
+  }
+}

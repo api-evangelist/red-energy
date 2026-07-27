@@ -1,0 +1,30 @@
+{
+  "captured": "2026-07-27",
+  "method": "searched",
+  "source": "Live capture from the production endpoint on 2026-07-27. Verbatim response body; no values invented.",
+  "operationId": "getOutages",
+  "note": "Scheduled-outage list. An empty outages array means no planned outage is currently published.",
+  "request": {
+    "method": "GET",
+    "url": "https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages",
+    "headers": {
+      "x-v": "1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-v": "1"
+    },
+    "body": {
+      "data": {
+        "outages": []
+      },
+      "links": {
+        "self": "https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages"
+      },
+      "meta": {}
+    }
+  }
+}

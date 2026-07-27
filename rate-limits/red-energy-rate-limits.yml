@@ -1,0 +1,142 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Red Energy
+providerId: red-energy
+generated: '2026-07-27'
+method: searched
+created: '2026-07-27'
+modified: '2026-07-27'
+tags:
+  - Rate Limiting
+  - Consumer Data Right
+  - Energy
+  - Australia
+description: >-
+  Red Energy publishes no rate limits of its own. As a designated CDR energy data
+  holder it is bound by the Consumer Data Standards Non-functional Requirements,
+  which set the traffic thresholds above which a data holder may freely throttle
+  or reject calls without breaching its availability and performance obligations,
+  plus per-data-set velocity limits on the highest-cost energy endpoints. These
+  are ecosystem-wide obligations, not a commercial plan.
+sources:
+  - https://consumerdatastandardsaustralia.github.io/standards/#traffic-thresholds
+  - https://consumerdatastandardsaustralia.github.io/standards/#non-functional-requirements
+docs: https://consumerdatastandardsaustralia.github.io/standards/#traffic-thresholds
+
+headers:
+  interactionId: x-fapi-interaction-id
+  retryAfter: Retry-After
+  retryAfterNote: >-
+    Retry-After is named in access-control-expose-headers on the AER Product
+    Reference Data host (observed 2026-07-27). No X-RateLimit-* family is defined
+    by the standard.
+responseCodes:
+  throttled: 429
+
+limits:
+  - name: Customer-present / authorisation traffic, per customer
+    scope: customer
+    metric: transactions_per_second
+    limit: 10
+    timeFrame: second
+  - name: Customer-present / authorisation traffic, per data recipient software product
+    scope: software_product
+    metric: transactions_per_second
+    limit: 50
+    timeFrame: second
+  - name: Customer-present sessions per day
+    scope: customer
+    metric: sessions_per_day
+    limit: null
+    timeFrame: day
+    note: Unlimited sessions per day for customer-present traffic.
+  - name: Unattended sessions per day, per customer, per software product
+    scope: customer_per_software_product
+    metric: sessions_per_day
+    limit: 20
+    timeFrame: day
+    note: Applies during low traffic periods; only best-effort support is required in high traffic periods.
+  - name: Unattended calls per session
+    scope: session
+    metric: calls_per_session
+    limit: 100
+    timeFrame: session
+  - name: Unattended traffic per session
+    scope: session
+    metric: transactions_per_second
+    limit: 5
+    timeFrame: second
+  - name: Unattended traffic per data recipient software product
+    scope: software_product
+    metric: transactions_per_second
+    limit: 50
+    timeFrame: second
+  - name: Secure traffic total, data holder with 0-10,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 150
+    timeFrame: second
+  - name: Secure traffic total, 10,001-20,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 200
+    timeFrame: second
+  - name: Secure traffic total, 20,001-30,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 250
+    timeFrame: second
+  - name: Secure traffic total, 30,001-40,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 300
+    timeFrame: second
+  - name: Secure traffic total, 40,001-50,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 350
+    timeFrame: second
+  - name: Secure traffic total, 50,001-60,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 400
+    timeFrame: second
+  - name: Secure traffic total, more than 60,000 active authorisations
+    scope: data_holder
+    metric: peak_transactions_per_second
+    limit: 450
+    timeFrame: second
+  - name: Public (unauthenticated) traffic total across all consumers
+    scope: data_holder
+    metric: transactions_per_second
+    limit: 300
+    timeFrame: second
+    note: >-
+      Additive to secure traffic. This is the threshold that governs the anonymous
+      Product Reference Data and discovery endpoints anyone can call today.
+
+velocityLimits:
+  - dataSet: NMI Standing Data
+    operations: [getElectricityServicePointDetail]
+    period: 24 hours
+    allowedCalls: 10
+  - dataSet: Energy Usage Data
+    operations: [getElectricityServicePointUsage, listElectricityUsageBulk, listElectricityUsageForServicePoints]
+    period: 24 hours
+    allowedCalls: 10
+  - dataSet: DER Data
+    operations: [getElectricityDERForServicePoint, listElectricityDERBulk, listElectricityDERForSpecificServicePoints]
+    period: 24 hours
+    allowedCalls: 10
+
+exemptions:
+  - Periods when the data holder's digital channels are the target of a distributed denial-of-service or equivalent attack.
+  - A significant traffic increase from a poorly designed or misbehaving data recipient software product.
+
+observed:
+  date: '2026-07-27'
+  note: >-
+    No rate limiting was encountered on the anonymous surfaces during this
+    enrichment round. No X-RateLimit-* headers were returned by either public
+    host.

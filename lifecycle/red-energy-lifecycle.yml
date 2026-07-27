@@ -1,0 +1,147 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://consumerdatastandardsaustralia.github.io/standards/ — Versioning,
+  Endpoint Version Schedule, Future Dated Obligations, Changelog and archives,
+  and Non-functional Requirements sections of the Consumer Data Standards
+  v1.36.0. Live status and outage state captured from Red Energy's own registered
+  CDR public base URI on 2026-07-27.
+provider: Red Energy
+providerId: red-energy
+
+note: >-
+  Red Energy publishes no lifecycle policy of its own. Every commitment below is
+  imposed on it as a designated CDR energy data holder by the Data Standards Body
+  and the ACCC, and is binding rather than voluntary. The status and outage
+  surfaces, however, are Red Energy's own hosts and were confirmed live.
+
+versioning:
+  scheme: per-endpoint version negotiated by HTTP header
+  uri_prefix: /cds-au/v1
+  uri_prefix_note: The v1 in the URI is the STANDARD's major version, not an endpoint version.
+  request_header: x-v
+  min_version_header: x-min-v
+  response_header: x-v
+  current_standard_version: 1.36.0
+  current_endpoint_versions:
+    listEnergyPlans: 1
+    getEnergyPlanDetail: 3
+    getStatus: 1
+    getOutages: 1
+    listEnergyAccounts: 2
+    getEnergyAccountDetail: 4
+    listElectricityServicePoints: 2
+    getElectricityServicePointDetail: 2
+    getCustomer: 1
+    getCustomerDetail: 2
+  observed:
+    - 'GET /cds-au/v1/discovery/status with x-v 1 -> HTTP 200, response x-v 1'
+    - 'GET /cds-au/v1/discovery/status with x-v 3 -> HTTP 406'
+    - 'GET /energy/plans with x-v 1 -> HTTP 200; with x-v 9 -> HTTP 406 (max=1)'
+    - 'GET /energy/plans/{planId} with x-v 1 -> HTTP 406; with x-v 3 -> HTTP 200'
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+
+deprecation:
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#endpoint-version-schedule
+  mechanism: >-
+    Endpoint versions are retired on a published schedule rather than through
+    Sunset/Deprecation response headers. Each endpoint carries its own version
+    train; the Endpoint Version Schedule table names the version, the obligation
+    date and the retirement date for every endpoint in the standard.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  future_dated_obligations: https://consumerdatastandardsaustralia.github.io/standards/#future-dated-obligations
+  future_dated_note: >-
+    The Future Dated Obligations section is the forward-looking change register
+    for data holders — it lists every standard change with a compliance date not
+    yet reached. It functions as the roadmap Red Energy has to build to.
+  deprecated_operations: []
+  deprecated_operations_note: >-
+    No operation in the harvested cds_energy or cds_common v1.36.0 documents
+    carries deprecated true.
+
+sla:
+  availability_target: 99.5% per month
+  availability_scope: >-
+    Applies to authenticated and unauthenticated endpoints alike. A period of
+    unavailability is any period when any endpoint defined in the standard cannot
+    reliably return a successful response to a well-formed request.
+  planned_outages_excluded: true
+  planned_outage_rules:
+    - Commensurate in length and frequency with the holder's other primary digital channels.
+    - Published to data recipients with at least one week of lead time for normal outages.
+    - May occur without notification only to resolve a critical service or security issue.
+  performance_target: 95% of calls per hour within the nominated threshold
+  performance_tiers:
+    - tier: Unauthenticated
+      threshold_ms: 1500
+      applies_to: All unauthenticated endpoints not otherwise specified.
+    - tier: High Priority
+      threshold_ms: 1000
+      applies_to: >-
+        All InfoSec endpoints; the unauthenticated Get Status and Get Outages;
+        and customer-present Get Energy Accounts, Get Energy Account Detail, Get
+        Balance For Energy Account, Get Invoices For Account, Get Customer, Get
+        Customer Detail.
+    - tier: Low Priority
+      threshold_ms: 1500
+      applies_to: Customer-present energy calls including Get Agreed Payment Schedule and Get Concessions.
+    - tier: Unattended
+      threshold_ms: 4000
+      applies_to: Unattended calls to the account and billing endpoints.
+    - tier: Large Payload
+      threshold_ms: 6000
+      applies_to: Get Bulk Billing and Get Billing For Specific Accounts.
+    - tier: Secondary Request
+      threshold_ms: 1000
+      applies_to: >-
+        Customer-present Get Service Points, Get Service Point Detail and Get DER
+        For Service Point (1500ms for secondary data holders).
+    - tier: Large Secondary Request
+      threshold_ms: 1500
+      applies_to: >-
+        Unattended service point calls and all Get Bulk Usage / Get Usage For
+        Service Point calls (4500ms for secondary data holders).
+  relief: >-
+    Data holders may obtain relief from the non-functional requirements during a
+    distributed denial-of-service attack or a significant traffic surge from a
+    misbehaving data recipient software product; both should result in HTTP 429.
+  url: https://consumerdatastandardsaustralia.github.io/standards/#non-functional-requirements
+
+status_page: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+status_page_type: machine-readable endpoint (CDS Get Status), not an HTML status page
+status_observed:
+  date: '2026-07-27'
+  http_status: 200
+  payload:
+    status: OK
+    explanation: All services operational
+outages_endpoint: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages
+outages_observed:
+  date: '2026-07-27'
+  http_status: 200
+  outages: []
+
+change_log:
+  url: https://consumerdatastandardsaustralia.github.io/standards/#changelog-and-archives
+  releases: https://github.com/ConsumerDataStandardsAustralia/standards/releases
+  detail: changelog/red-energy-changelog.yml
+
+registry:
+  url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  data_holder_brand_id: 39230258-a56c-ee11-a81c-002248e31327
+  interim_id: eb76743a-4ee5-40a7-aa1b-bd3b719a7622
+  abn: '60107479372'
+  acn: '107479372'
+  public_base_uri: https://public.cdr.redenergy.com.au
+  logo_uri: https://www.redenergy.com.au/assets/img/logo-red-energy.png
+  last_updated: '2026-07-01T12:15:37Z'
+  confirmed: '2026-07-27'
+  sibling_brands:
+    - brand: Snowy Energy
+      public_base_uri: https://public.cdr.snowyenergy.com.au
+      note: Same ABN 60107479372. Live status endpoint, but zero plans on the AER PRD host.
+    - brand: Lumo Energy
+      public_base_uri: https://public.cdr.lumoenergy.com.au
+      note: Snowy Hydro stablemate, ABN 69100528327. Live status endpoint, zero plans on the AER PRD host.

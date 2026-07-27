@@ -1,0 +1,371 @@
+generated: '2026-07-27'
+method: generated
+source: 'openapi/red-energy-cds-common-openapi.yml, openapi/red-energy-cds-energy-openapi.yml — generated
+  by 0-working/derive-agentic-access.py, then hand-corrected: the heuristic reads HTTP method, and classified
+  the five POST-as-query bulk endpoints as write or physical. The CDR data holder surface is read-only
+  in its entirety, so every operation is connected/read.'
+description: Recommended x-agentic-access execution contracts, classified heuristically from the OpenAPI.
+  A governance starting point for exposing this API to AI agents — review and bind audience per deployment.
+  See research/curity/agentic-governance/.
+summary:
+  operations: 27
+  by_action_class:
+    connected: 27
+  by_consequence:
+    read: 27
+  human_in_the_loop_required: 0
+operations:
+- path: /common/customer
+  method: get
+  operationId: getCustomer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /common/customer/detail
+  method: get
+  operationId: getCustomerDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /discovery/outages
+  method: get
+  operationId: getOutages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /discovery/status
+  method: get
+  operationId: getStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts
+  method: get
+  operationId: listEnergyAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/balances
+  method: get
+  operationId: listEnergyAccountBalancesBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/balances
+  method: post
+  operationId: listEnergyAccountBalancesSpecificAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    audience: null
+    token:
+      max-ttl: 3600
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: none
+    x-correction: 'POST-as-query, not a mutation: the request body carries a list of account or service
+      point ids because the id set is too long for a URL. The operation creates, updates and deletes nothing.'
+- path: /energy/accounts/billing
+  method: get
+  operationId: listEnergyAccountBillingBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/billing
+  method: post
+  operationId: listEnergyAccountBillingForSpecificAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    audience: null
+    token:
+      max-ttl: 3600
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: none
+    x-correction: 'POST-as-query, not a mutation: the request body carries a list of account or service
+      point ids because the id set is too long for a URL. The operation creates, updates and deletes nothing.'
+- path: /energy/accounts/invoices
+  method: get
+  operationId: listEnergyAccountInvoicesBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/invoices
+  method: post
+  operationId: listEnergyInvoicesForSpecificAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    audience: null
+    token:
+      max-ttl: 3600
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: none
+    x-correction: 'POST-as-query, not a mutation: the request body carries a list of account or service
+      point ids because the id set is too long for a URL. The operation creates, updates and deletes nothing.'
+- path: /energy/accounts/{accountId}
+  method: get
+  operationId: getEnergyAccountDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/{accountId}/balance
+  method: get
+  operationId: getEnergyAccountBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/{accountId}/billing
+  method: get
+  operationId: getBillingForEnergyAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/{accountId}/concessions
+  method: get
+  operationId: getEnergyAccountConcessions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/{accountId}/invoices
+  method: get
+  operationId: getEnergyAccountInvoices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/accounts/{accountId}/payment-schedule
+  method: get
+  operationId: getEnergyAccountPaymentSchedule
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints
+  method: get
+  operationId: listElectricityServicePoints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints/der
+  method: get
+  operationId: listElectricityDERBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints/der
+  method: post
+  operationId: listElectricityDERForSpecificServicePoints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    audience: null
+    token:
+      max-ttl: 3600
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: none
+    x-correction: 'POST-as-query, not a mutation: the request body carries a list of account or service
+      point ids because the id set is too long for a URL. The operation creates, updates and deletes nothing.'
+- path: /energy/electricity/servicepoints/usage
+  method: get
+  operationId: listElectricityUsageBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints/usage
+  method: post
+  operationId: listElectricityUsageForServicePoints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    audience: null
+    token:
+      max-ttl: 3600
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: none
+    x-correction: 'POST-as-query, not a mutation: the request body carries a list of account or service
+      point ids because the id set is too long for a URL. The operation creates, updates and deletes nothing.'
+- path: /energy/electricity/servicepoints/{servicePointId}
+  method: get
+  operationId: getElectricityServicePointDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints/{servicePointId}/der
+  method: get
+  operationId: getElectricityDERForServicePoint
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity/servicepoints/{servicePointId}/usage
+  method: get
+  operationId: getElectricityServicePointUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/plans
+  method: get
+  operationId: listEnergyPlans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/plans/{planId}
+  method: get
+  operationId: getEnergyPlanDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+corrections:
+  date: '2026-07-27'
+  operations:
+  - listEnergyAccountBalancesSpecificAccounts
+  - listEnergyAccountBillingForSpecificAccounts
+  - listEnergyInvoicesForSpecificAccounts
+  - listElectricityDERForSpecificServicePoints
+  - listElectricityUsageForServicePoints
+  reason: Reclassified from acting/write and acting/physical to connected/read. The Consumer Data Standards
+    define no mutating data holder operation; POST is used only to pass a long id list in a request body.
+access_split:
+  anonymous:
+  - listEnergyPlans
+  - getEnergyPlanDetail
+  - getStatus
+  - getOutages
+  accredited_only:
+  - getBillingForEnergyAccount
+  - getCustomer
+  - getCustomerDetail
+  - getElectricityDERForServicePoint
+  - getElectricityServicePointDetail
+  - getElectricityServicePointUsage
+  - getEnergyAccountBalance
+  - getEnergyAccountConcessions
+  - getEnergyAccountDetail
+  - getEnergyAccountInvoices
+  - getEnergyAccountPaymentSchedule
+  - listElectricityDERBulk
+  - listElectricityDERForSpecificServicePoints
+  - listElectricityServicePoints
+  - listElectricityUsageBulk
+  - listElectricityUsageForServicePoints
+  - listEnergyAccountBalancesBulk
+  - listEnergyAccountBalancesSpecificAccounts
+  - listEnergyAccountBillingBulk
+  - listEnergyAccountBillingForSpecificAccounts
+  - listEnergyAccountInvoicesBulk
+  - listEnergyAccounts
+  - listEnergyInvoicesForSpecificAccounts
+  note: The four anonymous operations are the only ones an unaccredited agent can call. The other 23 require
+    ACCC accreditation, CDR CA certificates, mutual TLS and a consented FAPI authorisation, so an agent
+    acting on them is always acting inside an accredited data recipient with a consumer consent already
+    in hand.

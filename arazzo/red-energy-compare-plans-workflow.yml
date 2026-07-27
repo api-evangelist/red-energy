@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Compare Red Energy tariff plans
+  version: 1.0.0
+  description: >-
+    Check that Red Energy's CDR implementation is available, then list its
+    published electricity plans and pull the full tariff detail for one of them.
+    Every step is unauthenticated — no API key, no signup, no accreditation. All
+    four operationIds are verified verbatim in the referenced specifications, and
+    each step was executed live on 2026-07-27.
+sourceDescriptions:
+  - name: cdsCommon
+    url: ../openapi/red-energy-cds-common-openapi.yml
+    type: openapi
+  - name: cdsEnergy
+    url: ../openapi/red-energy-cds-energy-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: compareRedEnergyPlans
+    summary: Check availability, list plans, read one plan's full tariff detail.
+    description: >-
+      Note the two different hosts. Discovery runs against Red Energy's own
+      registered CDR public base URI; plan data runs against the Australian
+      Energy Regulator's Energy Made Easy CDR host under the red-energy brand
+      path. In CDR energy the retailer does not serve its own generic plan data.
+    inputs:
+      type: object
+      properties:
+        fuelType:
+          type: string
+          description: ELECTRICITY, GAS, DUAL or ALL.
+          default: ELECTRICITY
+        pageSize:
+          type: integer
+          description: Records per page. The CDS default is 25.
+          default: 25
+        planId:
+          type: string
+          description: A planId from step two. Example verified live on 2026-07-27.
+          default: RED552317MRE18@EME
+    steps:
+      - stepId: checkStatus
+        description: >-
+          GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status with
+          header x-v 1. Proceed only when data.status is OK.
+        operationId: $sourceDescriptions.cdsCommon.getStatus
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/data/status == 'OK'
+        outputs:
+          serviceStatus: $response.body#/data/status
+          updateTime: $response.body#/data/updateTime
+      - stepId: checkOutages
+        description: >-
+          GET /cds-au/v1/discovery/outages with x-v 1. An empty outages array
+          means nothing is scheduled.
+        operationId: $sourceDescriptions.cdsCommon.getOutages
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          outages: $response.body#/data/outages
+      - stepId: listPlans
+        description: >-
+          GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans
+          with x-v 1. Returned meta.totalRecords 1705 on 2026-07-27.
+        operationId: $sourceDescriptions.cdsEnergy.listEnergyPlans
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+          - name: fuelType
+            in: query
+            value: $inputs.fuelType
+          - name: page-size
+            in: query
+            value: $inputs.pageSize
+          - name: effective
+            in: query
+            value: CURRENT
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          totalRecords: $response.body#/meta/totalRecords
+          totalPages: $response.body#/meta/totalPages
+          firstPlanId: $response.body#/data/plans/0/planId
+          nextPage: $response.body#/links/next
+      - stepId: getPlanDetail
+        description: >-
+          GET /energy/plans/{planId} with x-v 3. This endpoint is on a different
+          version train from listEnergyPlans — sending x-v 1 returns HTTP 406
+          urn:au-cds:error:cds-all:Header/UnsupportedVersion.
+        operationId: $sourceDescriptions.cdsEnergy.getEnergyPlanDetail
+        parameters:
+          - name: x-v
+            in: header
+            value: '3'
+          - name: planId
+            in: path
+            value: $inputs.planId
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          displayName: $response.body#/data/displayName
+          fuelType: $response.body#/data/fuelType
+          planType: $response.body#/data/type
+          electricityContract: $response.body#/data/electricityContract
+    outputs:
+      serviceStatus: $steps.checkStatus.outputs.serviceStatus
+      totalPlans: $steps.listPlans.outputs.totalRecords
+      planDisplayName: $steps.getPlanDetail.outputs.displayName
+      planContract: $steps.getPlanDetail.outputs.electricityContract

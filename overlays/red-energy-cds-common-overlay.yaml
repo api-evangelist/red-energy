@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Red Energy CDR Common API
+  version: 1.0.0
+extends: openapi/red-energy-cds-common-openapi.yml
+x-generated: '2026-07-27'
+x-method: generated
+x-source: >-
+  Generated from live verification of Red Energy's own registered CDR public base
+  URI on 2026-07-27. The harvested DSB document ships placeholder example.com
+  servers; this overlay records the real host and the observed behaviour without
+  mutating the standard.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: Red Energy
+      x-apievangelist-provider-id: red-energy
+      x-apievangelist-spec-provenance: >-
+        DSB Consumer Data Standards CDR Common API v1.36.0, harvested verbatim.
+        Not a Red-Energy-proprietary specification.
+      x-cdr-public-base-uri: https://public.cdr.redenergy.com.au
+
+  - target: $.servers
+    update:
+      - url: https://public.cdr.redenergy.com.au/cds-au/v1
+        description: >-
+          Red Energy's registered CDR public base URI. The only API surface hosted
+          on a Red-Energy-controlled domain. Serves the two Data Holder Operations
+          discovery paths anonymously and nothing else — the site root and
+          /cds-au/v1/energy/plans both return an nginx 404.
+        x-access: anonymous
+      - url: https://mtls.dh.example.com/cds-au/v1
+        description: >-
+          Placeholder from the DSB standard. Red Energy's real mutual-TLS base URI
+          is register-authenticated only.
+        x-access: accredited-only
+
+  - target: $.paths['/discovery/status'].get
+    update:
+      x-access: anonymous
+      x-verified: '2026-07-27'
+      x-verified-detail: >-
+        HTTP 200 with x-v 1 returning status OK, "All services operational".
+        HTTP 400 with no x-v header; HTTP 406 with x-v 3. Response carries
+        strict-transport-security max-age=63072000; includeSubDomains,
+        x-content-type-options nosniff and x-frame-options DENY.
+      x-example: examples/red-energy-get-status-example.json
+      x-server: https://public.cdr.redenergy.com.au/cds-au/v1
+
+  - target: $.paths['/discovery/outages'].get
+    update:
+      x-access: anonymous
+      x-verified: '2026-07-27'
+      x-verified-detail: HTTP 200 with x-v 1 returning an empty outages array.
+      x-example: examples/red-energy-get-outages-example.json
+      x-server: https://public.cdr.redenergy.com.au/cds-au/v1
+
+  - target: $.paths['/common/customer'].get
+    update:
+      x-access: accredited-only
+      x-scope: common:customer.basic:read
+      x-access-note: Consumer-authorised. Not called; unreachable without accreditation and consent.
+
+  - target: $.paths['/common/customer/detail'].get
+    update:
+      x-access: accredited-only
+      x-scope: common:customer.detail:read
+      x-access-note: Consumer-authorised. Not called; unreachable without accreditation and consent.

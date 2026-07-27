@@ -73,6 +73,21 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/
   - type: Registry
     url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Overlay
+    name: API Evangelist enhancements for the CDR Energy API
+    url: overlays/red-energy-cds-energy-overlay.yaml
+  - type: Examples
+    name: Live list-plans capture, 2026-07-27
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    name: Live plan-detail capture, 2026-07-27
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    name: Compare Red Energy tariff plans
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: AgentSkill
+    name: Compare Red Energy tariff plans
+    url: skills/red-energy-compare-energy-plans.md
 - aid: red-energy:red-energy-cdr-discovery-api
   name: Red Energy CDR Discovery API
   description: >-
@@ -102,8 +117,22 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
   - type: Status
     url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
   - type: Documentation
     url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Overlay
+    name: API Evangelist enhancements for the CDR Common API
+    url: overlays/red-energy-cds-common-overlay.yaml
+  - type: Examples
+    name: Live get-status capture, 2026-07-27
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    name: Live get-outages capture, 2026-07-27
+    url: examples/red-energy-get-outages-example.json
+  - type: AgentSkill
+    name: Check Red Energy CDR availability before calling
+    url: skills/red-energy-check-cdr-availability.md
 - aid: red-energy:red-energy-cdr-energy-consumer-data-api
   name: Red Energy CDR Energy Consumer Data API
   description: >-
@@ -132,9 +161,85 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
   - type: Authentication
     url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    name: Red Energy CDR authentication profile
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    name: CDR energy authorisation scopes
+    url: scopes/red-energy-scopes.yml
   - type: Documentation
     url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Overlay
+    name: API Evangelist enhancements for the CDR Energy API
+    url: overlays/red-energy-cds-energy-overlay.yaml
+  - type: AgentSkill
+    name: Retrieve a consenting customer's energy data as an accredited data recipient
+    url: skills/red-energy-share-consumer-energy-data.md
 common:
+- type: AgenticAccess
+  url: agentic-access/red-energy-agentic-access.yml
+- type: DomainSecurity
+  url: security/red-energy-domain-security.yml
+- type: Authentication
+  name: Red Energy CDR authentication profile
+  url: authentication/red-energy-authentication.yml
+- type: OAuthScopes
+  name: CDR energy authorisation scopes
+  url: scopes/red-energy-scopes.yml
+- type: Conventions
+  name: Red Energy CDR API conventions
+  url: conventions/red-energy-conventions.yml
+- type: ErrorCatalog
+  name: CDS error code catalogue
+  url: errors/red-energy-problem-types.yml
+- type: Lifecycle
+  name: Red Energy CDR lifecycle, versioning and service levels
+  url: lifecycle/red-energy-lifecycle.yml
+- type: StatusPage
+  name: CDR Get Status endpoint (machine-readable status surface)
+  url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+- type: Deprecation
+  name: CDS Endpoint Version Schedule (deprecation and retirement policy)
+  url: https://consumerdatastandardsaustralia.github.io/standards/#endpoint-version-schedule
+- type: Roadmap
+  name: CDS Future Dated Obligations
+  url: https://consumerdatastandardsaustralia.github.io/standards/#future-dated-obligations
+- type: ChangeLog
+  name: Consumer Data Standards changelog
+  url: changelog/red-energy-changelog.yml
+- type: RateLimits
+  name: CDS traffic thresholds and velocity limits
+  url: rate-limits/red-energy-rate-limits.yml
+- type: Conformance
+  name: Standards conformance, verified and asserted
+  url: conformance/red-energy-conformance.yml
+- type: Compliance
+  name: Red Energy Consumer Data Right Policy
+  url: https://www.redenergy.com.au/docs/Red-Energy-Consumer-Data-Right-Policy.pdf
+- type: DataModel
+  name: CDR energy entity graph
+  url: data-model/red-energy-data-model.yml
+- type: Packages
+  name: Package registry search results and CDR ecosystem tooling
+  url: packages/red-energy-packages.yml
+- type: MCPServer
+  name: Candidate MCP tool set derived from the CDR specs
+  url: mcp/red-energy-mcp.yml
+- type: ToolCrosswalk
+  name: MCP tool to OpenAPI operation crosswalk
+  url: mcp/red-energy-tool-crosswalk.yml
+- type: AgentSkill
+  name: Packaged agent skills for the Red Energy CDR surface
+  url: skills/_index.yml
+- type: Examples
+  name: Live request/response captures, 2026-07-27
+  url: examples/
+- type: LLMsTxt
+  name: Generated llms.txt
+  url: llms/red-energy-llms.txt
+- type: Arazzo
+  name: Compare Red Energy tariff plans
+  url: arazzo/red-energy-compare-plans-workflow.yml
 - type: Website
   url: https://www.redenergy.com.au/
 - type: LinkedIn
@@ -145,6 +250,32 @@ common:
   url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
 - type: Documentation
   url: https://consumerdatastandardsaustralia.github.io/standards/
+- type: APIReference
+  url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+- type: Support
+  name: Red Energy Contact Us
+  url: https://www.redenergy.com.au/contactus/
+- type: HelpCenter
+  name: Red Energy Help Centre
+  url: https://www.redenergy.com.au/help-centre/
+- type: Pricing
+  name: Red Energy energy plans
+  url: https://www.redenergy.com.au/products/
+- type: SignUp
+  name: Red Energy MyAccount registration
+  url: https://myaccount.redenergy.com.au/registration
+- type: Login
+  name: Red Energy MyAccount
+  url: https://myaccount.redenergy.com.au/
+- type: TermsOfService
+  name: Red Energy Terms and Conditions
+  url: https://www.redenergy.com.au/terms-and-conditions/
+- type: PrivacyPolicy
+  name: Red Energy Privacy Policy
+  url: https://www.redenergy.com.au/privacy-policy/index.html
+- type: Owner
+  name: Snowy Hydro Ltd
+  url: https://www.snowyhydro.com.au/retail/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

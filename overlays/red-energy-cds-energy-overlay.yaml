@@ -1,0 +1,96 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Red Energy CDR Energy API
+  version: 1.0.0
+extends: openapi/red-energy-cds-energy-openapi.yml
+x-generated: '2026-07-27'
+x-method: generated
+x-source: >-
+  Generated from what this enrichment round verified against Red Energy's live
+  surfaces on 2026-07-27. The harvested DSB document is the shared Consumer Data
+  Standards contract with placeholder example.com servers and no securitySchemes;
+  this overlay records the real hosts, the real access split, and the observed
+  behaviour without mutating the standard.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: Red Energy
+      x-apievangelist-provider-id: red-energy
+      x-apievangelist-spec-provenance: >-
+        DSB Consumer Data Standards CDR Energy API v1.36.0, harvested verbatim.
+        Not a Red-Energy-proprietary specification.
+      x-cdr-data-holder-brand-id: 39230258-a56c-ee11-a81c-002248e31327
+      x-cdr-abn: '60107479372'
+      x-cdr-register: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+
+  - target: $.servers
+    update:
+      - url: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+        description: >-
+          Australian Energy Regulator Energy Made Easy CDR host, Red Energy brand
+          path. Serves ONLY the two unauthenticated Product Reference Data
+          operations. Confirmed HTTP 200 on 2026-07-27 with meta.totalRecords 1705.
+        x-access: anonymous
+      - url: https://mtls.dh.example.com/cds-au/v1
+        description: >-
+          Placeholder from the DSB standard. Red Energy's real mutual-TLS base URI
+          is published only through the authenticated portion of the CDR Register
+          and is not publicly discoverable.
+        x-access: accredited-only
+
+  - target: $.paths['/energy/plans'].get
+    update:
+      x-access: anonymous
+      x-verified: '2026-07-27'
+      x-verified-detail: >-
+        HTTP 200 with x-v 1; meta.totalRecords 1705 Red Energy plans across
+        electricity and gas. HTTP 400 with no x-v; HTTP 406 with x-v 9
+        (max reported as 1).
+      x-example: examples/red-energy-list-energy-plans-example.json
+      x-server: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+
+  - target: $.paths['/energy/plans/{planId}'].get
+    update:
+      x-access: anonymous
+      x-verified: '2026-07-27'
+      x-verified-detail: >-
+        HTTP 200 at x-v 3 for planId RED552317MRE18@EME, returning displayName
+        "Qantas Red Saver" with a full electricityContract object. HTTP 406 at
+        x-v 1 with urn:au-cds:error:cds-all:Header/UnsupportedVersion. Unknown
+        planId returns 404 Resource/NotFound with the detail field omitted.
+      x-example: examples/red-energy-get-energy-plan-detail-example.json
+      x-server: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+
+  - target: $.paths[?(@property != '/energy/plans' && @property != '/energy/plans/{planId}')]
+    update:
+      x-access: accredited-only
+      x-access-note: >-
+        Consumer-authorised. Reachable only by an ACCC-accredited CDR data
+        recipient over mutual TLS with FAPI 1.0 Advanced OAuth2/OIDC, after the
+        individual customer consents. Not called by this review.
+
+  - target: $.tags
+    update:
+      - name: Energy Plans
+        description: >-
+          Unauthenticated CDR Product Reference Data. For energy this is served
+          centrally by the AER, not by the retailer, under a per-brand path.
+        x-access: anonymous
+      - name: Electricity Service Points
+        description: Consumer-authorised service point standing data. AEMO is the secondary data holder.
+        x-access: accredited-only
+      - name: Electricity Usage
+        description: Consumer-authorised interval and basic meter reads. AEMO-sourced.
+        x-access: accredited-only
+      - name: Distributed Energy Resources
+        description: Consumer-authorised DER registration and device data.
+        x-access: accredited-only
+      - name: Energy Accounts
+        description: Consumer-authorised account, concession and payment-schedule data.
+        x-access: accredited-only
+      - name: Energy Account Balances
+        description: Consumer-authorised balance data.
+        x-access: accredited-only
+      - name: Energy Account Billing
+        description: Consumer-authorised billing and invoice data.
+        x-access: accredited-only

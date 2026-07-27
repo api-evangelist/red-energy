@@ -119,3 +119,33 @@ The consumer-authorised half of the Consumer Data Right energy obligation that R
 ## Maintainers
 
 - **Kin Lane** — kin@apievangelist.com
+
+## Enrichment Artifacts (2026-07-27)
+
+Round 2 of the API Evangelist enrichment pipeline. Nothing below was invented — each artifact is either harvested from a real source, captured live from a production endpoint, or derived from artifacts already in this repository, and every probe records its HTTP status.
+
+| Artifact | What it holds | Method |
+|---|---|---|
+| [`authentication/`](authentication/red-energy-authentication.yml) | The two-mode auth posture: nothing on the public half, FAPI 1.0 Advanced OAuth2/OIDC over mTLS on the consumer half | searched |
+| [`scopes/`](scopes/red-energy-scopes.yml) | 11 CDR authorisation scopes with consumer-facing data-language equivalents | searched |
+| [`conventions/`](conventions/red-energy-conventions.yml) | `x-v` version negotiation, offset pagination, `x-fapi-interaction-id` tracing, CDS error envelope — and the absence of any idempotency contract | searched |
+| [`errors/`](errors/red-energy-problem-types.yml) | The `urn:au-cds:error:...` registry; three codes observed live | searched |
+| [`lifecycle/`](lifecycle/red-energy-lifecycle.yml) | Per-endpoint versioning, Endpoint Version Schedule as deprecation policy, 99.5% availability obligation, latency tiers | searched |
+| [`rate-limits/`](rate-limits/red-energy-rate-limits.yml) | CDS traffic thresholds and the 10-calls-per-24-hours velocity limits on NMI, usage and DER data | searched |
+| [`conformance/`](conformance/red-energy-conformance.yml) | Standards conformance separated into behaviourally verified versus statutorily asserted | searched |
+| [`changelog/`](changelog/red-energy-changelog.yml) | The DSB standards changelog that governs this contract | searched |
+| [`examples/`](examples/) | Seven request/response pairs captured live, including the 400, 404 and 406 error shapes | searched |
+| [`data-model/`](data-model/red-energy-data-model.yml) | The entity graph derived from 160 component schemas | derived |
+| [`overlays/`](overlays/) | OpenAPI Overlay 1.0.0 recording the real hosts and the anonymous/accredited split, without mutating the DSB documents | generated |
+| [`agentic-access/`](agentic-access/red-energy-agentic-access.yml) | All 27 operations classified `connected`/`read` — nothing on this API mutates anything | generated |
+| [`skills/`](skills/_index.yml) | Three packaged agent skills grounded in verified operationIds | generated |
+| [`arazzo/`](arazzo/red-energy-compare-plans-workflow.yml) | A runnable four-step workflow across both public hosts | generated |
+| [`mcp/`](mcp/red-energy-mcp.yml) | Candidate MCP tool set plus a tool-to-operation crosswalk. No MCP server exists in the CDR ecosystem | derived |
+| [`llms/`](llms/red-energy-llms.txt) | Generated llms.txt. No `/llms.txt` is published on any host | generated |
+| [`packages/`](packages/red-energy-packages.yml) | Registry search results — no first-party SDK anywhere — plus the DSB/ACCC ecosystem tooling | searched |
+| [`security/`](security/red-energy-domain-security.yml) | TLS, HSTS, DNSSEC, CAA, SPF and DMARC probe results | probed |
+| [`well-known/`](well-known/red-energy-well-known.yml) | Every `/.well-known/` and spec-discovery probe and its status. All missed — recorded as a negative, not omitted | searched |
+
+### Recorded negatives
+
+No webhooks or event surface, so no AsyncAPI. No CLI, no embedded UI components, no sandbox published by Red Energy, no first-party SDK, no Postman collection, no gRPC, no GraphQL, no vulnerability disclosure programme and no trust centre. `www.redenergy.com.au` returns HTTP 403 with a Cloudflare bot challenge to every programmatic client, including its own CDR policy PDF.

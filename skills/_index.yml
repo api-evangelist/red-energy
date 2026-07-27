@@ -1,0 +1,29 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the harvested OpenAPI in ../openapi/ plus
+  the conventions, errors, scopes and authentication artifacts in this repo.
+  Every operationId cited was verified verbatim in
+  openapi/red-energy-cds-energy-openapi.yml or
+  openapi/red-energy-cds-common-openapi.yml. Red Energy publishes no AGENTS.md,
+  skill files or agent guidance of its own — none was found on any host probed on
+  2026-07-27.
+provider: Red Energy
+providerId: red-energy
+
+skills:
+  - file: red-energy-compare-energy-plans.md
+    name: Compare Red Energy tariff plans
+    api: openapi/red-energy-cds-energy-openapi.yml
+    operations: [listEnergyPlans, getEnergyPlanDetail]
+    access: anonymous
+  - file: red-energy-check-cdr-availability.md
+    name: Check Red Energy CDR availability before calling
+    api: openapi/red-energy-cds-common-openapi.yml
+    operations: [getStatus, getOutages]
+    access: anonymous
+  - file: red-energy-share-consumer-energy-data.md
+    name: Retrieve a consenting customer's energy data as an accredited data recipient
+    api: openapi/red-energy-cds-energy-openapi.yml
+    operations: [listEnergyAccounts, getEnergyAccountDetail, getEnergyAccountBalance, getBillingForEnergyAccount, listElectricityServicePoints, getElectricityServicePointUsage]
+    access: accredited-only

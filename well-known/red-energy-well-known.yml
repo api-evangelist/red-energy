@@ -1,0 +1,79 @@
+generated: '2026-07-27'
+method: searched
+source: Live probes of every host in apis.yml and every OpenAPI servers[] host, 2026-07-27.
+provider: Red Energy
+providerId: red-energy
+
+result: none
+result_note: >-
+  No /.well-known/ document was found on any Red Energy or Red-Energy-serving
+  host. This is a recorded negative, not an omission — every path below was
+  probed and its HTTP status captured. No apis.yml WellKnown or SecurityTxt
+  pointer is wired, because no document exists to point at.
+
+context: >-
+  For a CDR data holder the absence of an anonymous /.well-known/openid-configuration
+  is expected rather than a defect: the Consumer Data Standards publish each data
+  holder's infosec base URI, and therefore its OpenID Provider Configuration, only
+  through the AUTHENTICATED portion of the CDR Register. The anonymous public base
+  URI serves the two Data Holder Operations discovery paths and nothing else. The
+  absence of a security.txt, by contrast, is a genuine gap.
+
+hosts:
+  - host: https://public.cdr.redenergy.com.au
+    role: Red Energy's registered CDR public base URI
+    server: nginx
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://cdr.energymadeeasy.gov.au
+    role: Australian Energy Regulator CDR host serving Red Energy branded Product Reference Data
+    server: Amazon CloudFront / API Gateway
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://www.redenergy.com.au
+    role: Corporate website
+    server: Cloudflare
+    documents:
+      - {path: /.well-known/security.txt, status: 403, note: Cloudflare bot challenge, not a 404 — presence cannot be determined}
+      - {path: /security.txt, status: 403}
+      - {path: /.well-known/openid-configuration, status: 403}
+      - {path: /.well-known/oauth-authorization-server, status: 403}
+      - {path: /.well-known/oauth-protected-resource, status: 403}
+      - {path: /.well-known/api-catalog, status: 403}
+      - {path: /.well-known/ai-plugin.json, status: 403}
+  - host: https://api.cdr.gov.au
+    role: CDR Register (the registry where Red Energy's brand entry lives)
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+  - host: https://www.snowyhydro.com.au
+    role: Parent company (Snowy Hydro Ltd)
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+
+spec_discovery_probes:
+  note: >-
+    Contract-discovery probes run in the same pass, against the API hosts rather
+    than only the docs host. All missed; the machine-readable contract for this
+    provider is the DSB standard already harvested into ../openapi/.
+  results:
+    - {host: 'https://public.cdr.redenergy.com.au', paths: [/openapi.json, /openapi.yaml, /swagger.json, /api-docs, /redoc, /llms.txt], status: 404}
+    - {host: 'https://cdr.energymadeeasy.gov.au', paths: [/openapi.json, /openapi.yaml, /swagger.json, /api-docs, /redoc, /llms.txt], status: 404}
+    - {host: 'https://www.redenergy.com.au', paths: [/openapi.json, /openapi.yaml, /swagger.json, /api-docs, /redoc, /llms.txt], status: 403}
+    - {host: 'https://consumerdatastandardsaustralia.github.io/standards', paths: [/llms.txt], status: 404}
+  graphql: {probed: false, note: No GraphQL surface exists or is advertised anywhere in the CDR ecosystem.}
+  mcp: {probed: false, note: No MCP endpoint is advertised. See mcp/red-energy-mcp.yml for the derived candidate.}

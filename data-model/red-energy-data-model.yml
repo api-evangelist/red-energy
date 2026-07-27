@@ -1,0 +1,186 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  DERIVED from the schema $ref graph and the id-reference fields in
+  openapi/red-energy-cds-energy-openapi.yml (133 component schemas) and
+  openapi/red-energy-cds-common-openapi.yml (27 component schemas), cross-checked
+  against the live plan and plan-detail payloads captured on 2026-07-27 (see
+  ../examples/).
+provider: Red Energy
+providerId: red-energy
+docs: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; direction is from the entity that owns the reference.
+
+id_formats:
+  planId: >-
+    Composite string, brand code + product code + "@" + source system. Observed
+    "RED552317MRE18@EME" — the @EME suffix marks the AER Energy Made Easy CDR
+    host as the source.
+  accountId: ASCIIString, opaque, unique within the data holder.
+  servicePointId: >-
+    Tokenised National Meter Identifier. The CDS require the NMI to be tokenised
+    so it is not directly exposed as the resource id.
+  invoiceNumber: String, the retailer's own invoice reference.
+  nationalMeterId: The NMI itself, exposed inside service point payloads under the basic service point scope.
+
+entities:
+  - name: EnergyPlan
+    domain: product-reference-data
+    access: anonymous
+    description: >-
+      A published tariff offer. type STANDING/MARKET/REGULATED, fuelType
+      ELECTRICITY/GAS/DUAL, brand and brandName, plus effectiveFrom/effectiveTo,
+      applicationUri and a geography block.
+    operations: [listEnergyPlans, getEnergyPlanDetail]
+  - name: EnergyPlanGeography
+    domain: product-reference-data
+    access: anonymous
+    description: >-
+      Where a plan is available — distributors (observed "Essential Energy",
+      "Essential Energy Far West", "Essential Energy Standard"), includedPostcodes
+      and excludedPostcodes.
+  - name: EnergyPlanContract
+    domain: product-reference-data
+    access: anonymous
+    description: >-
+      The electricityContract or gasContract block on plan detail — pricingModel,
+      timeZone, isFixed, paymentOption, tariffPeriod, eligibility, fees,
+      discounts, incentives, greenPowerCharges, solarFeedInTariff and
+      controlledLoad.
+  - name: EnergyAccount
+    domain: accounts
+    access: consumer-authorised
+    description: A customer's energy account with the retailer, holding one or more plans.
+    operations: [listEnergyAccounts, getEnergyAccountDetail]
+    scope: energy:accounts.basic:read / energy:accounts.detail:read
+  - name: EnergyAccountPlan
+    domain: accounts
+    access: consumer-authorised
+    description: The plan attached to an account, including the plan overview and the servicePointIds it covers.
+  - name: Balance
+    domain: billing
+    access: consumer-authorised
+    description: Current account balance.
+    operations: [getEnergyAccountBalance, listEnergyAccountBalancesBulk, listEnergyAccountBalancesSpecificAccounts]
+    scope: energy:billing:read
+  - name: BillingTransaction
+    domain: billing
+    access: consumer-authorised
+    description: >-
+      A charge, payment, credit, adjustment or other transaction against the
+      account, with an executionDateTime and a transaction-type discriminator.
+    operations: [getBillingForEnergyAccount, listEnergyAccountBillingBulk, listEnergyAccountBillingForSpecificAccounts]
+    scope: energy:billing:read
+  - name: Invoice
+    domain: billing
+    access: consumer-authorised
+    description: An issued invoice with period, dueDate, amounts and per-fuel breakdown.
+    operations: [getEnergyAccountInvoices, listEnergyAccountInvoicesBulk, listEnergyInvoicesForSpecificAccounts]
+    scope: energy:billing:read
+  - name: Concession
+    domain: accounts
+    access: consumer-authorised
+    description: A government or retailer concession applied to the account.
+    operations: [getEnergyAccountConcessions]
+    scope: energy:accounts.concessions:read
+  - name: PaymentSchedule
+    domain: accounts
+    access: consumer-authorised
+    description: Direct debit, card, manual or digital wallet payment arrangement.
+    operations: [getEnergyAccountPaymentSchedule]
+    scope: energy:accounts.paymentschedule:read
+  - name: ServicePoint
+    domain: service-points
+    access: consumer-authorised
+    description: >-
+      An electricity connection point identified by a tokenised NMI, with
+      servicePointClassification, servicePointStatus, jurisdictionCode and
+      isGenerator.
+    operations: [listElectricityServicePoints, getElectricityServicePointDetail]
+    scope: energy:electricity.servicepoints.basic:read / energy:electricity.servicepoints.detail:read
+  - name: ServicePointDetail
+    domain: service-points
+    access: consumer-authorised
+    description: Supply address, meters, registers and the associated market participants (distributor, FRMP, MDP, MPB, ROLR).
+  - name: Meter
+    domain: service-points
+    access: consumer-authorised
+    description: A physical meter at a service point, with its registers and specifications.
+  - name: UsageRead
+    domain: usage
+    access: consumer-authorised
+    description: >-
+      A meter read for a register over a read period — interval or basic, with
+      readUType discriminating between them.
+    operations: [getElectricityServicePointUsage, listElectricityUsageBulk, listElectricityUsageForServicePoints]
+    scope: energy:electricity.usage:read
+  - name: DERRecord
+    domain: der
+    access: consumer-authorised
+    description: >-
+      Distributed energy resource registration for a service point — approved
+      capacity, availablePhasesCount, installedPhasesCount, hasCentralProtectionControl.
+    operations: [getElectricityDERForServicePoint, listElectricityDERBulk, listElectricityDERForSpecificServicePoints]
+    scope: energy:electricity.der:read
+  - name: DERDevice
+    domain: der
+    access: consumer-authorised
+    description: An individual generation or storage device — type, manufacturer, model, nominalRatedCapacity, nominalStorageCapacity.
+  - name: Customer
+    domain: customer
+    access: consumer-authorised
+    description: >-
+      The CDR customer — person or organisation. customerUType discriminates.
+      Detail adds phone, email and addresses.
+    operations: [getCustomer, getCustomerDetail]
+    scope: common:customer.basic:read / common:customer.detail:read
+  - name: DiscoveryStatus
+    domain: operations
+    access: anonymous
+    description: status (OK/PARTIAL_FAILURE/UNAVAILABLE/SCHEDULED_OUTAGE), updateTime, explanation.
+    operations: [getStatus]
+  - name: Outage
+    domain: operations
+    access: anonymous
+    description: A scheduled outage with outageTime, duration, isPartial and explanation.
+    operations: [getOutages]
+
+relationships:
+  - {from: EnergyPlan, to: EnergyPlanGeography, kind: has_one, via: geography}
+  - {from: EnergyPlan, to: EnergyPlanContract, kind: has_one, via: electricityContract|gasContract}
+  - {from: EnergyAccount, to: EnergyAccountPlan, kind: has_many, via: plans}
+  - {from: EnergyAccountPlan, to: EnergyPlan, kind: belongs_to, via: planOverview}
+  - {from: EnergyAccountPlan, to: ServicePoint, kind: has_many, via: servicePointIds}
+  - {from: EnergyAccount, to: Balance, kind: has_one, via: accountId}
+  - {from: EnergyAccount, to: BillingTransaction, kind: has_many, via: accountId}
+  - {from: EnergyAccount, to: Invoice, kind: has_many, via: accountId}
+  - {from: EnergyAccount, to: Concession, kind: has_many, via: accountId}
+  - {from: EnergyAccount, to: PaymentSchedule, kind: has_many, via: accountId}
+  - {from: Invoice, to: EnergyAccount, kind: belongs_to, via: accountId}
+  - {from: BillingTransaction, to: Invoice, kind: belongs_to, via: invoiceNumber}
+  - {from: ServicePoint, to: ServicePointDetail, kind: has_one, via: servicePointId}
+  - {from: ServicePointDetail, to: Meter, kind: has_many, via: meters}
+  - {from: ServicePoint, to: UsageRead, kind: has_many, via: servicePointId}
+  - {from: ServicePoint, to: DERRecord, kind: has_one, via: servicePointId}
+  - {from: DERRecord, to: DERDevice, kind: has_many, via: derDevices}
+  - {from: Customer, to: EnergyAccount, kind: has_many, via: consent}
+  - {from: DiscoveryStatus, to: Outage, kind: has_many, via: outages}
+
+external_authority:
+  - entity: UsageRead
+    authority: AEMO
+    note: >-
+      Interval metering data originates with AEMO as the CDR secondary data
+      holder. Red Energy makes a Shared Responsibility Data Request; errors
+      propagated from AEMO carry isSecondaryDataHolderError true.
+  - entity: ServicePoint
+    authority: AEMO
+    note: NMI standing data is also AEMO-sourced under the shared responsibility model.
+  - entity: EnergyPlan
+    authority: Australian Energy Regulator
+    note: >-
+      Generic plan Product Reference Data is served centrally by the AER's Energy
+      Made Easy CDR host under a per-brand path, not by Red Energy. The @EME
+      suffix on planId reflects that.

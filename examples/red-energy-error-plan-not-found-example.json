@@ -1,0 +1,28 @@
+{
+  "captured": "2026-07-27",
+  "method": "searched",
+  "source": "Live capture from the production endpoint on 2026-07-27. Verbatim response body; no values invented.",
+  "operationId": "getEnergyPlanDetail",
+  "note": "Unknown planId returns 404 with urn:au-cds:error:cds-all:Resource/NotFound. Note the detail field is omitted by this implementation.",
+  "request": {
+    "method": "GET",
+    "url": "https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans/NOTAREALPLAN",
+    "headers": {
+      "x-v": "3"
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "errors": [
+        {
+          "code": "urn:au-cds:error:cds-all:Resource/NotFound",
+          "title": "Resource Not Found"
+        }
+      ]
+    }
+  }
+}

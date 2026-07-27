@@ -1,0 +1,208 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  DERIVED from the 4xx responses declared on every operation in
+  openapi/red-energy-cds-energy-openapi.yml and
+  openapi/red-energy-cds-common-openapi.yml, then SEARCHED and enriched from the
+  Consumer Data Standards "Error Codes" reference
+  (https://consumerdatastandardsaustralia.github.io/standards/#error-codes).
+  Three of these were observed live against Red Energy's own surfaces on
+  2026-07-27 and are marked verified.
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+provider: Red Energy
+providerId: red-energy
+
+format: cds-errors
+format_note: >-
+  NOT RFC 9457 (application/problem+json). The Consumer Data Standards define
+  their own envelope, predating and independent of RFC 9457. Responses are
+  application/json with a top-level errors[] array.
+
+envelope:
+  content_type: application/json
+  shape:
+    errors:
+      - code: URN error code (MUST be present)
+        title: Constant human-readable label per code (MUST be present)
+        detail: Human-readable description of this occurrence (MUST be present)
+        isSecondaryDataHolderError: Optional boolean, true when propagated from AEMO
+        meta: Optional endpoint-specific object
+  example: |
+    {
+      "errors": [
+        {
+          "code": "urn:au-cds:error:cds-all:Header/UnsupportedVersion",
+          "title": "Unsupported Version",
+          "detail": "Header x-v greater than maximum supported [x-v=9, max=1]"
+        }
+      ]
+    }
+
+problems:
+  - status: 400
+    code: urn:au-cds:error:cds-all:Header/Missing
+    title: Missing Required Header
+    description: A required HTTP header has not been provided. The detail SHOULD name the header.
+    verified: true
+    verified_note: >-
+      Observed 2026-07-27. GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans
+      with no x-v header returned HTTP 400 with detail "Header x-v must be provided".
+    example: examples/red-energy-error-missing-x-v-example.json
+    source_operations: [listEnergyPlans, getEnergyPlanDetail, getStatus, getOutages]
+  - status: 400
+    code: urn:au-cds:error:cds-all:Header/InvalidVersion
+    title: Invalid Version
+    description: >-
+      A version header (x-v or x-min-v) was supplied but is not a positive
+      integer.
+    source_operations: [listEnergyPlans, getEnergyPlanDetail, getStatus, getOutages]
+  - status: 400
+    code: urn:au-cds:error:cds-all:Header/Invalid
+    title: Invalid Header
+    description: A HTTP header was provided but its value is an invalid type or violates the field constraints.
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/Missing
+    title: Missing Required Field
+    description: The request is missing a mandatory query parameter or request-body field.
+    source_operations: [listEnergyAccountBalancesSpecificAccounts, listEnergyAccountBillingForSpecificAccounts, listEnergyInvoicesForSpecificAccounts, listElectricityUsageForServicePoints, listElectricityDERForSpecificServicePoints]
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/Invalid
+    title: Invalid Field
+    description: A URL or request-body parameter is an invalid type or violates the field type constraints.
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/InvalidDateTime
+    title: Invalid Date
+    description: >-
+      An invalid date was provided — for example a past date where a future date
+      is expected. Applies to the oldest-date/newest-date and
+      oldest-time/newest-time filters on the billing, invoice and usage endpoints.
+    source_operations: [getBillingForEnergyAccount, listEnergyAccountBillingBulk, getEnergyAccountInvoices, listElectricityUsageBulk, getElectricityServicePointUsage]
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/InvalidPageSize
+    title: Invalid Page Size
+    description: The page-size value exceeds the maximum allowed by the CDR Data Standards.
+  - status: 403
+    code: urn:au-cds:error:cds-all:Authorisation/RevokedConsent
+    title: Consent Is Revoked
+    description: >-
+      The consumer's consent is no longer authorised (revoked or expired) and the
+      requested resource will not be returned.
+    applies_to: consumer-authorised operations only
+  - status: 403
+    code: urn:au-cds:error:cds-all:Authorisation/InvalidConsent
+    title: Consent Is Invalid
+    description: >-
+      The authorised consumer's consent is not associated with the requested
+      resource or is insufficient to execute the action.
+    applies_to: consumer-authorised operations only
+  - status: 403
+    code: urn:au-cds:error:cds-all:Authorisation/AdrStatusNotActive
+    title: ADR Status Is Not Active
+    description: >-
+      The accredited data recipient or its software product is not "active". The
+      detail SHOULD contain the current status.
+    applies_to: consumer-authorised operations only
+  - status: 404
+    code: urn:au-cds:error:cds-all:Resource/NotFound
+    title: Resource Not Found
+    description: >-
+      The requested URL is not an API endpoint defined by the CDR Data Standards
+      and is not recognised by the implementation.
+    verified: true
+    verified_note: >-
+      Observed 2026-07-27. GET .../energy/plans/NOTAREALPLAN with x-v 3 returned
+      HTTP 404 with this code. The implementation omits the detail field, which
+      the standard says MUST be present.
+    example: examples/red-energy-error-plan-not-found-example.json
+    source_operations: [getEnergyPlanDetail]
+  - status: 404
+    code: urn:au-cds:error:cds-all:Resource/NotImplemented
+    title: Resource Not Implemented
+    description: >-
+      The URL is a valid CDR Data Standards endpoint but is not implemented by
+      this data holder.
+  - status: 404
+    code: urn:au-cds:error:cds-all:Resource/Invalid
+    title: Invalid Resource
+    description: The requested resource identifier is permanently unavailable.
+  - status: 404
+    code: urn:au-cds:error:cds-all:Resource/Unavailable
+    title: Unavailable Resource
+    description: The requested resource identifier is temporarily unavailable; a later request may succeed.
+  - status: 404
+    code: urn:au-cds:error:cds-energy:Authorisation/InvalidEnergyAccount
+    title: Invalid Energy Account
+    description: >-
+      The requested energy account is permanently unavailable. The detail is the
+      account id. MUST be supported for authenticated APIs.
+    source_operations: [getEnergyAccountDetail, getEnergyAccountBalance, getBillingForEnergyAccount, getEnergyAccountConcessions, getEnergyAccountInvoices, getEnergyAccountPaymentSchedule]
+  - status: 404
+    code: urn:au-cds:error:cds-energy:Authorisation/UnavailableEnergyAccount
+    title: Unavailable Energy Account
+    description: The requested energy account is temporarily unavailable. The detail is the account id.
+    source_operations: [getEnergyAccountDetail, getEnergyAccountBalance, getBillingForEnergyAccount, getEnergyAccountConcessions, getEnergyAccountInvoices, getEnergyAccountPaymentSchedule]
+  - status: 404
+    code: urn:au-cds:error:cds-energy:Authorisation/InvalidServicePoint
+    title: Invalid Service Point
+    description: >-
+      The requested service point is permanently unavailable. The detail is the
+      service point id. Applies both when the id is in the URI and when it is in
+      the request body.
+    source_operations: [getElectricityServicePointDetail, getElectricityDERForServicePoint, getElectricityServicePointUsage, listElectricityUsageForServicePoints, listElectricityDERForSpecificServicePoints]
+  - status: 404
+    code: urn:au-cds:error:cds-energy:Authorisation/UnavailableServicePoint
+    title: Unavailable Service Point
+    description: The requested service point is temporarily unavailable. The detail is the service point id.
+    source_operations: [getElectricityServicePointDetail, getElectricityDERForServicePoint, getElectricityServicePointUsage]
+  - status: 406
+    code: urn:au-cds:error:cds-all:Header/UnsupportedVersion
+    title: Unsupported Version
+    description: >-
+      The requested endpoint version is below the minimum or above the maximum
+      version the data holder supports.
+    verified: true
+    verified_note: >-
+      Observed 2026-07-27 twice — x-v 9 on listEnergyPlans returned HTTP 406 with
+      detail "Header x-v greater than maximum supported [x-v=9, max=1]", and x-v 1
+      on getEnergyPlanDetail returned 406 because that endpoint requires x-v 3+.
+    example: examples/red-energy-error-unsupported-version-example.json
+    source_operations: [listEnergyPlans, getEnergyPlanDetail, getStatus, getOutages]
+  - status: 422
+    code: urn:au-cds:error:cds-all:Field/InvalidPage
+    title: Invalid Page
+    description: >-
+      The requested page is out of range — for example page 6 when the set has
+      five pages.
+    source_operations: [listEnergyPlans, listEnergyAccounts, listElectricityServicePoints, listElectricityUsageBulk, listEnergyAccountBillingBulk]
+  - status: 422
+    code: urn:au-cds:error:cds-all:Authorisation/InvalidArrangement
+    title: Invalid Consent Arrangement
+    description: The arrangement being executed has previously been revoked; no further action will be taken.
+    applies_to: consumer-authorised operations only
+  - status: 4xx
+    code: urn:au-cds:error:cds-all:GeneralError/Expected
+    title: Expected Error Encountered
+    description: >-
+      A catch-all for an expected error not covered by a more specific code. The
+      detail SHOULD explain the error.
+  - status: 500
+    code: urn:au-cds:error:cds-all:GeneralError/Unexpected
+    title: Unexpected Error Encountered
+    description: An unexpected error occurred. The detail SHOULD carry a reference for support.
+  - status: 503
+    code: urn:au-cds:error:cds-all:Service/Unavailable
+    title: Service Unavailable
+    description: >-
+      The API is unavailable due to an outage. The detail MAY describe whether the
+      outage is planned. Scheduled outages are also published on the getOutages
+      endpoint.
+    source_operations: [getOutages]
+
+throttling:
+  status: 429
+  title: Too Many Requests
+  description: >-
+    The CDS permits a data holder to freely throttle or reject calls above the
+    published traffic thresholds, and explicitly names HTTP 429 as the response
+    during a denial-of-service event or when a misbehaving data recipient floods
+    the holder. See rate-limits/red-energy-rate-limits.yml.

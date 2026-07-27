@@ -1,0 +1,173 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://consumerdatastandardsaustralia.github.io/standards/ — the Consumer
+  Data Standards "High Level Standards" (HTTP Headers, Pagination, Error Codes,
+  Versioning, URI Structure, Non-functional Requirements), v1.36.0. Cross-checked
+  against live responses captured from Red Energy's surfaces on 2026-07-27 and
+  against the harvested OpenAPI in ../openapi/.
+description: >-
+  How every Red Energy CDR endpoint behaves across operations: no idempotency
+  contract (the surface is read-only), header-negotiated per-endpoint versioning,
+  offset pagination, a bespoke non-RFC-9457 error envelope, and per-request
+  correlation via x-fapi-interaction-id. Red Energy publishes no conventions of
+  its own — these are the standard's, which it implements and which were
+  observed behaving correctly.
+provider: Red Energy
+providerId: red-energy
+
+base_urls:
+  product_reference_data: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+  discovery: https://public.cdr.redenergy.com.au/cds-au/v1
+  consumer_data: null
+api_style: REST over HTTPS, JSON responses, no request bodies except two POST-as-query bulk endpoints
+
+authentication:
+  scheme: >-
+    None on the public half; OAuth2/OIDC under FAPI 1.0 Advanced over mutual TLS
+    on the consumer-authorised half.
+  detail: authentication/red-energy-authentication.yml
+
+idempotency:
+  supported: false
+  reason: >-
+    The CDR data holder surface is read-only. Twenty-two of the twenty-seven
+    operations across the two specs are GET. The five POST operations
+    (listEnergyAccountBalancesSpecificAccounts,
+    listEnergyAccountBillingForSpecificAccounts,
+    listEnergyInvoicesForSpecificAccounts, listElectricityUsageForServicePoints,
+    listElectricityDERForSpecificServicePoints) are POST-as-query — they carry a
+    list of account or service point ids in the body purely because the id set is
+    too long for a URL. They create nothing and are naturally idempotent.
+  header: null
+  note: >-
+    No Idempotency-Key header appears anywhere in the CDS or in the harvested
+    OpenAPI. No Idempotency pointer is wired in apis.yml for this provider.
+
+versioning:
+  scheme: per-endpoint, header negotiated
+  uri_version: /cds-au/v1 — the URI carries the STANDARD's major version, not the endpoint version
+  request_headers:
+    x-v: >-
+      Mandatory positive integer. The endpoint version the client wants. Omitting
+      it returns 400 urn:au-cds:error:cds-all:Header/Missing (verified live
+      2026-07-27).
+    x-min-v: >-
+      Optional. Lowest acceptable endpoint version. The holder responds with the
+      highest supported version between x-min-v and x-v.
+  response_headers:
+    x-v: The payload version actually served. Echoed on every response.
+  failure_mode: >-
+    406 Not Acceptable with urn:au-cds:error:cds-all:Header/UnsupportedVersion
+    when no requested version is supported. Observed detail on the Red Energy PRD
+    host - "Header x-v greater than maximum supported [x-v=9, max=1]".
+  observed_versions:
+    listEnergyPlans: 1
+    getEnergyPlanDetail: 3
+    getStatus: 1
+    getOutages: 1
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#endpoint-versioning
+  schedule: https://consumerdatastandardsaustralia.github.io/standards/#endpoint-version-schedule
+
+pagination:
+  style: offset (page number)
+  request_params:
+    page: Page number being requested. Defaults to 1.
+    page-size: Records per page. Defaults to 25.
+  response_fields:
+    links.first: URI of the first page. Mandatory when this is not the first page.
+    links.prev: URI of the previous page. Mandatory when this is not the first page.
+    links.next: URI of the next page. Mandatory when this is not the last page.
+    links.last: URI of the last page. Mandatory when this is not the last page.
+    links.self: URI of this page. Always present.
+    meta.totalRecords: Total records in the set. MUST be present.
+    meta.totalPages: Total pages in the set. MUST be present; 0 when totalRecords is 0.
+  errors:
+    - 422 urn:au-cds:error:cds-all:Field/InvalidPage — page out of range
+    - 400 urn:au-cds:error:cds-all:Field/InvalidPageSize — page-size above the maximum
+  verified: >-
+    GET /energy/plans?page=1&page-size=1 on 2026-07-27 returned meta.totalRecords
+    1705, meta.totalPages 1705, and links.self / links.next / links.last.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#pagination
+
+request_tracing:
+  header: x-fapi-interaction-id
+  description: >-
+    An RFC 4122 UUID used as a correlation id. If the client supplies it, the
+    data holder MUST play it back on the response; if not, the holder generates
+    one. Observed on the AER Product Reference Data host on 2026-07-27
+    (x-fapi-interaction-id was returned and exposed via
+    access-control-expose-headers).
+  other_headers:
+    x-fapi-auth-date: When the customer last logged in to the data recipient. Authenticated calls only.
+    x-fapi-customer-ip-address: Customer IP. Its presence marks a customer-present call.
+    x-cds-client-headers: Base64-encoded original customer HTTP headers. Customer-present calls only.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#http-headers
+
+error_envelope:
+  format: CDS errors[] object — NOT RFC 9457 application/problem+json
+  content_type: application/json
+  shape:
+    errors:
+      - code: Endpoint-specific error code, usually a urn:au-cds:error:... URN. MUST be present.
+        title: Human-readable label, constant per code. MUST be present.
+        detail: Human-readable description of this specific occurrence. MUST be present.
+        isSecondaryDataHolderError: Optional boolean; true when propagated from AEMO as secondary data holder.
+        meta: Optional object with endpoint-specific data.
+  urn_structure: 'urn:au-cds:error:<sub-type>:<error-category>/<error-code> where sub-type is cds-all, cds-register, cds-banking or cds-energy'
+  observed:
+    - 'GET /energy/plans with no x-v -> 400 {"errors":[{"code":"urn:au-cds:error:cds-all:Header/Missing","title":"Missing Required Header","detail":"Header x-v must be provided"}]}'
+    - 'GET /energy/plans with x-v 9 -> 406 urn:au-cds:error:cds-all:Header/UnsupportedVersion'
+    - 'GET /energy/plans/NOTAREALPLAN with x-v 3 -> 404 urn:au-cds:error:cds-all:Resource/NotFound (detail omitted by this implementation)'
+  detail: errors/red-energy-problem-types.yml
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+
+response_envelope:
+  data: The payload object or list. Always present on 2xx.
+  links: Navigation object. self is always present; pagination links when paged.
+  meta: Metadata object. totalRecords/totalPages when paged; may be empty.
+
+filtering:
+  description: >-
+    Filtering and pagination are applied independently. On listEnergyPlans the
+    CDS defines type (STANDING/MARKET/REGULATED/ALL), fuelType
+    (ELECTRICITY/GAS/DUAL/ALL), effective (CURRENT/FUTURE/ALL) and updated-since.
+  field_expansion:
+    supported: false
+    note: The CDS has no expand[] or sparse-fieldset mechanism. Detail is obtained via the *Detail endpoints.
+
+metadata:
+  customer_metadata_supported: false
+  note: There is no user-writable metadata surface; the API is read-only.
+
+rate_limit_signaling:
+  documented: true
+  throttle_status: 429 Too Many Requests
+  retry_after: >-
+    Retry-After is named in access-control-expose-headers on the AER Product
+    Reference Data host (observed 2026-07-27), so a browser client can read it
+    when throttled.
+  thresholds: rate-limits/red-energy-rate-limits.yml
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#traffic-thresholds
+
+caching:
+  data_latency: >-
+    No absolute latency requirement. Data served via the API must be commensurate
+    with the data shown through the holder's other primary digital channels. A
+    holder making a Shared Responsibility Data Request to AEMO may cache the
+    secondary holder's result briefly.
+
+cors:
+  observed: >-
+    Both public hosts return access-control-allow-origin "*".
+    public.cdr.redenergy.com.au allows Range, x-v and x-min-v request headers and
+    exposes Content-Length, x-v, x-min-v; the AER host exposes x-v, Retry-After
+    and x-fapi-interaction-id.
+
+transport_security:
+  public_endpoints: One-way TLS. The CDS forbids mutual TLS on unauthenticated endpoints.
+  authenticated_endpoints: Mutual TLS with CDR CA-issued certificates on both ends.
+  observed_hsts: >-
+    public.cdr.redenergy.com.au returns strict-transport-security
+    max-age=63072000; includeSubDomains (observed 2026-07-27).
+  detail: security/red-energy-domain-security.yml

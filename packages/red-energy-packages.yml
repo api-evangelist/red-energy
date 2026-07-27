@@ -1,0 +1,98 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  Searched npm (registry search + direct name lookups), PyPI, and the GitHub
+  organisations red-energy, redenergy and ConsumerDataStandardsAustralia on
+  2026-07-27.
+provider: Red Energy
+providerId: red-energy
+
+official_packages: []
+official_packages_note: >-
+  Red Energy publishes NO client libraries in any registry. There is a GitHub
+  organisation at github.com/red-energy (HTTP 200) but it has zero public
+  repositories and no identifying metadata, so it is not recorded as Red
+  Energy's. github.com/redenergy returns 404. No apis.yml SDKs pointer is wired,
+  because no first-party SDK exists.
+
+registries_searched:
+  - {registry: npm, result: none, note: 'No first-party package. Searches for "consumer data standards cdr", "consumer data right holder" and "red energy api" returned no relevant library.'}
+  - {registry: pypi, result: none, note: 'consumer-data-standards, cdr-energy and python-cdr all return 404.'}
+  - {registry: maven-central, result: none}
+  - {registry: nuget, result: none}
+  - {registry: pkg.go.dev, result: none}
+  - {registry: rubygems, result: none}
+  - {registry: packagist, result: none}
+  - {registry: crates.io, result: none}
+
+ecosystem_tooling:
+  note: >-
+    Not Red Energy's, and not registry-published, but these are the real
+    open-source artefacts a developer integrating with a CDR energy data holder
+    would use. Published by the Treasury Data Standards Body and the ACCC, source
+    only — none was found on npm or PyPI. Recorded with official false so no SDK
+    claim is implied for Red Energy.
+  packages:
+    - name: js-holder-sdk
+      language: javascript
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/js-holder-sdk
+      description: Middleware handling common CDS data holder boilerplate.
+      publisher: Data Standards Body
+      official: false
+    - name: mock-data-holder-java
+      language: java
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/mock-data-holder-java
+      description: A collection of CDS software artefacts in Java.
+      publisher: Data Standards Body
+      official: false
+    - name: mock-data-holder-nodejs
+      language: javascript
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/mock-data-holder-nodejs
+      description: NodeJS app hosting generated CDR data holder data.
+      publisher: Data Standards Body
+      official: false
+    - name: ADR-Gateway
+      language: typescript
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/ADR-Gateway
+      description: A data recipient gateway for getting a CDR accredited data recipient running.
+      publisher: Data Standards Body
+      official: false
+    - name: mock-register
+      language: csharp
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/mock-register
+      description: A mock CDR Register for development and testing.
+      publisher: Data Standards Body
+      official: false
+    - name: accc-authorisation-server
+      language: csharp
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/accc-authorisation-server
+      description: A CDR OpenID and FAPI 1.0 Advanced compliant identity provider for testing.
+      publisher: ACCC
+      official: false
+    - name: accc-mock-data-recipient
+      language: csharp
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/accc-mock-data-recipient
+      description: A mock CDR data recipient software product for development and testing.
+      publisher: ACCC
+      official: false
+    - name: testdata-cli
+      language: javascript
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/testdata-cli
+      description: CLI for generating data for use in the CDR ecosystem.
+      publisher: Data Standards Body
+      official: false
+    - name: dsb-postman
+      language: n/a
+      registry: github
+      url: https://github.com/ConsumerDataStandardsAustralia/dsb-postman
+      description: Repository behind the public DSB-SCHEMA-TESTS Postman workspace.
+      publisher: Data Standards Body
+      official: false
