@@ -1,0 +1,150 @@
+aid: red-energy
+url: https://raw.githubusercontent.com/api-evangelist/red-energy/refs/heads/main/apis.yml
+name: Red Energy
+kind: company
+description: >-
+  Red Energy Pty Ltd (ABN 60 107 479 372) is an Australian electricity and gas retailer,
+  wholly owned by Snowy Hydro Ltd, that supplies more than a million residential and business
+  customers across New South Wales, Victoria, Queensland, South Australia and the ACT from a
+  Richmond, Victoria base. It sits on the retail end of the National Electricity Market value
+  chain: Snowy Hydro generates, the distribution network businesses own the poles and wires,
+  AEMO operates the market and holds metering data, and Red Energy owns the customer, the
+  tariff and the bill. Its API posture is entirely a product of statute rather than product
+  strategy. Red Energy publishes no developer portal, no self-serve API programme and no
+  proprietary specification - developer., api., docs. and data. subdomains do not resolve, and
+  redenergy.com.au itself sits behind a Cloudflare bot challenge that returns HTTP 403 to any
+  non-browser client. What it does have is a real, verified Consumer Data Right implementation:
+  it is a designated CDR energy data holder listed on the CDR Register with the public base URI
+  https://public.cdr.redenergy.com.au, which serves the Consumer Data Standards discovery
+  endpoints live with correct x-v version negotiation, while 1,705 Red Energy branded plans are
+  published anonymously through the Australian Energy Regulator's Energy Made Easy CDR host.
+  The split is the story - open, standardised, anonymous product reference data on one side, and
+  consumer usage, billing and account data available only to accredited CDR data recipients with
+  the customer's consent on the other, with nothing at all in between.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red-energy.png
+tags:
+- Energy
+- Australia
+- Utilities
+- Electricity
+- Gas
+- Energy Retail
+- Consumer Data Right
+- CDR
+- Product Reference Data
+- Smart Metering
+- Open Data
+created: '2026-07-27'
+modified: '2026-07-27'
+specificationVersion: '0.19'
+apis:
+- aid: red-energy:red-energy-cdr-energy-product-reference-data-api
+  name: Red Energy CDR Energy Product Reference Data API
+  description: >-
+    The unauthenticated Consumer Data Right Product Reference Data surface for the Red Energy
+    brand - Get Generic Plans and Get Generic Plan Detail from the Consumer Data Standards CDR
+    Energy API. Unlike CDR banking, where each authorised deposit-taking institution serves its
+    own product endpoint, energy plan data is served centrally by the Australian Energy
+    Regulator's Energy Made Easy CDR host under a per-brand path. Confirmed live on 2026-07-27:
+    GET /cds-au/v1/energy/plans with header x-v 1 returned HTTP 200 with response header x-v 1
+    and meta.totalRecords 1705 Red Energy plans across electricity and gas; the same call with no
+    x-v header returned HTTP 400 and with x-v 9 returned HTTP 406, exactly the version-negotiation
+    behaviour the Consumer Data Standards prescribe. Plan detail requires x-v 3 or higher - x-v 1
+    returns a urn:au-cds:error:cds-all:Header/UnsupportedVersion error. No API key, no signup and
+    no accreditation is needed to call it.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+  tags:
+  - Energy Plans
+  - Product Reference Data
+  - Consumer Data Right
+  - Tariffs
+  - Australia
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-cds-energy-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+- aid: red-energy:red-energy-cdr-discovery-api
+  name: Red Energy CDR Discovery API
+  description: >-
+    Red Energy's own registered Consumer Data Right public base URI, serving the two
+    unauthenticated Data Holder Operations endpoints of the Consumer Data Standards CDR Common
+    API - Get Status and Get Outages. This is the only API surface hosted on a Red Energy
+    controlled domain. Confirmed live on 2026-07-27: GET /cds-au/v1/discovery/status with header
+    x-v 1 returned HTTP 200 and a CDS-shaped envelope reporting status OK and "All services
+    operational", GET /cds-au/v1/discovery/outages returned HTTP 200 with an empty outages array,
+    the same calls without an x-v header returned HTTP 400, and x-v 3 returned HTTP 406. The base
+    URI serves nothing else anonymously - /cds-au/v1/energy/plans, the site root and
+    /.well-known/openid-configuration all return an nginx HTTP 404.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#common-apis
+  baseURL: https://public.cdr.redenergy.com.au/cds-au/v1
+  tags:
+  - Discovery
+  - Status
+  - Outages
+  - Consumer Data Right
+  - Australia
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-cds-common-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+- aid: red-energy:red-energy-cdr-energy-consumer-data-api
+  name: Red Energy CDR Energy Consumer Data API
+  description: >-
+    The consumer-authorised half of the Consumer Data Right energy obligation that Red Energy is
+    designated to meet as a data holder - electricity service points, usage, distributed energy
+    resources, energy accounts, balances, invoices, billing, concessions and payment schedules,
+    sixteen paths in all from the Consumer Data Standards CDR Energy API. This surface is real
+    and mandated, but it is not open: it is reachable only by an accredited CDR data recipient,
+    over mutual TLS with FAPI-profile OAuth2 and OpenID Connect, after the individual customer
+    grants consent, and the infosec base URI is published only through the authenticated portion
+    of the CDR Register. No baseURL is recorded here because none is publicly discoverable, and
+    no endpoint on this surface was called - it cannot be reached anonymously. The mandate is
+    verified; the endpoints are, by design, unverifiable from outside the accreditation regime.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Energy Accounts
+  - Electricity Usage
+  - Billing
+  - Distributed Energy Resources
+  - Consumer Data Right
+  - Australia
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-cds-energy-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+common:
+- type: Website
+  url: https://www.redenergy.com.au/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/red-energy
+- type: Status
+  url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+- type: Registry
+  url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+- type: Documentation
+  url: https://consumerdatastandardsaustralia.github.io/standards/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

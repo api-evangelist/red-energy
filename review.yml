@@ -1,0 +1,373 @@
+aid: red-energy
+name: Red Energy
+review:
+  question: >-
+    Does Red Energy expose a confirmed, live public API surface, and does the Consumer Data Right
+    energy mandate that binds it correspond to an actual implementation?
+  answer: true
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  cdrRegisterEntryConfirmed: true
+  cdrPublicBaseUriLiveConfirmed: true
+  cdrProductReferenceDataLiveConfirmed: true
+  developerPortalConfirmed: false
+  specProvenance: >-
+    DSB Consumer Data Standards (shared standard, not a Red-Energy-proprietary contract).
+    Red Energy publishes no OpenAPI document of its own.
+
+mandate:
+  homeMarket: Australia
+  tier: utility-retailer
+  regime: cdr-energy
+  regimeVerbatim: >-
+    The Consumer Data Right, established by Part IVD of the Competition and Consumer Act 2010 and
+    administered by the ACCC with rules and technical standards set by the Treasury Data Standards
+    Body, was extended from banking to the energy sector. Red Energy Pty Ltd is a designated
+    energy data holder under that regime. This is the same statutory machinery, the same regulator
+    and the same standards body that produced the byte-for-byte identical banking contract every
+    Australian ADI implements - transplanted, intact, into a second sector.
+  status: live-implemented
+  statusVerbatim: >-
+    Live and implemented, and verified three independent ways rather than taken on a claim.
+    (1) REGISTER ENTRY. The CDR Register's unauthenticated Get Data Holder Brands Summary endpoint,
+    GET https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary with header x-v 1,
+    returned HTTP 200 and 84 energy data holder brands. Red Energy appears with
+    brandName "Red Energy", dataHolderBrandId 39230258-a56c-ee11-a81c-002248e31327,
+    interimId eb76743a-4ee5-40a7-aa1b-bd3b719a7622, abn 60107479372, acn 107479372,
+    publicBaseUri https://public.cdr.redenergy.com.au, lastUpdated 2026-07-01T12:15:37Z.
+    (2) LIVE STANDARDS-CONFORMANT SURFACE ON A RED ENERGY DOMAIN. That registered public base URI
+    resolves (13.54.239.160, 54.79.9.179, 54.253.26.71) and serves the Consumer Data Standards
+    Common API discovery endpoints. GET /cds-au/v1/discovery/status with x-v 1 returned HTTP 200,
+    content-type application/json, response header x-v 1, and the CDS envelope
+    {"data":{"status":"OK","updateTime":"2026-07-27T12:06:53Z","explanation":"All services
+    operational"},"links":{...},"meta":{}}. GET /cds-au/v1/discovery/outages with x-v 1 returned
+    HTTP 200 with an empty outages array. The same status call with NO x-v header returned HTTP
+    400 and with x-v 3 returned HTTP 406 - precisely the version-negotiation semantics the
+    Consumer Data Standards prescribe, which is behavioural proof of conformance rather than a
+    marketing assertion.
+    (3) LIVE BRANDED PRODUCT REFERENCE DATA. GET
+    https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans?page-size=5 with x-v 1
+    returned HTTP 200, response header x-v 1, and meta.totalRecords 1705 Red Energy plans; the
+    first record is planId RED552317MRE18@EME, brand "red-energy", brandName "Red Energy",
+    fuelType ELECTRICITY, type MARKET, with a geography block naming Essential Energy distribution
+    zones and hundreds of included postcodes. Plan detail, GET
+    /cds-au/v1/energy/plans/RED552317MRE18@EME, returned HTTP 406 at x-v 1 with
+    urn:au-cds:error:cds-all:Header/UnsupportedVersion and HTTP 200 at x-v 3, yielding
+    displayName "Qantas Red Saver" with a full electricityContract object (tariffPeriod, fees,
+    solarFeedInTariff, greenPowerCharges, controlledLoad, eligibility, incentives).
+    What was NOT verified, and is stated as such: none of the sixteen consumer-authorised energy
+    paths were called. They require CDR accreditation, mutual TLS and a consented FAPI OAuth2
+    authorisation, so they are unreachable from outside the regime by design. The mandate on that
+    half is confirmed; the implementation of that half is asserted by the register listing and by
+    Red Energy's published CDR policy, not by a response this review obtained.
+  evidenceThatIsNotEvidence: >-
+    Red Energy's own website could not be used as evidence at all. Every path under
+    redenergy.com.au and www.redenergy.com.au - including / , /consumer-data-right,
+    /help-centre/consumer-data-right, /privacy/cdr-policy, /cdr and the
+    /docs/Red-Energy-Consumer-Data-Right-Policy.pdf CDR policy document - returned HTTP 403 with a
+    Cloudflare "Just a moment..." interstitial to both curl and a browser user-agent. A compliance
+    page nobody could read would not have been proof of implementation in any case; the register
+    entry plus the two live standards-conformant hosts are.
+  dataStandard: >-
+    CDR Consumer Data Standards (energy) - DSB CDR Energy API v1.36.0 and CDR Common API v1.36.0,
+    OpenAPI 3.0.3, versioned per-endpoint through the x-v request/response header. No Green Button
+    or ESPI reference found, no OCPP/OCPI, no OpenADR, no IEEE 2030.5, no IEC CIM. The energy
+    sector's Australian standard is the same document family as the banking sector's, published
+    by the same body, at the same version number - which is the whole point of the control case.
+  consumerVsMarketDataSplit:
+    consumerDataApi: true
+    consumerDataNote: >-
+      A third party CAN obtain an individual Red Energy customer's usage, billing, account,
+      invoice, concession, payment-schedule and DER data through a documented API - the Consumer
+      Data Standards CDR Energy API - but only as an accredited CDR data recipient, over mTLS with
+      FAPI-profile OAuth2/OIDC, after that specific customer consents through Red Energy's consumer
+      dashboard. Red Energy's published CDR policy states it does not charge a fee to share CDR
+      data and that customers may amend or withdraw sharing at any time. Interval metering data for
+      a service point ultimately originates with AEMO as the CDR secondary data holder; Red Energy
+      is the primary data holder for the account, billing and tariff side.
+    marketDataOpen: false
+    marketDataNote: >-
+      Red Energy publishes no open grid, market or system data of its own. It is a retailer, not a
+      market operator or network business - the genuinely open Australian energy market feeds
+      (NEM dispatch, price, demand, DER register) come from AEMO, and the network data from the
+      distribution businesses. What Red Energy has that is genuinely open and anonymous is
+      PRODUCT reference data - 1,705 tariff plans, callable with no key and no signup - and that
+      is a consumer-product artefact of the CDR mandate, not market data. Recording it as
+      "market data open" would flatter the sector and blur the distinction the mandate actually
+      draws.
+    theFinding: >-
+      The split is total and there is nothing in the middle. Every tariff Red Energy sells is
+      machine-readable by anyone on earth without identifying themselves, in a schema identical to
+      the one 83 other Australian energy brands publish. Every fact about an actual Red Energy
+      customer is locked behind accreditation. Red Energy built neither surface as a product - it
+      built exactly what Part IVD compelled, on the timetable the ACCC set, and stopped.
+  accessGate:
+    gate: accredited-only
+    whatADeveloperMustDo: >-
+      For the open Product Reference Data: nothing. Send GET
+      https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans with the header x-v 1.
+      No account, no key, no terms click-through, no rate-limit disclosure found.
+      For the Discovery API on Red Energy's own host: nothing. Send GET
+      https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status with x-v 1.
+      For anything about a real customer: become an accredited person under the CDR rules by
+      applying to the ACCC (unrestricted or sponsored accreditation, or operate under the
+      Trusted Adviser / CDR representative pathways), obtain CDR Register client credentials and
+      transport/signing certificates from the CDR Register's certificate authority, complete
+      Conformance Test Suite testing, then initiate a consent flow that the individual Red Energy
+      customer approves. There is no self-serve path, no sandbox published by Red Energy, no
+      partner form on redenergy.com.au, and no commercial API deal on offer - the gate is
+      statutory, not commercial.
+  authModel:
+    publicProductReferenceData: none (unauthenticated, versioned only by the x-v header)
+    publicDiscovery: none (unauthenticated, versioned only by the x-v header)
+    consumerData: >-
+      OAuth2 / OpenID Connect under the FAPI security profile, mutual TLS, private_key_jwt client
+      authentication, CDR Register-issued certificates, consumer consent and authorisation with a
+      CDR-mandated consumer dashboard for review and revocation. Accredited data recipients only.
+    wellKnownProbe: >-
+      GET https://public.cdr.redenergy.com.au/.well-known/openid-configuration returned HTTP 404
+      (nginx). The data holder's infosec base URI and its OIDC discovery document are published
+      through the authenticated portion of the CDR Register, not the public summary endpoint, so
+      no OIDC metadata could be fetched anonymously. No infosec host was guessed.
+
+findings:
+  summary: |
+    Red Energy is the control case for the question of whether an API mandate is replicable, and
+    on the evidence it replicated cleanly. The Consumer Data Right - Part IVD of the Competition
+    and Consumer Act, the ACCC as regulator, the Treasury Data Standards Body as spec author - was
+    lifted out of banking and applied to energy, and Red Energy, a retailer with no developer
+    programme of any kind, is now a live, register-listed, standards-conformant API publisher.
+    Not on paper. GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status returns
+    HTTP 200 today, negotiates its version through the x-v header exactly as the standard says it
+    must, and 400s or 406s when you get that wrong.
+
+    The nuance that separates energy from banking is architectural, and it is worth being precise
+    about because it is easy to misread as a compliance gap. In CDR banking, every ADI serves its
+    own unauthenticated Product Reference Data from its own public base URI. In CDR energy it does
+    not work that way: generic plan data is served centrally through the Australian Energy
+    Regulator's Energy Made Easy CDR host on a per-brand path, and the retailer's own public base
+    URI carries only the Common API discovery endpoints. This review confirmed that empirically -
+    /cds-au/v1/energy/plans returns an nginx 404 on public.cdr.redenergy.com.au, and the identical
+    404 appears on a peer brand's host (public.cdr.energy.arcline.com.au), while
+    cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans returns 1,705 Red Energy plans.
+    The mandate produced a standard contract in both sectors; energy centralised the public half
+    of it and left the private half distributed.
+
+    Outside the mandate there is nothing. Red Energy has no developer portal: developer.,
+    developers., api., docs. and data. subdomains do not resolve in DNS at all, and every path on
+    redenergy.com.au sits behind a Cloudflare bot challenge returning HTTP 403 to any programmatic
+    client, including the company's own CDR policy PDF. There is a github.com/red-energy
+    organisation but it has zero public repositories and no identifying metadata, so it was not
+    recorded as Red Energy's. Nothing was found that Red Energy chose to build for developers.
+
+    The sibling structure is worth recording because it shows the mandate binding an entity rather
+    than a brand. Red Energy Pty Ltd's ABN 60107479372 appears on the CDR Register twice, under
+    brandName "Red Energy" (publicBaseUri public.cdr.redenergy.com.au) and brandName
+    "Snowy Energy" (publicBaseUri public.cdr.snowyenergy.com.au). Its Snowy Hydro stablemate Lumo
+    Energy is registered separately under ABN 69100528327 at public.cdr.lumoenergy.com.au. All
+    three hosts returned HTTP 200 on /cds-au/v1/discovery/status. On the AER PRD host, red-energy
+    returned 1,705 plans while snowy-energy and lumo-energy each returned totalRecords 0 - a real,
+    recordable difference between brands under the same obligation, and a reminder that a live
+    register entry does not by itself mean populated data.
+
+    The honest conclusion for the sector study: in Australia, the mandate is not merely designated,
+    it is implemented, and it is implemented by a company that would plainly never have shipped an
+    API otherwise. But it produced exactly one shape of API - a compliance surface - and no
+    product. Red Energy publishes no OpenAPI, no portal, no SDK, no changelog, no rate limits and
+    no support channel for developers. The contract exists because the Data Standards Body wrote
+    it, and it is identical to every competitor's for the same reason.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+      documented: true
+      note: >-
+        CDR Energy Product Reference Data for the Red Energy brand, hosted by the Australian Energy
+        Regulator. Unauthenticated. Versioned via the x-v request/response header.
+    - protocol: REST
+      scheme: https
+      baseURL: https://public.cdr.redenergy.com.au/cds-au/v1
+      documented: true
+      note: >-
+        Red Energy's registered CDR public base URI. Serves only the CDR Common API discovery
+        endpoints anonymously. Unauthenticated. Versioned via the x-v header.
+    - protocol: REST
+      scheme: https
+      baseURL: not publicly discoverable
+      documented: true
+      note: >-
+        The consumer-authorised CDR energy surface. Documented in the Consumer Data Standards but
+        the infosec base URI is published only via the authenticated CDR Register. mTLS + FAPI
+        OAuth2/OIDC, accredited data recipients only. Not called.
+  endpointsConfirmedRest:
+    - GET https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary (HTTP 200, x-v 1, 84 energy brands, Red Energy present)
+    - GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status (HTTP 200, x-v 1, status OK)
+    - GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages (HTTP 200, x-v 1, outages empty)
+    - GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans (HTTP 200, x-v 1, totalRecords 1705)
+    - GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans/{planId} (HTTP 200 at x-v 3; HTTP 406 at x-v 1)
+  probesRecorded:
+    - url: https://www.redenergy.com.au/
+      status: 403
+      note: Cloudflare "Just a moment..." bot challenge. Same for redenergy.com.au apex.
+    - url: https://www.redenergy.com.au/consumer-data-right
+      status: 403
+      note: Cloudflare challenge, browser user-agent included.
+    - url: https://www.redenergy.com.au/help-centre/consumer-data-right
+      status: 403
+    - url: https://www.redenergy.com.au/privacy/cdr-policy
+      status: 403
+    - url: https://www.redenergy.com.au/cdr
+      status: 403
+    - url: https://www.redenergy.com.au/docs/Red-Energy-Consumer-Data-Right-Policy.pdf
+      status: 403
+      note: CDR policy PDF is Cloudflare-blocked; content known only via search-engine summaries, so not treated as fetched evidence.
+    - url: https://www.redenergy.com.au/developers
+      status: 403
+    - url: https://www.redenergy.com.au/api
+      status: 403
+    - url: https://www.redenergy.com.au/docs
+      status: 403
+    - url: https://www.redenergy.com.au/data
+      status: 403
+    - url: https://www.redenergy.com.au/openapi.json
+      status: 403
+    - url: https://www.redenergy.com.au/swagger.json
+      status: 403
+    - url: https://www.redenergy.com.au/api-docs
+      status: 403
+    - url: https://www.redenergy.com.au/.well-known/openid-configuration
+      status: 403
+    - url: https://developer.redenergy.com.au/
+      status: 000
+      note: NXDOMAIN - no DNS record.
+    - url: https://developers.redenergy.com.au/
+      status: 000
+      note: NXDOMAIN - no DNS record.
+    - url: https://api.redenergy.com.au/
+      status: 000
+      note: NXDOMAIN - no DNS record.
+    - url: https://docs.redenergy.com.au/
+      status: 000
+      note: NXDOMAIN - no DNS record.
+    - url: https://data.redenergy.com.au/
+      status: 000
+      note: NXDOMAIN - no DNS record.
+    - url: https://public.cdr.redenergy.com.au/
+      status: 404
+      note: nginx 404 at root - the host serves only the CDS discovery paths.
+    - url: https://public.cdr.redenergy.com.au/.well-known/openid-configuration
+      status: 404
+      note: No anonymous OIDC discovery document. Infosec base URI is register-authenticated only.
+    - url: https://public.cdr.redenergy.com.au/cds-au/v1/energy/plans
+      status: 404
+      note: >-
+        Expected. In CDR energy, generic plan PRD is served centrally by the AER, not by the
+        retailer. The same 404 appears on peer host public.cdr.energy.arcline.com.au.
+    - url: https://public.cdr.snowyenergy.com.au/cds-au/v1/discovery/status
+      status: 200
+      note: Sibling brand under the same ABN 60107479372. Live.
+    - url: https://public.cdr.lumoenergy.com.au/cds-au/v1/discovery/status
+      status: 200
+      note: Snowy Hydro stablemate Lumo Energy, ABN 69100528327. Live.
+    - url: https://cdr.energymadeeasy.gov.au/snowy-energy/cds-au/v1/energy/plans
+      status: 200
+      note: HTTP 200 but meta.totalRecords 0 - registered, live, and empty.
+    - url: https://cdr.energymadeeasy.gov.au/lumo-energy/cds-au/v1/energy/plans
+      status: 200
+      note: HTTP 200 but meta.totalRecords 0.
+    - url: https://api.github.com/orgs/red-energy
+      status: 200
+      note: >-
+        Organisation named "Red Energy" exists but has 0 public repositories and no blog,
+        location or other identifying metadata. NOT recorded as Red Energy's - unverifiable.
+    - url: https://api.github.com/orgs/redenergy
+      status: 404
+    - url: https://www.linkedin.com/company/red-energy
+      status: 200
+    - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_energy.json
+      status: 200
+      note: CDR Energy API v1.36.0, OpenAPI 3.0.3, 18 paths. Harvested.
+    - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_common.json
+      status: 200
+      note: CDR Common API v1.36.0, OpenAPI 3.0.3, 4 paths. Harvested.
+  developerPortal:
+    exists: false
+    url: ''
+    note: >-
+      No developer portal of any kind. No developer/developers/api/docs/data subdomain resolves,
+      and the main site is bot-blocked. The nearest thing to developer documentation for Red
+      Energy's APIs is the Data Standards Body's Consumer Data Standards site, which is not Red
+      Energy's property and describes the standard rather than this implementation.
+  ownership:
+    parent: Snowy Hydro Ltd
+    note: >-
+      Red Energy Pty Ltd, ABN 60 107 479 372 / ACN 107 479 372, is wholly owned by Snowy Hydro
+      Ltd, which also owns Lumo Energy. Snowy Hydro generates; Red Energy retails to over one
+      million customers across NSW, VIC, QLD, SA and the ACT. Not active in Tasmania, Western
+      Australia or the Northern Territory.
+
+sources:
+  - url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+    type: APIReference
+    note: >-
+      CDR Register Get Data Holder Brands Summary (energy). HTTP 200 with x-v 1. 84 brands.
+      Red Energy entry - dataHolderBrandId 39230258-a56c-ee11-a81c-002248e31327,
+      publicBaseUri https://public.cdr.redenergy.com.au, abn 60107479372,
+      lastUpdated 2026-07-01T12:15:37Z. Also lists Snowy Energy (same ABN) and Lumo Energy.
+  - url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+    type: Status
+    note: >-
+      Confirmed live 2026-07-27. HTTP 200 with x-v 1, status OK. HTTP 400 with no x-v header,
+      HTTP 406 with x-v 3 - CDS version negotiation behaving exactly to standard.
+  - url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages
+    type: APIReference
+    note: Confirmed live 2026-07-27. HTTP 200 with x-v 1, empty outages array.
+  - url: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans
+    type: APIReference
+    note: >-
+      Confirmed live 2026-07-27. HTTP 200 with x-v 1, meta.totalRecords 1705 Red Energy plans.
+      HTTP 400 with no x-v, HTTP 406 with x-v 9.
+  - url: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans/RED552317MRE18@EME
+    type: APIReference
+    note: >-
+      Confirmed live 2026-07-27. HTTP 406 at x-v 1 with Header/UnsupportedVersion; HTTP 200 at
+      x-v 3 returning displayName "Qantas Red Saver" and a full electricityContract object.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: Documentation
+    note: DSB Consumer Data Standards - the shared standard Red Energy's CDR surface conforms to.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_energy.json
+    type: OpenAPI
+    note: >-
+      Source of the harvested OpenAPI 3.0.3 "CDR Energy API" v1.36.0 (DSB standard), HTTP 200,
+      fetched 2026-07-27, saved verbatim as YAML to openapi/red-energy-cds-energy-openapi.yml.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_common.json
+    type: OpenAPI
+    note: >-
+      Source of the harvested OpenAPI 3.0.3 "CDR Common API" v1.36.0 (DSB standard), HTTP 200,
+      fetched 2026-07-27, saved verbatim as YAML to openapi/red-energy-cds-common-openapi.yml.
+  - url: https://www.snowyhydro.com.au/retail/
+    type: Documentation
+    note: >-
+      HTTP 200. Snowy Hydro's retail page - Red Energy and Lumo Energy supply electricity and gas
+      to more than one million customers in VIC, NSW, ACT, south-east QLD and SA.
+  - url: https://www.redenergy.com.au/
+    type: Website
+    note: HTTP 403 Cloudflare bot challenge to every programmatic client. Not usable as evidence.
+
+actions:
+  openapiPaths:
+    - openapi/red-energy-cds-energy-openapi.yml
+    - openapi/red-energy-cds-common-openapi.yml
+  openapiProvenance: >-
+    DSB Consumer Data Standards shared specifications (CDR Energy API v1.36.0 and CDR Common API
+    v1.36.0), harvested verbatim 2026-07-27. NOT Red-Energy-proprietary. Red Energy publishes no
+    OpenAPI document. Both files carry an inline provenance header stating source URL, fetch date,
+    HTTP status, and exactly which paths Red Energy actually serves anonymously versus which are
+    accredited-only and were never called.
+  apisYmlUpdated: true
+  reason: >-
+    Red Energy has a real, verified public API surface, but it exists entirely because Part IVD of
+    the Competition and Consumer Act compelled it. Three APIs are recorded: the open, anonymous
+    Product Reference Data surface served under the Red Energy brand by the AER; the discovery
+    surface on Red Energy's own registered CDR host; and the mandated consumer-data surface, listed
+    with no baseURL because none is publicly discoverable and none of its endpoints were called.
