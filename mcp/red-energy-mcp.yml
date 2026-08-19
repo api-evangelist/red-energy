@@ -1,76 +1,101 @@
 generated: '2026-07-27'
 method: derived
 status: candidate
-source: >-
-  DERIVED from the operations in openapi/red-energy-cds-energy-openapi.yml and
-  openapi/red-energy-cds-common-openapi.yml. No MCP server is published by Red
-  Energy, by the Australian Energy Regulator, or by the Data Standards Body — no
-  MCP endpoint is advertised anywhere in the CDR ecosystem, and no /llms.txt or
-  MCP manifest was found on any host probed on 2026-07-27.
+source: DERIVED from the operations in openapi/red-energy-cds-energy-openapi.yml and openapi/red-energy-cds-common-openapi.yml.
+  No MCP server is published by Red Energy, by the Australian Energy Regulator, or by the Data Standards
+  Body — no MCP endpoint is advertised anywhere in the CDR ecosystem, and no /llms.txt or MCP manifest
+  was found on any host probed on 2026-07-27.
 provider: Red Energy
 providerId: red-energy
-
 server:
   name: red-energy-cdr
   transport: http
   url: null
-
-feasibility: >-
-  Only the four unauthenticated tools below could be run by an agent today. The
-  remaining twenty-three operations need ACCC accreditation, CDR CA certificates,
-  mutual TLS and a consented FAPI authorisation — an MCP server fronting them
-  would have to be operated by an accredited data recipient, not by an
-  unaccredited agent, and every call would be bound to one consenting customer.
-
+feasibility: Only the four unauthenticated tools below could be run by an agent today. The remaining twenty-three
+  operations need ACCC accreditation, CDR CA certificates, mutual TLS and a consented FAPI authorisation
+  — an MCP server fronting them would have to be operated by an accredited data recipient, not by an unaccredited
+  agent, and every call would be bound to one consenting customer.
 tools:
-  - name: get_cdr_status
-    description: Get Red Energy's CDR service health status (status, updateTime, explanation).
-    auth: none
-    source_operation: openapi/red-energy-cds-common-openapi.yml#getStatus
-    endpoint: GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-    required_headers: {x-v: '1'}
-  - name: get_cdr_outages
-    description: List Red Energy's scheduled CDR outages.
-    auth: none
-    source_operation: openapi/red-energy-cds-common-openapi.yml#getOutages
-    endpoint: GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages
-    required_headers: {x-v: '1'}
-  - name: list_energy_plans
-    description: >-
-      List Red Energy branded electricity and gas plans (1,705 as at 2026-07-27),
-      filterable by type, fuelType and effective date, with offset pagination.
-    auth: none
-    source_operation: openapi/red-energy-cds-energy-openapi.yml#listEnergyPlans
-    endpoint: GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans
-    required_headers: {x-v: '1'}
-  - name: get_energy_plan_detail
-    description: >-
-      Get the full detail of one Red Energy plan — tariff periods, fees, solar
-      feed-in tariff, green power charges, controlled load, eligibility and
-      incentives.
-    auth: none
-    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyPlanDetail
-    endpoint: GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans/{planId}
-    required_headers: {x-v: '3'}
-
+- name: get_cdr_status
+  description: Get Red Energy's CDR service health status (status, updateTime, explanation).
+  auth: none
+  source_operation: openapi/red-energy-cds-common-openapi.yml#getStatus
+  endpoint: GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  required_headers:
+    x-v: '1'
+- name: get_cdr_outages
+  description: List Red Energy's scheduled CDR outages.
+  auth: none
+  source_operation: openapi/red-energy-cds-common-openapi.yml#getOutages
+  endpoint: GET https://public.cdr.redenergy.com.au/cds-au/v1/discovery/outages
+  required_headers:
+    x-v: '1'
+- name: list_energy_plans
+  description: List Red Energy branded electricity and gas plans (1,705 as at 2026-07-27), filterable
+    by type, fuelType and effective date, with offset pagination.
+  auth: none
+  source_operation: openapi/red-energy-cds-energy-openapi.yml#listEnergyPlans
+  endpoint: GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans
+  required_headers:
+    x-v: '1'
+- name: get_energy_plan_detail
+  description: Get the full detail of one Red Energy plan — tariff periods, fees, solar feed-in tariff,
+    green power charges, controlled load, eligibility and incentives.
+  auth: none
+  source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyPlanDetail
+  endpoint: GET https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans/{planId}
+  required_headers:
+    x-v: '3'
 gated_tools:
-  note: >-
-    Candidate tools for the consumer-authorised surface. Listed for completeness;
-    none is runnable without accreditation and a consented authorisation.
+  note: Candidate tools for the consumer-authorised surface. Listed for completeness; none is runnable
+    without accreditation and a consented authorisation.
   tools:
-    - {name: get_customer, source_operation: 'openapi/red-energy-cds-common-openapi.yml#getCustomer', scope: 'common:customer.basic:read'}
-    - {name: get_customer_detail, source_operation: 'openapi/red-energy-cds-common-openapi.yml#getCustomerDetail', scope: 'common:customer.detail:read'}
-    - {name: list_energy_accounts, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#listEnergyAccounts', scope: 'energy:accounts.basic:read'}
-    - {name: get_energy_account_detail, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountDetail', scope: 'energy:accounts.detail:read'}
-    - {name: get_energy_account_balance, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountBalance', scope: 'energy:billing:read'}
-    - {name: list_energy_account_balances, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#listEnergyAccountBalancesBulk', scope: 'energy:billing:read'}
-    - {name: get_energy_account_billing, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getBillingForEnergyAccount', scope: 'energy:billing:read'}
-    - {name: get_energy_account_invoices, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountInvoices', scope: 'energy:billing:read'}
-    - {name: get_energy_account_concessions, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountConcessions', scope: 'energy:accounts.concessions:read'}
-    - {name: get_energy_account_payment_schedule, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountPaymentSchedule', scope: 'energy:accounts.paymentschedule:read'}
-    - {name: list_electricity_service_points, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#listElectricityServicePoints', scope: 'energy:electricity.servicepoints.basic:read'}
-    - {name: get_electricity_service_point_detail, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getElectricityServicePointDetail', scope: 'energy:electricity.servicepoints.detail:read'}
-    - {name: get_electricity_usage, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getElectricityServicePointUsage', scope: 'energy:electricity.usage:read'}
-    - {name: get_electricity_der, source_operation: 'openapi/red-energy-cds-energy-openapi.yml#getElectricityDERForServicePoint', scope: 'energy:electricity.der:read'}
-
+  - name: get_customer
+    source_operation: openapi/red-energy-cds-common-openapi.yml#getCustomer
+    scope: common:customer.basic:read
+  - name: get_customer_detail
+    source_operation: openapi/red-energy-cds-common-openapi.yml#getCustomerDetail
+    scope: common:customer.detail:read
+  - name: list_energy_accounts
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#listEnergyAccounts
+    scope: energy:accounts.basic:read
+  - name: get_energy_account_detail
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountDetail
+    scope: energy:accounts.detail:read
+  - name: get_energy_account_balance
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountBalance
+    scope: energy:billing:read
+  - name: list_energy_account_balances
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#listEnergyAccountBalancesBulk
+    scope: energy:billing:read
+  - name: get_energy_account_billing
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getBillingForEnergyAccount
+    scope: energy:billing:read
+  - name: get_energy_account_invoices
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountInvoices
+    scope: energy:billing:read
+  - name: get_energy_account_concessions
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountConcessions
+    scope: energy:accounts.concessions:read
+  - name: get_energy_account_payment_schedule
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getEnergyAccountPaymentSchedule
+    scope: energy:accounts.paymentschedule:read
+  - name: list_electricity_service_points
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#listElectricityServicePoints
+    scope: energy:electricity.servicepoints.basic:read
+  - name: get_electricity_service_point_detail
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getElectricityServicePointDetail
+    scope: energy:electricity.servicepoints.detail:read
+  - name: get_electricity_usage
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getElectricityServicePointUsage
+    scope: energy:electricity.usage:read
+  - name: get_electricity_der
+    source_operation: openapi/red-energy-cds-energy-openapi.yml#getElectricityDERForServicePoint
+    scope: energy:electricity.der:read
 crosswalk: mcp/red-energy-tool-crosswalk.yml
+deployment:
+  mode: none
+  verified: derived
+  tools: 4
+  checked: '2026-08-12'
+  source: catalog MCP census
