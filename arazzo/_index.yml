@@ -1,8 +1,8 @@
-generated: '2026-07-27'
-method: derived
-source: Derived from the Arazzo 1.0.1 workflow files in this directory.
-provider: Red Energy
-providerId: red-energy
+x-generated: '2026-07-27'
+x-method: derived
+x-source: Derived from the Arazzo 1.0.1 workflow files in this directory.
+x-provider: Red Energy
+x-providerId: red-energy
 workflows:
   - file: red-energy-compare-plans-workflow.yml
     workflowId: compareRedEnergyPlans
@@ -14,7 +14,7 @@ workflows:
       2026-07-27.
     operations: [getStatus, getOutages, listEnergyPlans, getEnergyPlanDetail]
     access: anonymous
-note: >-
+x-note: >-
   Only the anonymous half of Red Energy's surface can be modelled as a runnable
   workflow. The 23 consumer-authorised operations need ACCC accreditation, CDR
   CA certificates, mutual TLS and a consented FAPI authorisation, so no forkable
