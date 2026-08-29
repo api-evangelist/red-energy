@@ -447,6 +447,9 @@ apis:
   - type: OAuthScopes
     url: scopes/red-energy-scopes.yml
 common:
+- type: CapabilityMap
+  url: capabilities/red-energy-capability-edges.yml
+  name: Red Energy Business Capability Map
 - type: Overlay
   url: overlays/red-energy-cds-energy-overlay.yaml
 - type: AgentSkill
