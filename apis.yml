@@ -21,6 +21,18 @@ description: >-
   The split is the story - open, standardised, anonymous product reference data on one side, and
   consumer usage, billing and account data available only to accredited CDR data recipients with
   the customer's consent on the other, with nothing at all in between.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red-energy.png
 tags:
 - Energy
