@@ -3,7 +3,7 @@ provider: Red Energy
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Banking & Capital Markets
+- Oil & Gas
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -18,9 +18,9 @@ edges:
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
-  confidence: 0.72
-  evidence: GET /energy/accounts/{accountId}/invoices  "Get Invoices For Account"; schemas EnergyInvoice,
-    EnergyBillingPaymentTransaction, EnergyInvoiceElectricityUsageCharges
-  reason: Customer invoices and billing transactions (usage charges, once-off charges, payments received)
-    for retail energy accounts — customer invoicing and cash application, i.e. accounts receivable. Read-only
-    CDR exposure of the billing ledger keeps confidence below 0.8.
+  confidence: 0.75
+  evidence: GET /energy/accounts/{accountId}/invoices  getEnergyAccountInvoices  Get Invoices For Account;
+    schemas EnergyInvoice, EnergyBillingPaymentTransaction, EnergyInvoiceElectricityUsageCharges
+  reason: Operations return customer invoices and billing transactions (usage charges, demand charges,
+    payments, once-off charges) for retail energy accounts. That is customer invoicing and cash/payment
+    transaction data, mapping to Accounts Receivable Management.
