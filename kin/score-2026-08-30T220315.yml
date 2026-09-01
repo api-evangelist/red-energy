@@ -1,30 +1,33 @@
-# Kin Score artifact — red-energy — 2026-07-31T202106
+# Kin Score artifact — red-energy — 2026-08-30T220315
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: red-energy
-  schema_version: 0.9
-  scored_at: '2026-07-31'
-  run_ts: 2026-07-31T202106
-  composite: 48.8
-  band: developing
+  schema_version: 0.17.2
+  scored_at: '2026-08-30'
+  run_ts: 2026-08-30T220315
+  composite: 55.7
+  band: strong
   facets:
-    discoverability: 83.3
-    contract_quality: 32.3
-    governance: 20.8
-    operational_transparency: 76.3
-    developer_ergonomics: 34.2
+    discoverability: 68.5
+    contract_quality: 54.4
+    governance: 18.2
+    operational_transparency: 68.4
+    developer_ergonomics: 35.1
     commercial_clarity: 52.6
+    contract_governance: 18.2
+    access_clarity: 52.6
   agent_readiness:
-    score: 39.6
-    band: agent-ready
+    score: 27.7
+    band: agent-aware
     dimensions:
       spec_presence: true
       agentic_access: derived
-      mcp_server: derived
-      auth_clarity: true
+      reversibility_documented: false
+      mcp_server: false
+      auth_clarity: bearer
       idempotency: false
-      error_semantics: documented
+      error_semantics: verified
       openapi_examples: documented
       rate_limit_signal: documented
       event_surface_described: false
@@ -33,6 +36,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   regulatory:
     applies: true
     regime: Energy & Utilities
@@ -44,3 +51,8 @@ kin_score:
     skills: derived
     agentic_access: derived
     conformance: first-party
+    contracts:
+      total: 2
+      derived: 0
+      coverage: 0.0
+      callable: 0.0
