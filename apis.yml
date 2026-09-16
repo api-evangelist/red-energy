@@ -2,25 +2,22 @@ aid: red-energy
 url: https://raw.githubusercontent.com/api-evangelist/red-energy/refs/heads/main/apis.yml
 name: Red Energy
 kind: company
-description: >-
-  Red Energy Pty Ltd (ABN 60 107 479 372) is an Australian electricity and gas retailer,
-  wholly owned by Snowy Hydro Ltd, that supplies more than a million residential and business
-  customers across New South Wales, Victoria, Queensland, South Australia and the ACT from a
-  Richmond, Victoria base. It sits on the retail end of the National Electricity Market value
-  chain: Snowy Hydro generates, the distribution network businesses own the poles and wires,
-  AEMO operates the market and holds metering data, and Red Energy owns the customer, the
-  tariff and the bill. Its API posture is entirely a product of statute rather than product
-  strategy. Red Energy publishes no developer portal, no self-serve API programme and no
-  proprietary specification - developer., api., docs. and data. subdomains do not resolve, and
-  redenergy.com.au itself sits behind a Cloudflare bot challenge that returns HTTP 403 to any
-  non-browser client. What it does have is a real, verified Consumer Data Right implementation:
-  it is a designated CDR energy data holder listed on the CDR Register with the public base URI
-  https://public.cdr.redenergy.com.au, which serves the Consumer Data Standards discovery
-  endpoints live with correct x-v version negotiation, while 1,705 Red Energy branded plans are
-  published anonymously through the Australian Energy Regulator's Energy Made Easy CDR host.
-  The split is the story - open, standardised, anonymous product reference data on one side, and
-  consumer usage, billing and account data available only to accredited CDR data recipients with
-  the customer's consent on the other, with nothing at all in between.
+description: 'Red Energy Pty Ltd (ABN 60 107 479 372) is an Australian electricity and gas retailer, wholly
+  owned by Snowy Hydro Ltd, that supplies more than a million residential and business customers across
+  New South Wales, Victoria, Queensland, South Australia and the ACT from a Richmond, Victoria base. It
+  sits on the retail end of the National Electricity Market value chain: Snowy Hydro generates, the distribution
+  network businesses own the poles and wires, AEMO operates the market and holds metering data, and Red
+  Energy owns the customer, the tariff and the bill. Its API posture is entirely a product of statute
+  rather than product strategy. Red Energy publishes no developer portal, no self-serve API programme
+  and no proprietary specification - developer., api., docs. and data. subdomains do not resolve, and
+  redenergy.com.au itself sits behind a Cloudflare bot challenge that returns HTTP 403 to any non-browser
+  client. What it does have is a real, verified Consumer Data Right implementation: it is a designated
+  CDR energy data holder listed on the CDR Register with the public base URI https://public.cdr.redenergy.com.au,
+  which serves the Consumer Data Standards discovery endpoints live with correct x-v version negotiation,
+  while 1,705 Red Energy branded plans are published anonymously through the Australian Energy Regulator''s
+  Energy Made Easy CDR host. The split is the story - open, standardised, anonymous product reference
+  data on one side, and consumer usage, billing and account data available only to accredited CDR data
+  recipients with the customer''s consent on the other, with nothing at all in between.'
 deliveryModel:
   model: saas
   open_source: false
@@ -62,7 +59,7 @@ tags:
 - Smart Metering
 - Open Data
 created: '2026-07-27'
-modified: '2026-07-27'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: red-energy:red-energy-data-holder-customers-api
@@ -286,7 +283,7 @@ apis:
   - type: OAuthScopes
     url: scopes/red-energy-scopes.yml
 - aid: red-energy:red-energy-energy-account-balances-api
-  name: Red Energy Energy Account Balances API
+  name: Red Energy Account Balances API
   description: Energy Account Balance endpoints
   humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
   baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
@@ -330,7 +327,7 @@ apis:
   - type: OAuthScopes
     url: scopes/red-energy-scopes.yml
 - aid: red-energy:red-energy-energy-account-billing-api
-  name: Red Energy Energy Account Billing API
+  name: Red Energy Account Billing API
   description: Energy Account Billing endpoints
   humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
   baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
@@ -374,7 +371,7 @@ apis:
   - type: OAuthScopes
     url: scopes/red-energy-scopes.yml
 - aid: red-energy:red-energy-energy-accounts-api
-  name: Red Energy Energy Accounts API
+  name: Red Energy Accounts API
   description: Energy Account endpoints
   humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
   baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
@@ -418,7 +415,7 @@ apis:
   - type: OAuthScopes
     url: scopes/red-energy-scopes.yml
 - aid: red-energy:red-energy-energy-plans-api
-  name: Red Energy Energy Plans API
+  name: Red Energy Plans API
   description: Energy Plan endpoints
   humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
   baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
@@ -524,7 +521,10 @@ common:
 - type: X-MCPServerCandidate
   name: Candidate MCP tool set derived from the CDR specs
   url: mcp/red-energy-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   name: MCP tool to OpenAPI operation crosswalk
   url: mcp/red-energy-tool-crosswalk.yml
