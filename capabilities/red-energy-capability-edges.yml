@@ -11,8 +11,20 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 4
 edges:
+- tag: Electricity Usage
+  spec_file: red-energy-electricity-usage-api-openapi.yml
+  capability_id: BC-3910.40
+  capability_id_l1: BC-3910
+  capability_name: Meter Reading & Validation
+  confidence: 0.78
+  evidence: GET /energy/electricity/servicepoints/{servicePointId}/usage  getElectricityServicePointUsage;
+    schemas EnergyUsageRead_intervalRead, EnergyUsageRead_basicRead, EnergyUsageRead_intervalRead_readQualities
+  reason: The surface delivers metered consumption reads — basic and interval reads with read qualities
+    (actual/estimated/substituted) — per service point, which is meter reading and validation of consumption
+    data.
+  recovered_from: vertical-power-water-utilities-edges.json
 - tag: Energy Account Billing
   spec_file: red-energy-energy-account-billing-api-openapi.yml
   capability_id: BC-200.30
@@ -24,3 +36,30 @@ edges:
   reason: Operations return customer invoices and billing transactions (usage charges, demand charges,
     payments, once-off charges) for retail energy accounts. That is customer invoicing and cash/payment
     transaction data, mapping to Accounts Receivable Management.
+- tag: Electricity Service Points
+  spec_file: red-energy-electricity-service-points-api-openapi.yml
+  capability_id: BC-3910.10
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer Account Management
+  confidence: 0.72
+  evidence: GET /energy/electricity/servicepoints/{servicePointId}  getElectricityServicePointDetail  Get
+    Service Point Detail; schemas EnergyServicePointDetailV2_allOf_registers, EnergyServicePointV2_consumerProfile,
+    EnergyServicePointDetailV2_allOf_relatedParticipants
+  reason: Operations return the supply point (NMI) identifier, its registers, consumer profile, distribution
+    loss factor and related market participants — utility supply-point/customer account data. BC-3910.10
+    explicitly covers 'supply-point identifiers', making it the best fit; some overlap with meter asset
+    data keeps confidence short of high.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Energy Accounts
+  spec_file: red-energy-energy-accounts-api-openapi.yml
+  capability_id: BC-3910.10
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer Account Management
+  confidence: 0.72
+  evidence: GET /energy/accounts/{accountId}  getEnergyAccountDetail  Get Energy Account Detail; GET /energy/accounts/{accountId}/concessions  Get
+    Concessions; GET /energy/accounts/{accountId}/payment-schedule  Get Agreed Payment Schedule; schema
+    EnergyAccountDetailV4_allOf_planDetail
+  reason: Retail energy customer account lifecycle data — account detail with plan/tariff assignment,
+    concessions and agreed payment schedule — matching utility-specific customer account management including
+    tariff assignment.
+  recovered_from: vertical-power-water-utilities-edges.json
