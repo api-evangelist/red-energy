@@ -1,0 +1,38 @@
+{
+  "provider": "red-energy",
+  "sources": [
+    "_original/red-energy-cds-common-openapi.yml",
+    "_original/red-energy-cds-energy-openapi.yml"
+  ],
+  "outputs": [
+    "red-energy-data-holder-customers-api-openapi.yml",
+    "red-energy-data-holder-operations-api-openapi.yml",
+    "red-energy-distributed-energy-resources-api-openapi.yml",
+    "red-energy-electricity-service-points-api-openapi.yml",
+    "red-energy-electricity-usage-api-openapi.yml",
+    "red-energy-energy-account-balances-api-openapi.yml",
+    "red-energy-energy-account-billing-api-openapi.yml",
+    "red-energy-energy-accounts-api-openapi.yml",
+    "red-energy-energy-plans-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "red-energy-cds-common-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "red-energy-cds-energy-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "red-energy-data-holder-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-data-holder-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-distributed-energy-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-electricity-service-points-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-electricity-usage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-energy-account-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-energy-account-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-energy-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-energy-energy-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
