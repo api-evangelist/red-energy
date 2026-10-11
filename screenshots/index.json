@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "red-energy",
+    "captured_at": "2026-10-11T193404",
+    "source_url": "https://www.redenergy.com.au/",
+    "source_type": "Website",
+    "file": "red-energy-2026-10-11T193404.png",
+    "bytes": 49950,
+    "capture": "playwright-local"
+  }
+]
