@@ -1,13 +1,14 @@
 ---
-generated: '2026-07-27'
+generated: '2026-10-21'
 method: generated
-name: Check Red Energy CDR availability before calling
+name: red-energy-check-cdr-availability
+title: Check Red Energy CDR availability before calling
 description: Read Red Energy's mandated CDR health and scheduled-outage endpoints so an agent can decide whether to proceed, back off, or wait out a planned outage.
-api: openapi/red-energy-cds-common-openapi.yml
+api: openapi/red-energy-data-holder-operations-api-openapi.yml
 operations: [getStatus, getOutages]
 access: anonymous
 source: >-
-  operationIds verified in openapi/red-energy-cds-common-openapi.yml; behaviour
+  operationIds verified in openapi/_original/red-energy-cds-common-openapi.yml (split into the per-API openapi/red-energy-*-openapi.yml files); behaviour
   verified live against https://public.cdr.redenergy.com.au/cds-au/v1 on
   2026-07-27.
 ---

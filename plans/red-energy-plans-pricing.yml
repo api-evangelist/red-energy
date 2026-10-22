@@ -1,0 +1,26 @@
+name: Red Energy pricing
+generated: '2026-10-21'
+method: none
+provider: Red Energy
+providerId: red-energy
+audience: unclear
+pricing_basis: none
+published: false
+delivery:
+  model: managed
+plan_count: 0
+plans: []
+note: >-
+  Red Energy publishes no API plans or API pricing. Its only API surface is the
+  statutory Consumer Data Right data holder (public.cdr.redenergy.com.au), which
+  carries no commercial plan: product reference data is anonymous and consumer data
+  is reachable only by accredited data recipients with consent. The ~1,705 Red Energy
+  energy plans exposed through the CDR are retail electricity/gas tariffs (consumer
+  pricing delivered AS data by the energy-plans API), not the price of the API. The
+  company site www.redenergy.com.au returned an HTTP 403 Cloudflare challenge on
+  2026-10-21, so no pricing page could be read there either.
+checked:
+  - url: https://www.redenergy.com.au/
+    status: 403
+  - url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+    status: 200

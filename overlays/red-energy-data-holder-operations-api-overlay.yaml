@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Red Energy CDR Common Data Holder Operations API
+  version: 1.0.0
+extends: openapi/red-energy-data-holder-operations-api-openapi.yml
+x-generated: '2026-10-21'
+x-method: generated
+x-source: >-
+  Generated from the refined OpenAPI in openapi/ plus live GET checks on 2026-10-21 of public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  and /outages (200) and cdr.energymadeeasy.gov.au/red-energy/cds-au/v1/energy/plans (200). The original
+  is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: Red Energy
+    x-apievangelist-provider-id: red-energy
+    x-apievangelist-spec-provenance: >-
+      Split from the DSB Consumer Data Standards contract harvested verbatim into openapi/_original/.
+      The shared CDR standard, not a Red-Energy-proprietary specification.
+    x-cdr-abn: '60107479372'
+    x-cdr-register: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+- target: $.servers
+  update:
+  - url: https://public.cdr.redenergy.com.au/cds-au/v1
+    description: >-
+      Red Energy's registered CDR public base URI, the only API surface on a Red-Energy-controlled domain.
+      Serves the Data Holder Operations discovery paths anonymously.
+    x-access: anonymous
+- target: $.paths['/discovery/outages'].get
+  update:
+    x-access: anonymous
+    x-server: https://public.cdr.redenergy.com.au/cds-au/v1
+    x-verified-detail: HTTP 200 with x-v 1 on 2026-10-21; data.outages empty.
+    x-required-header: x-v
+- target: $.paths['/discovery/status'].get
+  update:
+    x-access: anonymous
+    x-server: https://public.cdr.redenergy.com.au/cds-au/v1
+    x-verified-detail: HTTP 200 with x-v 1 on 2026-10-21; data.status OK, explanation "All services operational".
+    x-required-header: x-v

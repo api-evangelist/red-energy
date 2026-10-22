@@ -1,23 +1,24 @@
 aid: red-energy
+
 url: https://raw.githubusercontent.com/api-evangelist/red-energy/refs/heads/main/apis.yml
+
 name: Red Energy
+
 kind: company
-description: 'Red Energy Pty Ltd (ABN 60 107 479 372) is an Australian electricity and gas retailer, wholly
-  owned by Snowy Hydro Ltd, that supplies more than a million residential and business customers across
-  New South Wales, Victoria, Queensland, South Australia and the ACT from a Richmond, Victoria base. It
-  sits on the retail end of the National Electricity Market value chain: Snowy Hydro generates, the distribution
-  network businesses own the poles and wires, AEMO operates the market and holds metering data, and Red
-  Energy owns the customer, the tariff and the bill. Its API posture is entirely a product of statute
-  rather than product strategy. Red Energy publishes no developer portal, no self-serve API programme
-  and no proprietary specification - developer., api., docs. and data. subdomains do not resolve, and
-  redenergy.com.au itself sits behind a Cloudflare bot challenge that returns HTTP 403 to any non-browser
-  client. What it does have is a real, verified Consumer Data Right implementation: it is a designated
-  CDR energy data holder listed on the CDR Register with the public base URI https://public.cdr.redenergy.com.au,
-  which serves the Consumer Data Standards discovery endpoints live with correct x-v version negotiation,
-  while 1,705 Red Energy branded plans are published anonymously through the Australian Energy Regulator''s
-  Energy Made Easy CDR host. The split is the story - open, standardised, anonymous product reference
-  data on one side, and consumer usage, billing and account data available only to accredited CDR data
-  recipients with the customer''s consent on the other, with nothing at all in between.'
+
+description: 'Red Energy Pty Ltd (ABN 60 107 479 372) is an Australian electricity and gas retailer, wholly owned by Snowy Hydro Ltd, that supplies
+  more than a million residential and business customers across New South Wales, Victoria, Queensland, South Australia and the ACT from a Richmond,
+  Victoria base. It sits on the retail end of the National Electricity Market value chain: Snowy Hydro generates, the distribution network businesses
+  own the poles and wires, AEMO operates the market and holds metering data, and Red Energy owns the customer, the tariff and the bill. Its API
+  posture is entirely a product of statute rather than product strategy. Red Energy publishes no developer portal, no self-serve API programme
+  and no proprietary specification - developer., api., docs. and data. subdomains do not resolve, and redenergy.com.au itself sits behind a Cloudflare
+  bot challenge that returns HTTP 403 to any non-browser client. What it does have is a real, verified Consumer Data Right implementation: it
+  is a designated CDR energy data holder listed on the CDR Register with the public base URI https://public.cdr.redenergy.com.au, which serves
+  the Consumer Data Standards discovery endpoints live with correct x-v version negotiation, while 1,705 Red Energy branded plans are published
+  anonymously through the Australian Energy Regulator''s Energy Made Easy CDR host. The split is the story - open, standardised, anonymous product
+  reference data on one side, and consumer usage, billing and account data available only to accredited CDR data recipients with the customer''s
+  consent on the other, with nothing at all in between.'
+
 deliveryModel:
   model: saas
   open_source: false
@@ -30,6 +31,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -45,7 +47,9 @@ accessModel:
   - security
   generated: '2026-09-02'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red-energy.png
+
 tags:
 - Energy
 - Australia
@@ -58,416 +62,57 @@ tags:
 - Product Reference Data
 - Smart Metering
 - Open Data
+
 created: '2026-07-27'
-modified: '2026-09-16'
+
+modified: '2026-10-21'
+
 specificationVersion: '0.23'
-apis:
-- aid: red-energy:red-energy-data-holder-customers-api
-  name: Red Energy Data Holder Customers API
-  description: Data Holder Customer endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Data Holder Customers
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-data-holder-customers-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-data-holder-operations-api
-  name: Red Energy Data Holder Operations API
-  description: Data Holder Operations endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Data Holder Operations
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-data-holder-operations-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-distributed-energy-resources-api
-  name: Red Energy Distributed Energy Resources API
-  description: Distributed Energy Resource endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Distributed Energy Resources
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-distributed-energy-resources-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-electricity-service-points-api
-  name: Red Energy Electricity Service Points API
-  description: Electricity Service Point endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Electricity Service Points
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-electricity-service-points-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-electricity-usage-api
-  name: Red Energy Electricity Usage API
-  description: Electricity Usage endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Electricity Usage
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-electricity-usage-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-energy-account-balances-api
-  name: Red Energy Account Balances API
-  description: Energy Account Balance endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Energy Account Balances
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-energy-account-balances-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-energy-account-billing-api
-  name: Red Energy Account Billing API
-  description: Energy Account Billing endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Energy Account Billing
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-energy-account-billing-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-energy-accounts-api
-  name: Red Energy Accounts API
-  description: Energy Account endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Energy Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-energy-accounts-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
-- aid: red-energy:red-energy-energy-plans-api
-  name: Red Energy Plans API
-  description: Energy Plan endpoints
-  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
-  tags:
-  - Energy Plans
-  properties:
-  - type: OpenAPI
-    url: openapi/red-energy-energy-plans-api-openapi.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
-  - type: Documentation
-    url: https://consumerdatastandardsaustralia.github.io/standards/
-  - type: Registry
-    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
-  - type: Examples
-    url: examples/red-energy-list-energy-plans-example.json
-  - type: Examples
-    url: examples/red-energy-get-energy-plan-detail-example.json
-  - type: Arazzo
-    url: arazzo/red-energy-compare-plans-workflow.yml
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
-  - type: APIReference
-    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
-  - type: Status
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: StatusPage
-    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
-  - type: Examples
-    url: examples/red-energy-get-status-example.json
-  - type: Examples
-    url: examples/red-energy-get-outages-example.json
-  - type: Authentication
-    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
-  - type: Authentication
-    url: authentication/red-energy-authentication.yml
-  - type: OAuthScopes
-    url: scopes/red-energy-scopes.yml
+
+x-coverage:
+  state: blocked
+  reason: bot-challenge
+  detail: 'Identity pass 2026-10-21: www.redenergy.com.au answers a browser User-Agent with an HTTP 403 Cloudflare challenge (pre-flight front_door
+    verdict bot-challenge), so the company site itself cannot be read. Identity is established from hosts that do answer: the CDR Register brand
+    summary lists Red Energy with redenergy.com.au assets, Red Energy''s own CDR host public.cdr.redenergy.com.au serves Get Status live (x-v
+    1), and its LinkedIn page and Snowy Hydro''s retail page name it. Website pointer kept as https://www.redenergy.com.au/ (page exists, only
+    our crawler is challenged).'
+  evidence:
+  - url: https://www.redenergy.com.au/
+    status: 403
+  - url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+    status: 200
+  - url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+    status: 200
+  - url: https://www.linkedin.com/company/red-energy
+    status: 200
+  - url: https://www.snowyhydro.com.au/retail/
+    status: 200
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
+- type: Spectral
+  url: rules/red-energy-rules.yml
+- type: JSONLD
+  url: json-ld/red-energy-context.jsonld
+- type: Vocabulary
+  url: vocabulary/red-energy-vocabulary.yml
+- type: Overlay
+  url: overlays/red-energy-data-holder-customers-api-overlay.yaml
+- type: Hosts
+  url: hosts/red-energy-hosts.yml
+- type: IntegrationEdges
+  url: integrations/red-energy-integration-edges.yml
+- type: Vendors
+  url: vendors/red-energy-vendors.yml
 - type: CapabilityMap
   url: capabilities/red-energy-capability-edges.yml
   name: Red Energy Business Capability Map
-- type: Overlay
-  url: overlays/red-energy-cds-energy-overlay.yaml
 - type: AgentSkill
   url: skills/red-energy-compare-energy-plans.md
-- type: Overlay
-  url: overlays/red-energy-cds-common-overlay.yaml
 - type: AgentSkill
   url: skills/red-energy-check-cdr-availability.md
 - type: AgentSkill
@@ -521,10 +166,9 @@ common:
 - type: X-MCPServerCandidate
   name: Candidate MCP tool set derived from the CDR specs
   url: mcp/red-energy-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
-    — a tool list derived from the published API contracts, not an existing server. The scorer already
-    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
-    surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   name: MCP tool to OpenAPI operation crosswalk
   url: mcp/red-energy-tool-crosswalk.yml
@@ -576,6 +220,464 @@ common:
 - type: Owner
   name: Snowy Hydro Ltd
   url: https://www.snowyhydro.com.au/retail/
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
+apis:
+- aid: red-energy:red-energy-data-holder-customers-api
+  name: Red Energy Data Holder Customers API
+  description: Data Holder Customer endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that Red
+    Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri https://public.cdr.redenergy.com.au);
+    servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated mTLS resource base, which the CDR Register
+    publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Data Holder Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-data-holder-customers-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-response-common-customer-detail-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-response-common-customer-schema.json
+- aid: red-energy:red-energy-data-holder-operations-api
+  name: Red Energy Data Holder Operations API
+  description: Data Holder Operations endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that
+    Red Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri
+    https://public.cdr.redenergy.com.au); servers[] is the standard's mtls.dh.example.com placeholder.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  baseURL: https://public.cdr.redenergy.com.au/cds-au/v1
+  tags:
+  - Data Holder Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-data-holder-operations-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-response-common-discovery-status-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-response-discovery-outages-list-schema.json
+- aid: red-energy:red-energy-distributed-energy-resources-api
+  name: Red Energy Distributed Energy Resources API
+  description: Distributed Energy Resource endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification
+    that Red Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri
+    https://public.cdr.redenergy.com.au); servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated
+    mTLS resource base, which the CDR Register publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Distributed Energy Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-distributed-energy-resources-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-der-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-der-detail-response-schema.json
+- aid: red-energy:red-energy-electricity-service-points-api
+  name: Red Energy Electricity Service Points API
+  description: Electricity Service Point endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that
+    Red Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri
+    https://public.cdr.redenergy.com.au); servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated
+    mTLS resource base, which the CDR Register publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Electricity Service Points
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-electricity-service-points-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-service-point-list-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-service-point-detail-response-v2-schema.json
+- aid: red-energy:red-energy-electricity-usage-api
+  name: Red Energy Electricity Usage API
+  description: Electricity Usage endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that Red Energy
+    implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri https://public.cdr.redenergy.com.au);
+    servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated mTLS resource base, which the CDR Register
+    publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Electricity Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-electricity-usage-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-usage-list-response-schema.json
+- aid: red-energy:red-energy-energy-account-balances-api
+  name: Red Energy Account Balances API
+  description: Energy Account Balance endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that
+    Red Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri
+    https://public.cdr.redenergy.com.au); servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated
+    mTLS resource base, which the CDR Register publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Energy Account Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-energy-account-balances-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-balance-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-balance-response-schema.json
+- aid: red-energy:red-energy-energy-account-billing-api
+  name: Red Energy Account Billing API
+  description: Energy Account Billing endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that
+    Red Energy implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri
+    https://public.cdr.redenergy.com.au); servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated
+    mTLS resource base, which the CDR Register publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Energy Account Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-energy-account-billing-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-billing-list-response-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-invoice-list-response-schema.json
+- aid: red-energy:red-energy-energy-accounts-api
+  name: Red Energy Accounts API
+  description: Energy Account endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that Red Energy
+    implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri https://public.cdr.redenergy.com.au);
+    servers[] is the standard's mtls.dh.example.com placeholder. Served from Red Energy's authenticated mTLS resource base, which the CDR Register
+    publishes only to accredited data recipients, so no anonymous baseURL is recorded.
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  tags:
+  - Energy Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-energy-accounts-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-account-list-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-payment-schedule-response-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-concessions-response-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-account-detail-response-v4-schema.json
+- aid: red-energy:red-energy-energy-plans-api
+  name: Red Energy Plans API
+  description: 'Energy Plan endpoints. Contract is the Consumer Data Standards (Data Standards Body, dsb.gov.au) specification that Red Energy
+    implements as a CDR energy data holder (CDR Register brand 39230258-a56c-ee11-a81c-002248e31327, ABN 60107479372, publicBaseUri https://public.cdr.redenergy.com.au);
+    servers[] is the standard''s mtls.dh.example.com placeholder. Energy Product Reference Data is served on Red Energy''s behalf by the Australian
+    Energy Regulator''s Energy Made Easy CDR host (verified 2026-10-21: GET /energy/plans returned brand red-energy, brandName Red Energy).'
+  humanURL: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  baseURL: https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1
+  tags:
+  - Energy Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/red-energy-energy-plans-api-openapi.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#energy-apis
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plans
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-generic-plan-detail
+  - type: Documentation
+    url: https://consumerdatastandardsaustralia.github.io/standards/
+  - type: Registry
+    url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  - type: Examples
+    url: examples/red-energy-list-energy-plans-example.json
+  - type: Examples
+    url: examples/red-energy-get-energy-plan-detail-example.json
+  - type: Arazzo
+    url: arazzo/red-energy-compare-plans-workflow.yml
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-status
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-outages
+  - type: Status
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: StatusPage
+    url: https://public.cdr.redenergy.com.au/cds-au/v1/discovery/status
+  - type: Examples
+    url: examples/red-energy-get-status-example.json
+  - type: Examples
+    url: examples/red-energy-get-outages-example.json
+  - type: Authentication
+    url: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+  - type: Authentication
+    url: authentication/red-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/red-energy-scopes.yml
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-plan-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/red-energy-energy-plan-response-v3-schema.json
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 35
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

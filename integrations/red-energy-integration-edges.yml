@@ -1,3 +1,18 @@
+generated: '2026-10-21'
+method: searched
+source:
+- https://zapier.com/apps/red-energy/integrations
+- https://n8n.io/integrations/red-energy/
+- https://composio.dev/toolkits/red-energy
+- https://monid.ai/tools/red-energy
+checked:
+- https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+- https://composio.dev/toolkits/red-energy
+- https://monid.ai/tools/red-energy
+- https://n8n.io/integrations/red-energy/
+- https://zapier.com/apps/red-energy/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: Consumer Data Right
   partner: null
@@ -16,7 +31,4 @@ edges:
     api_families: null
     detected_by: sweep-standard-registers.py
     detected: '2026-10-14'
-generated: '2026-10-12'
-method: searched
-checked:
-- https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+templates: []

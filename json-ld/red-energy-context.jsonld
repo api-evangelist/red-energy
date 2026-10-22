@@ -1,0 +1,1327 @@
+{
+  "@context": {
+    "@vocab": "https://redenergy.com.au/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "red": "https://redenergy.com.au/schema#",
+    "CommonPersonDetailV2_allOf": "red:CommonPersonDetailV2_allOf",
+    "emailAddresses": {
+      "@id": "red:emailAddresses",
+      "@container": "@list"
+    },
+    "phoneNumbers": {
+      "@id": "red:phoneNumbers",
+      "@container": "@list"
+    },
+    "physicalAddresses": {
+      "@id": "red:physicalAddresses",
+      "@container": "@list"
+    },
+    "ResponseCommonCustomerDetailV2": "red:ResponseCommonCustomerDetailV2",
+    "data": {
+      "@id": "red:data",
+      "@type": "@id"
+    },
+    "links": {
+      "@id": "red:links",
+      "@type": "@id"
+    },
+    "meta": {
+      "@id": "red:meta",
+      "@type": "@id"
+    },
+    "ErrorV2": "red:ErrorV2",
+    "code": {
+      "@id": "red:code",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "red:detail",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "red:title",
+      "@type": "xsd:string"
+    },
+    "CommonOrganisationDetailV2_allOf": "red:CommonOrganisationDetailV2_allOf",
+    "CommonPerson": "red:CommonPerson",
+    "firstName": {
+      "@id": "red:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "red:lastName",
+      "@type": "xsd:string"
+    },
+    "lastUpdateTime": {
+      "@id": "red:lastUpdateTime",
+      "@type": "xsd:string"
+    },
+    "middleNames": {
+      "@id": "red:middleNames",
+      "@container": "@list"
+    },
+    "occupationCode": {
+      "@id": "red:occupationCode",
+      "@type": "xsd:string"
+    },
+    "occupationCodeVersion": {
+      "@id": "red:occupationCodeVersion",
+      "@type": "xsd:string"
+    },
+    "prefix": {
+      "@id": "red:prefix",
+      "@type": "xsd:string"
+    },
+    "suffix": {
+      "@id": "red:suffix",
+      "@type": "xsd:string"
+    },
+    "ResponseCommonCustomer_data": "red:ResponseCommonCustomer_data",
+    "customerUType": {
+      "@id": "red:customerUType",
+      "@type": "xsd:string"
+    },
+    "organisation": {
+      "@id": "red:organisation",
+      "@type": "@id"
+    },
+    "person": {
+      "@id": "red:person",
+      "@type": "@id"
+    },
+    "CommonPhysicalAddress": "red:CommonPhysicalAddress",
+    "addressUType": {
+      "@id": "red:addressUType",
+      "@type": "xsd:string"
+    },
+    "paf": {
+      "@id": "red:paf",
+      "@type": "@id"
+    },
+    "simple": {
+      "@id": "red:simple",
+      "@type": "@id"
+    },
+    "CommonPhoneNumber": "red:CommonPhoneNumber",
+    "areaCode": {
+      "@id": "red:areaCode",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "red:countryCode",
+      "@type": "xsd:string"
+    },
+    "extension": {
+      "@id": "red:extension",
+      "@type": "xsd:string"
+    },
+    "fullNumber": {
+      "@id": "red:fullNumber",
+      "@type": "xsd:string"
+    },
+    "isPreferred": {
+      "@id": "red:isPreferred",
+      "@type": "xsd:boolean"
+    },
+    "number": {
+      "@id": "red:number",
+      "@type": "xsd:string"
+    },
+    "purpose": {
+      "@id": "red:purpose",
+      "@type": "xsd:string"
+    },
+    "CommonOrganisation": "red:CommonOrganisation",
+    "abn": {
+      "@id": "red:abn",
+      "@type": "xsd:string"
+    },
+    "acn": {
+      "@id": "red:acn",
+      "@type": "xsd:string"
+    },
+    "agentFirstName": {
+      "@id": "red:agentFirstName",
+      "@type": "xsd:string"
+    },
+    "agentLastName": {
+      "@id": "red:agentLastName",
+      "@type": "xsd:string"
+    },
+    "agentRole": {
+      "@id": "red:agentRole",
+      "@type": "xsd:string"
+    },
+    "businessName": {
+      "@id": "red:businessName",
+      "@type": "xsd:string"
+    },
+    "establishmentDate": {
+      "@id": "red:establishmentDate",
+      "@type": "xsd:string"
+    },
+    "industryCode": {
+      "@id": "red:industryCode",
+      "@type": "xsd:string"
+    },
+    "industryCodeVersion": {
+      "@id": "red:industryCodeVersion",
+      "@type": "xsd:string"
+    },
+    "isACNCRegistered": {
+      "@id": "red:isACNCRegistered",
+      "@type": "xsd:boolean"
+    },
+    "legalName": {
+      "@id": "red:legalName",
+      "@type": "xsd:string"
+    },
+    "organisationType": {
+      "@id": "red:organisationType",
+      "@type": "xsd:string"
+    },
+    "registeredCountry": {
+      "@id": "red:registeredCountry",
+      "@type": "xsd:string"
+    },
+    "shortName": {
+      "@id": "red:shortName",
+      "@type": "xsd:string"
+    },
+    "ResponseCommonCustomerDetailV2_data": "red:ResponseCommonCustomerDetailV2_data",
+    "CommonPhysicalAddressWithPurpose_allOf": "red:CommonPhysicalAddressWithPurpose_allOf",
+    "CommonSimpleAddress": "red:CommonSimpleAddress",
+    "addressLine1": {
+      "@id": "red:addressLine1",
+      "@type": "xsd:string"
+    },
+    "addressLine2": {
+      "@id": "red:addressLine2",
+      "@type": "xsd:string"
+    },
+    "addressLine3": {
+      "@id": "red:addressLine3",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "red:city",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "red:country",
+      "@type": "xsd:string"
+    },
+    "mailingName": {
+      "@id": "red:mailingName",
+      "@type": "xsd:string"
+    },
+    "postcode": {
+      "@id": "red:postcode",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "red:state",
+      "@type": "xsd:string"
+    },
+    "ResponseCommonCustomer": "red:ResponseCommonCustomer",
+    "ResponseErrorListV2": "red:ResponseErrorListV2",
+    "errors": {
+      "@id": "red:errors",
+      "@container": "@list"
+    },
+    "Links": "red:Links",
+    "self": {
+      "@id": "red:self",
+      "@type": "xsd:string"
+    },
+    "CommonPAFAddress": "red:CommonPAFAddress",
+    "buildingName1": {
+      "@id": "red:buildingName1",
+      "@type": "xsd:string"
+    },
+    "buildingName2": {
+      "@id": "red:buildingName2",
+      "@type": "xsd:string"
+    },
+    "dpid": {
+      "@id": "red:dpid",
+      "@type": "xsd:string"
+    },
+    "flatUnitNumber": {
+      "@id": "red:flatUnitNumber",
+      "@type": "xsd:string"
+    },
+    "flatUnitType": {
+      "@id": "red:flatUnitType",
+      "@type": "xsd:string"
+    },
+    "floorLevelNumber": {
+      "@id": "red:floorLevelNumber",
+      "@type": "xsd:string"
+    },
+    "floorLevelType": {
+      "@id": "red:floorLevelType",
+      "@type": "xsd:string"
+    },
+    "localityName": {
+      "@id": "red:localityName",
+      "@type": "xsd:string"
+    },
+    "lotNumber": {
+      "@id": "red:lotNumber",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryNumber": {
+      "@id": "red:postalDeliveryNumber",
+      "@type": "xsd:integer"
+    },
+    "postalDeliveryNumberPrefix": {
+      "@id": "red:postalDeliveryNumberPrefix",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryNumberSuffix": {
+      "@id": "red:postalDeliveryNumberSuffix",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryType": {
+      "@id": "red:postalDeliveryType",
+      "@type": "xsd:string"
+    },
+    "streetName": {
+      "@id": "red:streetName",
+      "@type": "xsd:string"
+    },
+    "streetSuffix": {
+      "@id": "red:streetSuffix",
+      "@type": "xsd:string"
+    },
+    "streetType": {
+      "@id": "red:streetType",
+      "@type": "xsd:string"
+    },
+    "thoroughfareNumber1": {
+      "@id": "red:thoroughfareNumber1",
+      "@type": "xsd:integer"
+    },
+    "thoroughfareNumber1Suffix": {
+      "@id": "red:thoroughfareNumber1Suffix",
+      "@type": "xsd:string"
+    },
+    "thoroughfareNumber2": {
+      "@id": "red:thoroughfareNumber2",
+      "@type": "xsd:integer"
+    },
+    "thoroughfareNumber2Suffix": {
+      "@id": "red:thoroughfareNumber2Suffix",
+      "@type": "xsd:string"
+    },
+    "ErrorV2_meta": "red:ErrorV2_meta",
+    "urn": {
+      "@id": "red:urn",
+      "@type": "xsd:string"
+    },
+    "CommonEmailAddress": "red:CommonEmailAddress",
+    "address": {
+      "@id": "red:address",
+      "@type": "xsd:string"
+    },
+    "DiscoveryOutage": "red:DiscoveryOutage",
+    "duration": {
+      "@id": "red:duration",
+      "@type": "xsd:string"
+    },
+    "explanation": {
+      "@id": "red:explanation",
+      "@type": "xsd:string"
+    },
+    "isPartial": {
+      "@id": "red:isPartial",
+      "@type": "xsd:boolean"
+    },
+    "outageTime": {
+      "@id": "red:outageTime",
+      "@type": "xsd:string"
+    },
+    "ResponseDiscoveryOutagesList_data": "red:ResponseDiscoveryOutagesList_data",
+    "outages": {
+      "@id": "red:outages",
+      "@container": "@list"
+    },
+    "ResponseCommonDiscoveryStatus": "red:ResponseCommonDiscoveryStatus",
+    "ResponseCommonDiscoveryStatus_data": "red:ResponseCommonDiscoveryStatus_data",
+    "detectionTime": {
+      "@id": "red:detectionTime",
+      "@type": "xsd:string"
+    },
+    "expectedResolutionTime": {
+      "@id": "red:expectedResolutionTime",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "red:status",
+      "@type": "xsd:string"
+    },
+    "updateTime": {
+      "@id": "red:updateTime",
+      "@type": "xsd:string"
+    },
+    "ResponseDiscoveryOutagesList": "red:ResponseDiscoveryOutagesList",
+    "RequestServicePointIdListV1": "red:RequestServicePointIdListV1",
+    "EnergyDerRecord_derDevices": "red:EnergyDerRecord_derDevices",
+    "count": {
+      "@id": "red:count",
+      "@type": "xsd:integer"
+    },
+    "deviceIdentifier": {
+      "@id": "red:deviceIdentifier",
+      "@type": "xsd:decimal"
+    },
+    "manufacturer": {
+      "@id": "red:manufacturer",
+      "@type": "xsd:string"
+    },
+    "modelNumber": {
+      "@id": "red:modelNumber",
+      "@type": "xsd:string"
+    },
+    "nominalRatedCapacity": {
+      "@id": "red:nominalRatedCapacity",
+      "@type": "xsd:decimal"
+    },
+    "nominalStorageCapacity": {
+      "@id": "red:nominalStorageCapacity",
+      "@type": "xsd:decimal"
+    },
+    "subtype": {
+      "@id": "red:subtype",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "red:type",
+      "@type": "xsd:string"
+    },
+    "PrimaryErrorV1_allOf": "red:PrimaryErrorV1_allOf",
+    "isSecondaryDataHolderError": {
+      "@id": "red:isSecondaryDataHolderError",
+      "@type": "xsd:boolean"
+    },
+    "EnergyDerDetailResponse": "red:EnergyDerDetailResponse",
+    "EnergyDerRecord_acConnections": "red:EnergyDerRecord_acConnections",
+    "commissioningDate": {
+      "@id": "red:commissioningDate",
+      "@type": "xsd:string"
+    },
+    "connectionIdentifier": {
+      "@id": "red:connectionIdentifier",
+      "@type": "xsd:decimal"
+    },
+    "derDevices": {
+      "@id": "red:derDevices",
+      "@container": "@list"
+    },
+    "equipmentType": {
+      "@id": "red:equipmentType",
+      "@type": "xsd:string"
+    },
+    "inverterDeviceCapacity": {
+      "@id": "red:inverterDeviceCapacity",
+      "@type": "xsd:decimal"
+    },
+    "inverterModelNumber": {
+      "@id": "red:inverterModelNumber",
+      "@type": "xsd:string"
+    },
+    "inverterSeries": {
+      "@id": "red:inverterSeries",
+      "@type": "xsd:string"
+    },
+    "manufacturerName": {
+      "@id": "red:manufacturerName",
+      "@type": "xsd:string"
+    },
+    "MetaPaginated": "red:MetaPaginated",
+    "totalPages": {
+      "@id": "red:totalPages",
+      "@type": "xsd:integer"
+    },
+    "totalRecords": {
+      "@id": "red:totalRecords",
+      "@type": "xsd:integer"
+    },
+    "EnergyDerRecord": "red:EnergyDerRecord",
+    "acConnections": {
+      "@id": "red:acConnections",
+      "@container": "@list"
+    },
+    "approvedCapacity": {
+      "@id": "red:approvedCapacity",
+      "@type": "xsd:decimal"
+    },
+    "availablePhasesCount": {
+      "@id": "red:availablePhasesCount",
+      "@type": "xsd:integer"
+    },
+    "hasCentralProtectionControl": {
+      "@id": "red:hasCentralProtectionControl",
+      "@type": "xsd:boolean"
+    },
+    "installedPhasesCount": {
+      "@id": "red:installedPhasesCount",
+      "@type": "xsd:integer"
+    },
+    "islandableInstallation": {
+      "@id": "red:islandableInstallation",
+      "@type": "xsd:boolean"
+    },
+    "protectionMode": {
+      "@id": "red:protectionMode",
+      "@type": "@id"
+    },
+    "servicePointId": {
+      "@id": "red:servicePointId"
+    },
+    "EnergyDerRecord_protectionMode": "red:EnergyDerRecord_protectionMode",
+    "exportLimitKva": {
+      "@id": "red:exportLimitKva",
+      "@type": "xsd:decimal"
+    },
+    "frequencyRateOfChange": {
+      "@id": "red:frequencyRateOfChange",
+      "@type": "xsd:decimal"
+    },
+    "interTripScheme": {
+      "@id": "red:interTripScheme",
+      "@type": "xsd:string"
+    },
+    "neutralVoltageDisplacement": {
+      "@id": "red:neutralVoltageDisplacement",
+      "@type": "xsd:decimal"
+    },
+    "overFrequencyProtection": {
+      "@id": "red:overFrequencyProtection",
+      "@type": "xsd:decimal"
+    },
+    "overFrequencyProtectionDelay": {
+      "@id": "red:overFrequencyProtectionDelay",
+      "@type": "xsd:decimal"
+    },
+    "overVoltageProtection": {
+      "@id": "red:overVoltageProtection",
+      "@type": "xsd:decimal"
+    },
+    "overVoltageProtectionDelay": {
+      "@id": "red:overVoltageProtectionDelay",
+      "@type": "xsd:decimal"
+    },
+    "sustainedOverVoltage": {
+      "@id": "red:sustainedOverVoltage",
+      "@type": "xsd:decimal"
+    },
+    "sustainedOverVoltageDelay": {
+      "@id": "red:sustainedOverVoltageDelay",
+      "@type": "xsd:decimal"
+    },
+    "underFrequencyProtection": {
+      "@id": "red:underFrequencyProtection",
+      "@type": "xsd:decimal"
+    },
+    "underFrequencyProtectionDelay": {
+      "@id": "red:underFrequencyProtectionDelay",
+      "@type": "xsd:decimal"
+    },
+    "underVoltageProtection": {
+      "@id": "red:underVoltageProtection",
+      "@type": "xsd:decimal"
+    },
+    "underVoltageProtectionDelay": {
+      "@id": "red:underVoltageProtectionDelay",
+      "@type": "xsd:decimal"
+    },
+    "voltageVectorShift": {
+      "@id": "red:voltageVectorShift",
+      "@type": "xsd:decimal"
+    },
+    "EnergyDerListResponse": "red:EnergyDerListResponse",
+    "RequestServicePointIdListV1_data": "red:RequestServicePointIdListV1_data",
+    "servicePointIds": {
+      "@id": "red:servicePointIds",
+      "@container": "@list"
+    },
+    "PrimaryResponseErrorListV1": "red:PrimaryResponseErrorListV1",
+    "LinksPaginated": "red:LinksPaginated",
+    "first": {
+      "@id": "red:first",
+      "@type": "xsd:string"
+    },
+    "last": {
+      "@id": "red:last",
+      "@type": "xsd:string"
+    },
+    "next": {
+      "@id": "red:next",
+      "@type": "xsd:string"
+    },
+    "prev": {
+      "@id": "red:prev",
+      "@type": "xsd:string"
+    },
+    "EnergyDerListResponse_data": "red:EnergyDerListResponse_data",
+    "derRecords": {
+      "@id": "red:derRecords",
+      "@container": "@list"
+    },
+    "EnergyServicePointDetailV2_allOf_registers": "red:EnergyServicePointDetailV2_allOf_registers",
+    "averagedDailyLoad": {
+      "@id": "red:averagedDailyLoad",
+      "@type": "xsd:decimal"
+    },
+    "consumptionType": {
+      "@id": "red:consumptionType",
+      "@type": "xsd:string"
+    },
+    "controlledLoad": {
+      "@id": "red:controlledLoad",
+      "@type": "xsd:boolean"
+    },
+    "multiplier": {
+      "@id": "red:multiplier",
+      "@type": "xsd:decimal"
+    },
+    "networkTariffCode": {
+      "@id": "red:networkTariffCode",
+      "@type": "xsd:string"
+    },
+    "registerConsumptionType": {
+      "@id": "red:registerConsumptionType",
+      "@type": "xsd:string"
+    },
+    "registerId": {
+      "@id": "red:registerId",
+      "@type": "xsd:string"
+    },
+    "registerSuffix": {
+      "@id": "red:registerSuffix",
+      "@type": "xsd:string"
+    },
+    "timeOfDay": {
+      "@id": "red:timeOfDay",
+      "@type": "xsd:string"
+    },
+    "unitOfMeasure": {
+      "@id": "red:unitOfMeasure",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointDetailV2_allOf_relatedParticipants": "red:EnergyServicePointDetailV2_allOf_relatedParticipants",
+    "party": {
+      "@id": "red:party",
+      "@type": "xsd:string"
+    },
+    "role": {
+      "@id": "red:role",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointDetailV2_allOf": "red:EnergyServicePointDetailV2_allOf",
+    "distributionLossFactor": {
+      "@id": "red:distributionLossFactor",
+      "@type": "@id"
+    },
+    "location": {
+      "@id": "red:location"
+    },
+    "meters": {
+      "@id": "red:meters",
+      "@container": "@list"
+    },
+    "relatedParticipants": {
+      "@id": "red:relatedParticipants",
+      "@container": "@list"
+    },
+    "EnergyServicePointListResponseV2_data": "red:EnergyServicePointListResponseV2_data",
+    "servicePoints": {
+      "@id": "red:servicePoints",
+      "@container": "@list"
+    },
+    "EnergyServicePointDetailV2_allOf_specifications": "red:EnergyServicePointDetailV2_allOf_specifications",
+    "installationType": {
+      "@id": "red:installationType",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "red:model",
+      "@type": "xsd:string"
+    },
+    "nextScheduledReadDate": {
+      "@id": "red:nextScheduledReadDate",
+      "@type": "xsd:string"
+    },
+    "readType": {
+      "@id": "red:readType",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointV2_consumerProfile": "red:EnergyServicePointV2_consumerProfile",
+    "classification": {
+      "@id": "red:classification",
+      "@type": "xsd:string"
+    },
+    "threshold": {
+      "@id": "red:threshold",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointDetailResponseV2": "red:EnergyServicePointDetailResponseV2",
+    "EnergyServicePointV2": "red:EnergyServicePointV2",
+    "consumerProfile": {
+      "@id": "red:consumerProfile",
+      "@type": "@id"
+    },
+    "isGenerator": {
+      "@id": "red:isGenerator",
+      "@type": "xsd:boolean"
+    },
+    "jurisdictionCode": {
+      "@id": "red:jurisdictionCode",
+      "@type": "xsd:string"
+    },
+    "lastConsumerChangeDate": {
+      "@id": "red:lastConsumerChangeDate",
+      "@type": "xsd:string"
+    },
+    "lastUpdateDateTime": {
+      "@id": "red:lastUpdateDateTime",
+      "@type": "xsd:string"
+    },
+    "nationalMeteringId": {
+      "@id": "red:nationalMeteringId",
+      "@type": "xsd:string"
+    },
+    "servicePointClassification": {
+      "@id": "red:servicePointClassification",
+      "@type": "xsd:string"
+    },
+    "servicePointStatus": {
+      "@id": "red:servicePointStatus",
+      "@type": "xsd:string"
+    },
+    "validFromDate": {
+      "@id": "red:validFromDate",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointDetailV2_allOf_distributionLossFactor": "red:EnergyServicePointDetailV2_allOf_distributionLossFactor",
+    "description": {
+      "@id": "red:description",
+      "@type": "xsd:string"
+    },
+    "lossValue": {
+      "@id": "red:lossValue",
+      "@type": "xsd:string"
+    },
+    "EnergyServicePointListResponseV2": "red:EnergyServicePointListResponseV2",
+    "EnergyServicePointDetailV2_allOf_meters": "red:EnergyServicePointDetailV2_allOf_meters",
+    "meterId": {
+      "@id": "red:meterId",
+      "@type": "xsd:string"
+    },
+    "registers": {
+      "@id": "red:registers",
+      "@container": "@list"
+    },
+    "specifications": {
+      "@id": "red:specifications",
+      "@type": "@id"
+    },
+    "EnergyUsageRead": "red:EnergyUsageRead",
+    "basicRead": {
+      "@id": "red:basicRead",
+      "@type": "@id"
+    },
+    "intervalRead": {
+      "@id": "red:intervalRead",
+      "@type": "@id"
+    },
+    "readEndDate": {
+      "@id": "red:readEndDate",
+      "@type": "xsd:string"
+    },
+    "readStartDate": {
+      "@id": "red:readStartDate",
+      "@type": "xsd:string"
+    },
+    "readUType": {
+      "@id": "red:readUType",
+      "@type": "xsd:string"
+    },
+    "EnergyUsageListResponse_data": "red:EnergyUsageListResponse_data",
+    "reads": {
+      "@id": "red:reads",
+      "@container": "@list"
+    },
+    "EnergyUsageRead_intervalRead_readQualities": "red:EnergyUsageRead_intervalRead_readQualities",
+    "endInterval": {
+      "@id": "red:endInterval",
+      "@type": "xsd:integer"
+    },
+    "quality": {
+      "@id": "red:quality",
+      "@type": "xsd:string"
+    },
+    "startInterval": {
+      "@id": "red:startInterval",
+      "@type": "xsd:integer"
+    },
+    "EnergyUsageRead_intervalRead": "red:EnergyUsageRead_intervalRead",
+    "aggregateValue": {
+      "@id": "red:aggregateValue",
+      "@type": "xsd:decimal"
+    },
+    "intervalReads": {
+      "@id": "red:intervalReads",
+      "@container": "@list"
+    },
+    "readIntervalLength": {
+      "@id": "red:readIntervalLength",
+      "@type": "xsd:integer"
+    },
+    "readQualities": {
+      "@id": "red:readQualities",
+      "@container": "@list"
+    },
+    "EnergyUsageListResponse": "red:EnergyUsageListResponse",
+    "EnergyUsageRead_basicRead": "red:EnergyUsageRead_basicRead",
+    "value": {
+      "@id": "red:value",
+      "@type": "xsd:decimal"
+    },
+    "EnergyBalanceResponse_data": "red:EnergyBalanceResponse_data",
+    "balance": {
+      "@id": "red:balance",
+      "@type": "xsd:string"
+    },
+    "EnergyBalanceListResponse": "red:EnergyBalanceListResponse",
+    "RequestAccountIdListV1": "red:RequestAccountIdListV1",
+    "EnergyBalanceResponse": "red:EnergyBalanceResponse",
+    "EnergyBalanceListResponse_data": "red:EnergyBalanceListResponse_data",
+    "balances": {
+      "@id": "red:balances",
+      "@container": "@list"
+    },
+    "EnergyBalanceListResponse_data_balances": "red:EnergyBalanceListResponse_data_balances",
+    "accountId": {
+      "@id": "red:accountId"
+    },
+    "RequestAccountIdListV1_data": "red:RequestAccountIdListV1_data",
+    "accountIds": {
+      "@id": "red:accountIds",
+      "@container": "@list"
+    },
+    "EnergyInvoiceListResponse_data": "red:EnergyInvoiceListResponse_data",
+    "invoices": {
+      "@id": "red:invoices",
+      "@container": "@list"
+    },
+    "EnergyBillingUsageTransactionV2_calculationFactors": "red:EnergyBillingUsageTransactionV2_calculationFactors",
+    "EnergyInvoiceElectricityUsageCharges": "red:EnergyInvoiceElectricityUsageCharges",
+    "otherCharges": {
+      "@id": "red:otherCharges",
+      "@container": "@list"
+    },
+    "totalGenerationCredits": {
+      "@id": "red:totalGenerationCredits",
+      "@type": "xsd:string"
+    },
+    "totalGst": {
+      "@id": "red:totalGst",
+      "@type": "xsd:string"
+    },
+    "totalOnceOffCharges": {
+      "@id": "red:totalOnceOffCharges",
+      "@type": "xsd:string"
+    },
+    "totalOnceOffDiscounts": {
+      "@id": "red:totalOnceOffDiscounts",
+      "@type": "xsd:string"
+    },
+    "totalUsageCharges": {
+      "@id": "red:totalUsageCharges",
+      "@type": "xsd:string"
+    },
+    "EnergyBillingOnceOffTransaction": "red:EnergyBillingOnceOffTransaction",
+    "amount": {
+      "@id": "red:amount",
+      "@type": "xsd:string"
+    },
+    "invoiceNumber": {
+      "@id": "red:invoiceNumber",
+      "@type": "xsd:string"
+    },
+    "EnergyInvoiceGasUsageCharges": "red:EnergyInvoiceGasUsageCharges",
+    "EnergyInvoiceGasUsageCharges_otherCharges": "red:EnergyInvoiceGasUsageCharges_otherCharges",
+    "MeasureUnitEnum": "red:MeasureUnitEnum",
+    "EnergyBillingListResponseV3_data": "red:EnergyBillingListResponseV3_data",
+    "transactions": {
+      "@id": "red:transactions",
+      "@container": "@list"
+    },
+    "EnergyBillingTransactionV3": "red:EnergyBillingTransactionV3",
+    "demand": {
+      "@id": "red:demand"
+    },
+    "executionDateTime": {
+      "@id": "red:executionDateTime",
+      "@type": "xsd:string"
+    },
+    "gst": {
+      "@id": "red:gst",
+      "@type": "xsd:string"
+    },
+    "onceOff": {
+      "@id": "red:onceOff"
+    },
+    "payment": {
+      "@id": "red:payment"
+    },
+    "transactionUType": {
+      "@id": "red:transactionUType",
+      "@type": "xsd:string"
+    },
+    "usage": {
+      "@id": "red:usage"
+    },
+    "EnergyBillingPaymentTransaction": "red:EnergyBillingPaymentTransaction",
+    "method": {
+      "@id": "red:method",
+      "@type": "xsd:string"
+    },
+    "EnergyInvoice": "red:EnergyInvoice",
+    "accountCharges": {
+      "@id": "red:accountCharges",
+      "@type": "@id"
+    },
+    "balanceAtIssue": {
+      "@id": "red:balanceAtIssue",
+      "@type": "xsd:string"
+    },
+    "dueDate": {
+      "@id": "red:dueDate",
+      "@type": "xsd:string"
+    },
+    "electricity": {
+      "@id": "red:electricity"
+    },
+    "gas": {
+      "@id": "red:gas"
+    },
+    "gstAmount": {
+      "@id": "red:gstAmount",
+      "@type": "xsd:string"
+    },
+    "invoiceAmount": {
+      "@id": "red:invoiceAmount",
+      "@type": "xsd:string"
+    },
+    "issueDate": {
+      "@id": "red:issueDate",
+      "@type": "xsd:string"
+    },
+    "payOnTimeDiscount": {
+      "@id": "red:payOnTimeDiscount",
+      "@type": "@id"
+    },
+    "paymentStatus": {
+      "@id": "red:paymentStatus",
+      "@type": "xsd:string"
+    },
+    "period": {
+      "@id": "red:period",
+      "@type": "@id"
+    },
+    "EnergyInvoice_period": "red:EnergyInvoice_period",
+    "endDate": {
+      "@id": "red:endDate",
+      "@type": "xsd:string"
+    },
+    "startDate": {
+      "@id": "red:startDate",
+      "@type": "xsd:string"
+    },
+    "EnergyBillingListResponseV3": "red:EnergyBillingListResponseV3",
+    "EnergyBillingUsageTransactionV2": "red:EnergyBillingUsageTransactionV2",
+    "adjustments": {
+      "@id": "red:adjustments",
+      "@container": "@list"
+    },
+    "calculationFactors": {
+      "@id": "red:calculationFactors",
+      "@container": "@list"
+    },
+    "isEstimate": {
+      "@id": "red:isEstimate",
+      "@type": "xsd:boolean"
+    },
+    "measureUnit": {
+      "@id": "red:measureUnit",
+      "@type": "xsd:string"
+    },
+    "timeOfUseType": {
+      "@id": "red:timeOfUseType",
+      "@type": "xsd:string"
+    },
+    "EnergyInvoice_payOnTimeDiscount": "red:EnergyInvoice_payOnTimeDiscount",
+    "date": {
+      "@id": "red:date",
+      "@type": "xsd:string"
+    },
+    "discountAmount": {
+      "@id": "red:discountAmount",
+      "@type": "xsd:string"
+    },
+    "EnergyInvoiceAccountCharges": "red:EnergyInvoiceAccountCharges",
+    "totalCharges": {
+      "@id": "red:totalCharges",
+      "@type": "xsd:string"
+    },
+    "totalDiscounts": {
+      "@id": "red:totalDiscounts",
+      "@type": "xsd:string"
+    },
+    "EnergyBillingDemandTransactionV3": "red:EnergyBillingDemandTransactionV3",
+    "rate": {
+      "@id": "red:rate",
+      "@type": "xsd:decimal"
+    },
+    "EnergyBillingUsageTransactionV2_adjustments": "red:EnergyBillingUsageTransactionV2_adjustments",
+    "EnergyInvoiceListResponse": "red:EnergyInvoiceListResponse",
+    "EnergyBillingOtherTransaction": "red:EnergyBillingOtherTransaction",
+    "EnergyPlanIncentives": "red:EnergyPlanIncentives",
+    "category": {
+      "@id": "red:category",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "red:displayName",
+      "@type": "xsd:string"
+    },
+    "eligibility": {
+      "@id": "red:eligibility",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanGreenPowerCharges": "red:EnergyPlanGreenPowerCharges",
+    "scheme": {
+      "@id": "red:scheme",
+      "@type": "xsd:string"
+    },
+    "tiers": {
+      "@id": "red:tiers",
+      "@container": "@list"
+    },
+    "EnergyPlanDiscounts_percentOverThreshold": "red:EnergyPlanDiscounts_percentOverThreshold",
+    "usageAmount": {
+      "@id": "red:usageAmount",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanControlledLoadV2_singleRate": "red:EnergyPlanControlledLoadV2_singleRate",
+    "dailySupplyCharge": {
+      "@id": "red:dailySupplyCharge",
+      "@type": "xsd:string"
+    },
+    "rates": {
+      "@id": "red:rates",
+      "@container": "@list"
+    },
+    "EnergyAccountV2_allOf": "red:EnergyAccountV2_allOf",
+    "plans": {
+      "@id": "red:plans",
+      "@container": "@list"
+    },
+    "EnergyPaymentScheduleResponse": "red:EnergyPaymentScheduleResponse",
+    "EnergyPlanDiscounts_fixedAmount": "red:EnergyPlanDiscounts_fixedAmount",
+    "EnergyPaymentSchedule_digitalWallet": "red:EnergyPaymentSchedule_digitalWallet",
+    "calculationType": {
+      "@id": "red:calculationType",
+      "@type": "xsd:string"
+    },
+    "identifier": {
+      "@id": "red:identifier",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "red:name",
+      "@type": "xsd:string"
+    },
+    "paymentFrequency": {
+      "@id": "red:paymentFrequency",
+      "@type": "xsd:string"
+    },
+    "provider": {
+      "@id": "red:provider",
+      "@type": "xsd:string"
+    },
+    "EnergyConcession": "red:EnergyConcession",
+    "additionalInfo": {
+      "@id": "red:additionalInfo",
+      "@type": "xsd:string"
+    },
+    "additionalInfoUri": {
+      "@id": "red:additionalInfoUri",
+      "@type": "xsd:string"
+    },
+    "appliedTo": {
+      "@id": "red:appliedTo",
+      "@container": "@list"
+    },
+    "discountFrequency": {
+      "@id": "red:discountFrequency",
+      "@type": "xsd:string"
+    },
+    "percentage": {
+      "@id": "red:percentage",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanDetailV3_allOf_meteringCharges": "red:EnergyPlanDetailV3_allOf_meteringCharges",
+    "maximumValue": {
+      "@id": "red:maximumValue",
+      "@type": "xsd:string"
+    },
+    "minimumValue": {
+      "@id": "red:minimumValue",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanDiscounts_percentOfUse": "red:EnergyPlanDiscounts_percentOfUse",
+    "EnergyConcessionsResponse": "red:EnergyConcessionsResponse",
+    "EnergyPlanTariffPeriodV2_singleRate": "red:EnergyPlanTariffPeriodV2_singleRate",
+    "generalUnitPrice": {
+      "@id": "red:generalUnitPrice",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanDiscounts": "red:EnergyPlanDiscounts",
+    "fixedAmount": {
+      "@id": "red:fixedAmount",
+      "@type": "@id"
+    },
+    "methodUType": {
+      "@id": "red:methodUType",
+      "@type": "xsd:string"
+    },
+    "percentOfBill": {
+      "@id": "red:percentOfBill",
+      "@type": "@id"
+    },
+    "percentOfUse": {
+      "@id": "red:percentOfUse",
+      "@type": "@id"
+    },
+    "percentOverThreshold": {
+      "@id": "red:percentOverThreshold",
+      "@type": "@id"
+    },
+    "EnergyPlanGreenPowerCharges_tiers": "red:EnergyPlanGreenPowerCharges_tiers",
+    "percentGreen": {
+      "@id": "red:percentGreen",
+      "@type": "xsd:string"
+    },
+    "EnergyAccountListResponseV2": "red:EnergyAccountListResponseV2",
+    "EnergyPaymentSchedule_manualPayment": "red:EnergyPaymentSchedule_manualPayment",
+    "billFrequency": {
+      "@id": "red:billFrequency",
+      "@type": "xsd:string"
+    },
+    "EnergyAccountDetailV4_allOf_plans": "red:EnergyAccountDetailV4_allOf_plans",
+    "authorisedContacts": {
+      "@id": "red:authorisedContacts",
+      "@container": "@list"
+    },
+    "nickname": {
+      "@id": "red:nickname",
+      "@type": "xsd:string"
+    },
+    "planDetail": {
+      "@id": "red:planDetail",
+      "@type": "@id"
+    },
+    "planOverview": {
+      "@id": "red:planOverview",
+      "@type": "@id"
+    },
+    "EnergyPlanTariffPeriodV2_demandCharges": "red:EnergyPlanTariffPeriodV2_demandCharges",
+    "chargePeriod": {
+      "@id": "red:chargePeriod",
+      "@type": "xsd:string"
+    },
+    "days": {
+      "@id": "red:days",
+      "@container": "@list"
+    },
+    "endTime": {
+      "@id": "red:endTime",
+      "@type": "xsd:string"
+    },
+    "maxDemand": {
+      "@id": "red:maxDemand",
+      "@type": "xsd:string"
+    },
+    "measurementPeriod": {
+      "@id": "red:measurementPeriod",
+      "@type": "xsd:string"
+    },
+    "minDemand": {
+      "@id": "red:minDemand",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "red:startTime",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanSolarFeedInTariffV3_singleTariff_rates": "red:EnergyPlanSolarFeedInTariffV3_singleTariff_rates",
+    "unitPrice": {
+      "@id": "red:unitPrice",
+      "@type": "xsd:string"
+    },
+    "volume": {
+      "@id": "red:volume",
+      "@type": "xsd:decimal"
+    },
+    "EnergyAccountV2_allOf_planOverview": "red:EnergyAccountV2_allOf_planOverview",
+    "EnergyPlanTariffPeriodV2_bandedDailySupplyCharges": "red:EnergyPlanTariffPeriodV2_bandedDailySupplyCharges",
+    "EnergyPaymentScheduleResponse_data": "red:EnergyPaymentScheduleResponse_data",
+    "paymentSchedules": {
+      "@id": "red:paymentSchedules",
+      "@container": "@list"
+    },
+    "EnergyPlanDiscounts_percentOfBill": "red:EnergyPlanDiscounts_percentOfBill",
+    "EnergyConcessionsResponse_data": "red:EnergyConcessionsResponse_data",
+    "concessions": {
+      "@id": "red:concessions",
+      "@container": "@list"
+    },
+    "EnergyPlanContractV3": "red:EnergyPlanContractV3",
+    "additionalFeeInformation": {
+      "@id": "red:additionalFeeInformation",
+      "@type": "xsd:string"
+    },
+    "discounts": {
+      "@id": "red:discounts",
+      "@container": "@list"
+    },
+    "fees": {
+      "@id": "red:fees",
+      "@container": "@list"
+    },
+    "greenPowerCharges": {
+      "@id": "red:greenPowerCharges",
+      "@container": "@list"
+    },
+    "incentives": {
+      "@id": "red:incentives",
+      "@container": "@list"
+    },
+    "intrinsicGreenPower": {
+      "@id": "red:intrinsicGreenPower",
+      "@type": "@id"
+    },
+    "isFixed": {
+      "@id": "red:isFixed",
+      "@type": "xsd:boolean"
+    },
+    "onExpiryDescription": {
+      "@id": "red:onExpiryDescription",
+      "@type": "xsd:string"
+    },
+    "paymentOption": {
+      "@id": "red:paymentOption",
+      "@container": "@list"
+    },
+    "pricingModel": {
+      "@id": "red:pricingModel",
+      "@type": "xsd:string"
+    },
+    "solarFeedInTariff": {
+      "@id": "red:solarFeedInTariff",
+      "@container": "@list"
+    },
+    "tariffPeriod": {
+      "@id": "red:tariffPeriod",
+      "@container": "@list"
+    },
+    "timeZone": {
+      "@id": "red:timeZone",
+      "@type": "xsd:string"
+    },
+    "variation": {
+      "@id": "red:variation",
+      "@type": "xsd:string"
+    },
+    "EnergyPlanTariffPeriodV2": "red:EnergyPlanTariffPeriodV2",
+    "bandedDailySupplyCharges": {
+      "@id": "red:bandedDailySupplyCharges",
+      "@container": "@list"
+    },
+    "dailySupplyChargeType": {
+      "@id": "red:dailySupplyChargeType",
+      "@type": "xsd:string"
+    },
+    "demandCharges": {
+      "@id": "red:demandCharges",
+      "@container": "@list"
+    },
+    "rateBlockUType": {
+      "@id": "red:rateBlockUType",
+      "@type": "xsd:string"
+    },
+    "singleRate": {
+      "@id": "red:singleRate",
+      "@type": "@id"
+    },
+    "timeOfUseRates": {
+      "@id": "red:timeOfUseRates",
+      "@container": "@list"
+    },
+    "EnergyPlanSolarFeedInTariffV3_timeVariations": "red:EnergyPlanSolarFeedInTariffV3_timeVariations",
+    "EnergyAccountDetailV4_allOf_authorisedContacts": "red:EnergyAccountDetailV4_allOf_authorisedContacts",
+    "EnergyPaymentSchedule_cardDebit": "red:EnergyPaymentSchedule_cardDebit",
+    "cardScheme": {
+      "@id": "red:cardScheme",
+      "@type": "xsd:string"
+    },
+    "EnergyPaymentSchedule_directDebit": "red:EnergyPaymentSchedule_directDebit",
+    "accountNumber": {
+      "@id": "red:accountNumber",
+      "@type": "xsd:string"
+    },
+    "bsb": {
+      "@id": "red:bsb",
+      "@type": "xsd:string"
+    },
+    "isTokenised": {
+      "@id": "red:isTokenised",
+      "@type": "xsd:boolean"
+    },
+    "EnergyAccountDetailV4_allOf": "red:EnergyAccountDetailV4_allOf",
+    "EnergyPlanSolarFeedInTariffV3_singleTariff": "red:EnergyPlanSolarFeedInTariffV3_singleTariff",
+    "EnergyAccountDetailResponseV4": "red:EnergyAccountDetailResponseV4",
+    "EnergyPlanTariffPeriodV2_timeOfUse": "red:EnergyPlanTariffPeriodV2_timeOfUse",
+    "EnergyAccountListResponseV2_data": "red:EnergyAccountListResponseV2_data",
+    "accounts": {
+      "@id": "red:accounts",
+      "@container": "@list"
+    },
+    "EnergyPlanControlledLoadV2_singleRate_rates": "red:EnergyPlanControlledLoadV2_singleRate_rates",
+    "EnergyPlanTariffPeriodV2_timeOfUseRates": "red:EnergyPlanTariffPeriodV2_timeOfUseRates",
+    "timeOfUse": {
+      "@id": "red:timeOfUse",
+      "@container": "@list"
+    },
+    "EnergyDaysEnum": "red:EnergyDaysEnum",
+    "EnergyPlanControlledLoadV2_timeOfUse": "red:EnergyPlanControlledLoadV2_timeOfUse"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Red Energy API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Red Energy's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-21) from openapi/red-energy-data-holder-customers-api-openapi.yml, openapi/red-energy-data-holder-operations-api-openapi.yml, openapi/red-energy-distributed-energy-resources-api-openapi.yml.",
+  "dcterms:created": "2026-10-21",
+  "dcterms:source": [
+    "openapi/red-energy-data-holder-customers-api-openapi.yml",
+    "openapi/red-energy-data-holder-operations-api-openapi.yml",
+    "openapi/red-energy-distributed-energy-resources-api-openapi.yml",
+    "openapi/red-energy-electricity-service-points-api-openapi.yml",
+    "openapi/red-energy-electricity-usage-api-openapi.yml"
+  ]
+}

@@ -1,13 +1,14 @@
 ---
-generated: '2026-07-27'
+generated: '2026-10-21'
 method: generated
-name: Compare Red Energy tariff plans
+name: red-energy-compare-energy-plans
+title: Compare Red Energy tariff plans
 description: List Red Energy's published electricity and gas plans and pull full tariff detail for the ones worth comparing, with no credential at all.
-api: openapi/red-energy-cds-energy-openapi.yml
+api: openapi/red-energy-energy-plans-api-openapi.yml
 operations: [listEnergyPlans, getEnergyPlanDetail]
 access: anonymous
 source: >-
-  operationIds verified in openapi/red-energy-cds-energy-openapi.yml; behaviour
+  operationIds verified in openapi/_original/red-energy-cds-energy-openapi.yml (split into the per-API openapi/red-energy-*-openapi.yml files); behaviour
   verified live against https://cdr.energymadeeasy.gov.au/red-energy/cds-au/v1 on
   2026-07-27.
 ---

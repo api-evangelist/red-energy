@@ -1,14 +1,16 @@
 ---
-generated: '2026-07-27'
+generated: '2026-10-21'
 method: generated
-name: Retrieve a consenting customer's energy data as an accredited data recipient
+name: red-energy-share-consumer-energy-data
+title: Retrieve a consenting customer's energy data as an accredited data recipient
 description: The end-to-end shape of a CDR energy data-sharing call against Red Energy — what accreditation and consent you need first, then the account, billing, service point and usage operations in the order they depend on each other.
-api: openapi/red-energy-cds-energy-openapi.yml
+api: openapi/red-energy-energy-accounts-api-openapi.yml
+apis: [openapi/red-energy-electricity-service-points-api-openapi.yml, openapi/red-energy-electricity-usage-api-openapi.yml, openapi/red-energy-energy-account-balances-api-openapi.yml, openapi/red-energy-energy-account-billing-api-openapi.yml, openapi/red-energy-energy-accounts-api-openapi.yml]
 operations: [listEnergyAccounts, getEnergyAccountDetail, getEnergyAccountBalance, getBillingForEnergyAccount, listElectricityServicePoints, getElectricityServicePointUsage]
 access: accredited-only
 source: >-
-  operationIds verified in openapi/red-energy-cds-energy-openapi.yml and
-  openapi/red-energy-cds-common-openapi.yml. Behaviour is NOT verified — this
+  operationIds verified in openapi/_original/red-energy-cds-energy-openapi.yml (split into the per-API openapi/red-energy-*-openapi.yml files) and
+  openapi/_original/red-energy-cds-common-openapi.yml (split into the per-API openapi/red-energy-*-openapi.yml files). Behaviour is NOT verified — this
   surface cannot be reached without ACCC accreditation, CDR CA certificates and a
   consented authorisation, and no endpoint on it was called. Grounded in the
   Consumer Data Standards, not in an observed response.

@@ -1,0 +1,145 @@
+generated: '2026-10-21'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 10
+  own: 3
+  other_domain: 5
+  platform: 2
+  roles:
+  - api
+  - docs
+  - identity
+  - other
+  - status
+  - website
+hosts:
+- host: api.cdr.gov.au
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Registry
+  serves: []
+  registrable_domain: cdr.gov.au
+  role: api
+  relation: other-domain
+- host: api.com.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.com.au
+  role: api
+  relation: other-domain
+- host: api.gov.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.gov.au
+  role: api
+  relation: other-domain
+- host: cdr.energymadeeasy.gov.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - cdn
+  vendor: cloudfront
+  registrable_domain: energymadeeasy.gov.au
+  role: other
+  relation: other-domain
+- host: consumerdatastandardsaustralia.github.io
+  found_by:
+  - pointer
+  - apis[]
+  - vendor-detect
+  types:
+  - Deprecation
+  - Roadmap
+  - Documentation
+  - APIReference
+  serves:
+  - docs
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: github.io
+  role: docs
+  relation: platform
+- host: myaccount.redenergy.com.au
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - SignUp
+  - Login
+  serves: []
+  registrable_domain: redenergy.com.au
+  role: identity
+  relation: own
+- host: public.cdr.redenergy.com.au
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - StatusPage
+  - Status
+  serves:
+  - api
+  registrable_domain: redenergy.com.au
+  role: status
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.redenergy.com.au
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Compliance
+  - Website
+  - Support
+  - HelpCenter
+  - Pricing
+  - TermsOfService
+  - PrivacyPolicy
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: redenergy.com.au
+  role: website
+  relation: own
+- host: www.snowyhydro.com.au
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Owner
+  serves: []
+  registrable_domain: snowyhydro.com.au
+  role: other
+  relation: other-domain

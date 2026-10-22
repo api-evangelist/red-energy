@@ -1,0 +1,13 @@
+generated: '2026-10-21'
+method: none
+source: https://www.redenergy.com.au/
+legal_pages_attempted:
+- {url: https://www.redenergy.com.au/privacy-policy/index.html, status: null, title: 'Just a moment...', note: Cloudflare challenge page (266 chars) returned in pre-flight; policy text not readable}
+- {url: https://www.redenergy.com.au/terms-and-conditions/, status: null, title: 'Just a moment...', note: Cloudflare challenge page (266 chars) returned in pre-flight}
+- {url: https://www.redenergy.com.au/docs/Red-Energy-Consumer-Data-Right-Policy.pdf, status: null, title: 'Just a moment...', note: Consumer Data Right policy PDF behind the same challenge}
+x-coverage:
+  state: blocked
+  reason: bot-challenge
+  evidence: {url: https://www.redenergy.com.au/, http_status: 403, fetched: '2026-10-21'}
+signals: {}
+note: Red Energy's own site (www.redenergy.com.au), which hosts its privacy policy, terms and Consumer Data Right policy, answered a browser user-agent with HTTP 403 and an anti-bot challenge ('Just a moment...'), so none of its legal pages could be read and no signal could be quoted. Empty signals reflect blocked coverage, not a confirmed absence.

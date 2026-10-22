@@ -1,5 +1,5 @@
 generated: '2026-07-27'
-method: searched
+method: none
 source: >-
   Searched npm (registry search + direct name lookups), PyPI, and the GitHub
   organisations red-energy, redenergy and ConsumerDataStandardsAustralia on
@@ -7,8 +7,8 @@ source: >-
 provider: Red Energy
 providerId: red-energy
 
-official_packages: []
-official_packages_note: >-
+packages: []
+packages_note: >-
   Red Energy publishes NO client libraries in any registry. There is a GitHub
   organisation at github.com/red-energy (HTTP 200) but it has zero public
   repositories and no identifying metadata, so it is not recorded as Red
