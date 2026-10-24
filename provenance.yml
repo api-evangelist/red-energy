@@ -10,8 +10,8 @@ artifacts:
     method: derived
     evidence: declared in the artifact
   arazzo/red-energy-compare-plans-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   authentication/red-energy-authentication.yml:
     method: searched
     evidence: declared in the artifact
@@ -69,127 +69,76 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
+  hosts/red-energy-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
     method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+    evidence: carries an API Evangelist house phrase
+  integrations/red-energy-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
+  json-ld/red-energy-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-account-detail-response-v4-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-account-list-response-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-balance-list-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-balance-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-billing-list-response-v3-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-concessions-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-der-detail-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-der-list-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-invoice-list-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-payment-schedule-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-plan-list-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-plan-response-v3-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-service-point-detail-response-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-service-point-list-response-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-energy-usage-list-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-response-common-customer-detail-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-response-common-customer-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-response-common-discovery-status-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/red-energy-response-discovery-outages-list-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -273,16 +222,25 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/red-energy-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
-  llms/red-energy-llms.txt:
-    method: generated
-    evidence: carries an API Evangelist house phrase
   mcp/red-energy-mcp.yml:
-    method: derived
-    evidence: declared in the artifact
-  mcp/red-energy-tool-crosswalk.yml:
     method: derived
     evidence: declared in the artifact
   openapi/_original/red-energy-cds-common-openapi.yml:
@@ -320,17 +278,47 @@ artifacts:
   openapi/red-energy-energy-plans-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  overlays/red-energy-cds-common-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
-  overlays/red-energy-cds-energy-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
+  overlays/red-energy-data-holder-customers-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-data-holder-operations-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-distributed-energy-resources-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-electricity-service-points-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-electricity-usage-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-energy-account-balances-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-energy-account-billing-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-energy-accounts-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/red-energy-energy-plans-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/red-energy-packages.yml:
-    method: searched
-    evidence: declared in the artifact
+    method: unknown
+    evidence: no authorship recorded
+  plans/red-energy-plans-pricing.yml:
+    method: unknown
+    evidence: no authorship recorded
   rate-limits/red-energy-rate-limits.yml:
     method: searched
+    evidence: declared in the artifact
+  regulatory/red-energy-regulatory-posture.yml:
+    method: unknown
+    evidence: no authorship recorded
+  rules/red-energy-rules.yml:
+    method: generated
     evidence: declared in the artifact
   scopes/red-energy-scopes.yml:
     method: searched
@@ -349,6 +337,12 @@ artifacts:
     evidence: declared in the artifact
   skills/red-energy-share-consumer-energy-data.md:
     method: generated
+    evidence: declared in the artifact
+  vendors/red-energy-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/red-energy-vocabulary.yml:
+    method: derived
     evidence: declared in the artifact
   well-known/red-energy-well-known.yml:
     method: searched
